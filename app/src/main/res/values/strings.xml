@@ -5,4 +5,12 @@
     <string name="currency_app_name">Currency Converter</string>
     <string name="trivia_app_name">Trivia Tester</string>
     <string name="welcome_msg">Welcome to our Android Suite</string>
+
+    <string name="bear_h">Height (px)</string>
+    <string name="bear_h_hint">Height</string>
+    <string name="bear_w">Width (px)</string>
+    <string name="bear_w_hint">Width</string>
+    <string name="make_img">Generate Image</string>
+    <string name="view_imgs">View All Images</string>
+    <string name="save_img">Save Image</string>
 </resources>

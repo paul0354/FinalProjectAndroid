@@ -14,5 +14,7 @@ public class BearActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityBearBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
     }
 }
