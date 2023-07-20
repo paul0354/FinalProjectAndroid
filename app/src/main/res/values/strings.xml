@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">FinalProjectAndroid</string>
+    <string name="app_name">Android Final Project</string>
+    <string name="bear_app_name">Bear Image Generator</string>
+    <string name="flight_app_name">Flight Tracker</string>
+    <string name="currency_app_name">Currency Converter</string>
+    <string name="trivia_app_name">Trivia Tester</string>
+    <string name="welcome_msg">Welcome to our Android Suite</string>
 </resources>

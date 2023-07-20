@@ -7,12 +7,109 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/welcomeMsg"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="128dp"
+        android:layout_marginEnd="64dp"
+        android:text="@string/welcome_msg"
+        android:textAlignment="center"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/flightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="#5417BEBB"
+        app:layout_constraintStart_toStartOf="@+id/bearButton"
+        app:layout_constraintTop_toBottomOf="@+id/bearButton"
+        app:srcCompat="@drawable/flight_icon" />
+
+    <ImageButton
+        android:id="@+id/triviaButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="#5417BEBB"
+        app:layout_constraintEnd_toEndOf="@+id/currencyButton"
+        app:layout_constraintTop_toBottomOf="@+id/currencyButton"
+        app:srcCompat="@drawable/trivia_icon" />
+
+    <ImageButton
+        android:id="@+id/bearButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
+        android:background="#5417BEBB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeMsg"
+        app:srcCompat="@drawable/bear_icon" />
+
+    <ImageButton
+        android:id="@+id/currencyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="32dp"
+        android:background="#5417BEBB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bearButton"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeMsg"
+        app:srcCompat="@drawable/currency_icon" />
+
+    <TextView
+        android:id="@+id/bearName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/bear_app_name"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/bearButton"
+        app:layout_constraintStart_toStartOf="@+id/bearButton"
+        app:layout_constraintTop_toBottomOf="@+id/bearButton" />
+
+    <TextView
+        android:id="@+id/flightName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Flight Tracker"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/flightButton"
+        app:layout_constraintStart_toStartOf="@+id/flightButton"
+        app:layout_constraintTop_toBottomOf="@+id/flightButton" />
+
+    <TextView
+        android:id="@+id/currencyName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/currency_app_name"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/currencyButton"
+        app:layout_constraintStart_toStartOf="@+id/currencyButton"
+        app:layout_constraintTop_toBottomOf="@+id/currencyButton" />
+
+    <TextView
+        android:id="@+id/triviaName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/trivia_app_name"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/triviaButton"
+        app:layout_constraintStart_toStartOf="@+id/triviaButton"
+        app:layout_constraintTop_toBottomOf="@+id/triviaButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
