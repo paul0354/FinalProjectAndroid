@@ -102,10 +102,10 @@
         app:layout_constraintTop_toBottomOf="@+id/widthInput"
         tools:text="@string/view_imgs" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/imagesView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <ImageView
+        android:id="@+id/bearImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -113,5 +113,7 @@
         app:layout_constraintBottom_toTopOf="@+id/saveImageBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/makeImageBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/makeImageBtn"
+        app:srcCompat="@drawable/bear_icon" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
