@@ -5,4 +5,9 @@
     <string name="currency_app_name">Currency Converter</string>
     <string name="trivia_app_name">Trivia Tester</string>
     <string name="welcome_msg">Welcome to our Android Suite</string>
+    <string-array name="currency_array">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+    </string-array>
 </resources>
