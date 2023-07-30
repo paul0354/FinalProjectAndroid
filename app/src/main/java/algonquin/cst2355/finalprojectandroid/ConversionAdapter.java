@@ -3,22 +3,22 @@ package algonquin.cst2355.finalprojectandroid;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
-import algonquin.cst2355.finalprojectandroid.Conversion;
-import algonquin.cst2355.finalprojectandroid.R;
+import java.util.ArrayList;
 
 public class ConversionAdapter extends RecyclerView.Adapter<ConversionAdapter.ConversionViewHolder> {
 
-    private List<Conversion> conversions;
+    private final ArrayList<Conversion> conversions;
+    private final OnItemClickListener itemClickListener;
 
-    public ConversionAdapter(List<Conversion> conversions) {
+    public ConversionAdapter(ArrayList<Conversion> conversions, OnItemClickListener itemClickListener) {
         this.conversions = conversions;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -41,7 +41,7 @@ public class ConversionAdapter extends RecyclerView.Adapter<ConversionAdapter.Co
         return conversions.size();
     }
 
-    static class ConversionViewHolder extends RecyclerView.ViewHolder {
+    class ConversionViewHolder extends RecyclerView.ViewHolder {
         TextView amountTextView;
         TextView dateTextView;
         TextView currencyTextView;
@@ -52,6 +52,17 @@ public class ConversionAdapter extends RecyclerView.Adapter<ConversionAdapter.Co
             dateTextView = itemView.findViewById(R.id.textViewDate);
             currencyTextView = itemView.findViewById(R.id.currencyTextView);
             // Initialize other views if needed
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    itemClickListener.onItemClick(conversions.get(position));
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Conversion selectedItem);
     }
 }
