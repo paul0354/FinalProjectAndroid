@@ -7,9 +7,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import java.text.SimpleDateFormat;
@@ -23,11 +23,13 @@ import algonquin.cst2355.finalprojectandroid.Conversion;
 import algonquin.cst2355.finalprojectandroid.ConversionAdapter;
 import algonquin.cst2355.finalprojectandroid.ConversionDAO;
 import algonquin.cst2355.finalprojectandroid.ConversionDatabase;
+import algonquin.cst2355.finalprojectandroid.ConversionDetailsFragment;
 import algonquin.cst2355.finalprojectandroid.R;
 import algonquin.cst2355.finalprojectandroid.data.CurrencyActivityViewModel;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityCurrencyBinding;
+import algonquin.cst2355.finalprojectandroid.databinding.FragmentItemDetailBinding;
 
-public class CurrencyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class CurrencyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ConversionAdapter.OnItemClickListener {
 
     ActivityCurrencyBinding binding;
     ArrayList<Conversion> conversions = new ArrayList<>();
@@ -56,7 +58,6 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         setupCurrenciesSpinner();
         binding.recyclerView.setAdapter(myAdapter);
 
-
         myDB = Room.databaseBuilder(getApplicationContext(), ConversionDatabase.class, "database-name").build();
         myDAO = myDB.cDAO();
 
@@ -72,7 +73,7 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             conversionModel.conversions.postValue(conversions);
         }
 
-        myAdapter = new ConversionAdapter(conversions); // Initialize the adapter here
+        myAdapter = new ConversionAdapter(conversions, this); // Initialize the adapter here
         binding.recyclerView.setAdapter(myAdapter); // Set the adapter for the RecyclerView
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.buttonConvert.setOnClickListener(click -> {
@@ -102,7 +103,6 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                 Toast.makeText(CurrencyActivity.this, "Please enter an amount", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private void setupCurrenciesSpinner() {
@@ -128,9 +128,8 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             String amountText = binding.editTextAmount.getText().toString();
             if (!amountText.isEmpty()) {
                 double amount = Double.parseDouble(amountText);
-                 fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
-                 toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
-
+                fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
+                toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
             }
         }
     }
@@ -139,6 +138,7 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
     public void onNothingSelected(AdapterView<?> parent) {
         // Handle the case when nothing is selected in the spinners (if required)
     }
+
     private double convertCurrency(double amount, String fromCurrency, String toCurrency) {
         double conversionRate = 2.0;
 
@@ -150,6 +150,16 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             // Handle unsupported currency conversion here, if needed
             return amount;
         }
+    }
 
+    @Override
+    public void onItemClick(Conversion selectedItem) {
+        // Show the fragment ItemDetailFragment using the FragmentManager
+        ConversionDetailsFragment fragment = ConversionDetailsFragment.newInstance(selectedItem);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragmentLocation, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

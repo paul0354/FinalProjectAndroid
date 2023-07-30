@@ -1,11 +1,15 @@
 package algonquin.cst2355.finalprojectandroid;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Conversion {
+public class Conversion implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")
@@ -26,6 +30,25 @@ public class Conversion {
     }
 
 
+    protected Conversion(Parcel in) {
+        id = in.readInt();
+        conversionResult = in.readString();
+        timeSemt = in.readString();
+        convertedCurrencies = in.readString();
+    }
+
+    public static final Creator<Conversion> CREATOR = new Creator<Conversion>() {
+        @Override
+        public Conversion createFromParcel(Parcel in) {
+            return new Conversion(in);
+        }
+
+        @Override
+        public Conversion[] newArray(int size) {
+            return new Conversion[size];
+        }
+    };
+
     public String getConversionResult() {
         return conversionResult;
     }
@@ -36,5 +59,16 @@ public class Conversion {
 
     public String getCurrencyConversion() {
         return convertedCurrencies;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(conversionResult);
+        dest.writeString(timeSemt);
     }
 }
