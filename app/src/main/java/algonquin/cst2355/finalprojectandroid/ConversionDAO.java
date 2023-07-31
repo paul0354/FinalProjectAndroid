@@ -19,4 +19,6 @@ public interface ConversionDAO {
     @Delete
     void deleteConversion (Conversion c);
 
+    @Query("DELETE FROM conversion")
+    void deleteAllConversions();
 }

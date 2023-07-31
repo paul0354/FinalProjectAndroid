@@ -1,6 +1,11 @@
 package algonquin.cst2355.finalprojectandroid;
 
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,42 +42,40 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
     private ConversionAdapter myAdapter; // Change the type to ConversionAdapter
     ConversionDatabase myDB;
     ConversionDAO myDAO;
+    ConversionDetailsFragment displayedFragment;
 
     private ArrayList<String> currenciesList = new ArrayList<>();
+    private static final String PREFS_NAME = "MyPrefsFile"; // Unique name for your SharedPreferences
+    private static final String AMOUNT_KEY = "amountKey"; // Key for storing the amount
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCurrencyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        View rootView = binding.getRoot();
+        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.currency_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         binding.spinnerToCurrency.setAdapter(adapter);
         binding.spinnerFromCurrency.setAdapter(adapter);
-
         binding.spinnerToCurrency.setOnItemSelectedListener(this);
         binding.spinnerFromCurrency.setOnItemSelectedListener(this);
         setupCurrenciesSpinner();
         binding.recyclerView.setAdapter(myAdapter);
-
-        myDB = Room.databaseBuilder(getApplicationContext(), ConversionDatabase.class, "database-name").build();
+        conversions = new ArrayList<>();
+        myDB = Room.databaseBuilder(getApplicationContext(), ConversionDatabase.class, "conversion-database").fallbackToDestructiveMigration().build();
         myDAO = myDB.cDAO();
-
         conversionModel = new ViewModelProvider(this).get(CurrencyActivityViewModel.class);
-        conversions = conversionModel.conversions.getValue();
-        Executor thread = Executors.newSingleThreadExecutor();
-        thread.execute(() -> {
-            List<Conversion> allConversions = myDAO.getAllConversions();
-            conversions.addAll(allConversions);
-        });
+        loadSavedConversions();
         if (conversions == null) {
             conversions = new ArrayList<>();
             conversionModel.conversions.postValue(conversions);
         }
-
         myAdapter = new ConversionAdapter(conversions, this); // Initialize the adapter here
         binding.recyclerView.setAdapter(myAdapter); // Set the adapter for the RecyclerView
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -82,17 +85,13 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                 double amount = Double.parseDouble(amountText);
                 String fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
                 String toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
-
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(AMOUNT_KEY, amountText);
+                editor.apply();
                 double resultAmount = convertCurrency(amount, fromCurrency, toCurrency);
                 String currentDateAndTime = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a").format(new Date());
 
                 Conversion newConversion = new Conversion(String.valueOf(resultAmount), currentDateAndTime, "null");
-                Executor thread1 = Executors.newSingleThreadExecutor();
-
-                thread1.execute(() -> {
-                    newConversion.id = (int) myDAO.insertConversion(newConversion); // add to database
-                });
-
                 conversions.add(newConversion);
                 myAdapter.notifyItemInserted(conversions.size() - 1);
 
@@ -102,6 +101,14 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             } else {
                 Toast.makeText(CurrencyActivity.this, "Please enter an amount", Toast.LENGTH_SHORT).show();
             }
+        });
+        String savedAmount = sharedPreferences.getString(AMOUNT_KEY, "");
+        binding.editTextAmount.setText(savedAmount);
+        binding.displayQueries.setOnClickListener(click -> {
+            loadSavedConversions();
+        });
+        binding.ClearAll.setOnClickListener(click -> {
+            deleteAllConversions();
         });
     }
 
@@ -156,10 +163,34 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
     public void onItemClick(Conversion selectedItem) {
         // Show the fragment ItemDetailFragment using the FragmentManager
         ConversionDetailsFragment fragment = ConversionDetailsFragment.newInstance(selectedItem);
+        displayedFragment = fragment;
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.fragmentLocation, fragment)
-                .addToBackStack(null)
                 .commit();
+    }
+
+    private void loadSavedConversions() {
+        Executor loadThread = Executors.newSingleThreadExecutor();
+        loadThread.execute(() -> {
+            List<Conversion> savedConversions = myDAO.getAllConversions();
+            Log.d("CurrencyActivity", "Loaded " + savedConversions.size() + " conversions from the database.");
+            runOnUiThread(() -> {
+                conversions.clear();
+                conversions.addAll(savedConversions);
+                myAdapter.notifyDataSetChanged();
+                Log.d("CurrencyActivity", "Posted " + savedConversions.size() + " conversions to the ViewModel.");
+            });
+        });
+    }
+    private void deleteAllConversions() {
+        Executor deleteThread = Executors.newSingleThreadExecutor();
+        deleteThread.execute(() -> {
+            myDAO.deleteAllConversions(); // Delete all conversions from the database
+            runOnUiThread(() -> {
+                conversions.clear();
+                myAdapter.notifyDataSetChanged();
+            });
+        });
     }
 }
