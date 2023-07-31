@@ -101,10 +101,10 @@
         app:layout_constraintTop_toTopOf="@+id/editTextAmount" />
 
     <Button
-        android:id="@+id/saveQuery"
+        android:id="@+id/ClearAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="Clear All"
         app:layout_constraintBottom_toBottomOf="@+id/buttonConvert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonConvert"

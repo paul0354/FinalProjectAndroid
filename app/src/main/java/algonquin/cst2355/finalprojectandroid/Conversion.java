@@ -71,4 +71,5 @@ public class Conversion implements Parcelable {
         dest.writeString(conversionResult);
         dest.writeString(timeSemt);
     }
+
 }
