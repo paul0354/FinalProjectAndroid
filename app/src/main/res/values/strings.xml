@@ -13,4 +13,6 @@
     <string name="make_img">Generate Image</string>
     <string name="view_imgs">View All Images</string>
     <string name="save_img">Save Image</string>
+    <string name="curr_img_text">Current Image:</string>
+    <string name="save_to_db">SAVE TO DATABASE</string>
 </resources>
