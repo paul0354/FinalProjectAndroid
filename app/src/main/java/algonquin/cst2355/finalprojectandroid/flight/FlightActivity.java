@@ -13,6 +13,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -48,12 +49,18 @@ public class FlightActivity extends AppCompatActivity {
     FlightViewModel flightModel;
     RequestQueue queue = null;
     protected String airportCode;
+    //for logging
+    private static final String TAG = "FlightActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityFlightBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //Logging, to check that everything works
+        Log.w(TAG, "In onCreate() - loading widgets");
 
         //sets up internet stuff
         queue = Volley.newRequestQueue(this);
@@ -66,6 +73,7 @@ public class FlightActivity extends AppCompatActivity {
 
         //gets saved messages
         if(savedFlights == null) {
+            Log.w(TAG, "savedFlights is not null");
             flightModel.listings.postValue(savedFlights = new ArrayList<>());
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(() -> {
@@ -82,6 +90,8 @@ public class FlightActivity extends AppCompatActivity {
 
         //sets what happens when search button is clicked
         binding.searchFlight.setOnClickListener(clk -> {
+
+            Log.w(TAG, "Button has been clicked");
 
             airportCode = binding.inputCode.getText().toString(); //gets input
             String encode = "";
@@ -102,12 +112,14 @@ public class FlightActivity extends AppCompatActivity {
                         "Searching Airport " + binding.inputCode.getText().toString(),
                         Toast.LENGTH_SHORT).show();
 
-                String api = "24f8b8297ec37f1de18dda8ea6f79d5a";
+                String api = "2450b1bc2a63456a382b6f220853639c";
                 String url = "http://api.aviationstack.com/v1/flights?access_key="
                         + api + "?dep_iata=" + encode;
 
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                         (response) ->{
+
+                    Log.w(TAG, "In JsonObjectRequest() - request went through.");
 
                     try{
 
@@ -123,6 +135,8 @@ public class FlightActivity extends AppCompatActivity {
                             String ter = dep.getString("terminal");
                             String gat = dep.getString("gate");
                             String del = dep.getString("delay");
+
+                            Log.w(TAG, "Flight " + i + "has destination " + des);
 
                             FlightInfo f = new FlightInfo(fN, des, ter, gat, del);
                             flights.add(f);
