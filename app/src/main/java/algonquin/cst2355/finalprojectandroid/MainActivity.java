@@ -1,12 +1,12 @@
 package algonquin.cst2355.finalprojectandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityMainBinding;
+import algonquin.cst2355.finalprojectandroid.flight.FlightActivity;
 
 public class MainActivity extends AppCompatActivity {
 
