@@ -29,7 +29,7 @@ import java.util.concurrent.Executors;
 import algonquin.cst2355.finalprojectandroid.data.CurrencyActivityViewModel;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityCurrencyBinding;
 
-public class CurrencyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
+public class CurrencyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener , ConversionDetailsFragment.OnConversionDeletedListener  {
 
     ActivityCurrencyBinding binding;
     ArrayList<Conversion> conversions = new ArrayList<>();
@@ -149,14 +149,23 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         });
         conversionModel.selectedConversion.observe(this, (newConversionValue) -> {
             if (newConversionValue != null) {
-                FragmentManager fMgr = getSupportFragmentManager();
-                FragmentTransaction tx = fMgr.beginTransaction();
                 binding.fragmentLocation.setVisibility(View.VISIBLE);
-                ConversionDetailsFragment conversionFragment = new ConversionDetailsFragment(newConversionValue);
-                tx.add(R.id.fragmentLocation, conversionFragment);
-                tx.replace(R.id.fragmentLocation, conversionFragment);
-                tx.commit();
+                displayedFragment = ConversionDetailsFragment.newInstance(newConversionValue);
+                displayedFragment.setOnConversionDeletedListener(this); // Set the activity as the listener
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragmentLocation, displayedFragment)
+                        .commit();
             }
+        });
+    }
+
+    @Override
+    public void onConversionDeleted(Conversion deletedConversion) {
+        Log.d("CurrencyActivity", "onConversionDeleted() called");
+        runOnUiThread(() -> {
+            conversions.remove(deletedConversion);
+            myAdapter.notifyDataSetChanged();
         });
     }
 
@@ -165,6 +174,7 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         TextView editTextAmount;
         TextView textViewDate;
         TextView textViewResultAmount;
+        private ConversionDetailsFragment displayedFragment;
 
         public MyRowHolder(@NonNull View itemView) {
             super(itemView);
@@ -172,11 +182,11 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
                     Conversion selectedConversion = conversions.get(position);
-                    ConversionDetailsFragment fragment = ConversionDetailsFragment.newInstance(selectedConversion);
-                    displayedFragment = fragment;
+                    displayedFragment = ConversionDetailsFragment.newInstance(selectedConversion);
+                    displayedFragment.setOnConversionDeletedListener(CurrencyActivity.this);
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction()
-                            .replace(R.id.fragmentLocation, fragment)
+                            .replace(R.id.fragmentLocation, displayedFragment)
                             .commit();
                 }
 //                if (position != RecyclerView.NO_POSITION) {
