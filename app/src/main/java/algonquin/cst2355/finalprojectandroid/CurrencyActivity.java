@@ -1,49 +1,44 @@
 package algonquin.cst2355.finalprojectandroid;
-
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-
-import algonquin.cst2355.finalprojectandroid.Conversion;
-import algonquin.cst2355.finalprojectandroid.ConversionAdapter;
-import algonquin.cst2355.finalprojectandroid.ConversionDAO;
-import algonquin.cst2355.finalprojectandroid.ConversionDatabase;
-import algonquin.cst2355.finalprojectandroid.ConversionDetailsFragment;
-import algonquin.cst2355.finalprojectandroid.R;
 import algonquin.cst2355.finalprojectandroid.data.CurrencyActivityViewModel;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityCurrencyBinding;
-import algonquin.cst2355.finalprojectandroid.databinding.FragmentItemDetailBinding;
 
-public class CurrencyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, ConversionAdapter.OnItemClickListener {
+public class CurrencyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
 
     ActivityCurrencyBinding binding;
     ArrayList<Conversion> conversions = new ArrayList<>();
     CurrencyActivityViewModel conversionModel;
-    private ConversionAdapter myAdapter; // Change the type to ConversionAdapter
+    private RecyclerView.Adapter myAdapter;
+
     ConversionDatabase myDB;
     ConversionDAO myDAO;
-    ConversionDetailsFragment displayedFragment;
-
+     ConversionDetailsFragment displayedFragment;
     private ArrayList<String> currenciesList = new ArrayList<>();
     private static final String PREFS_NAME = "MyPrefsFile"; // Unique name for your SharedPreferences
     private static final String AMOUNT_KEY = "amountKey"; // Key for storing the amount
@@ -51,11 +46,38 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
     private SharedPreferences sharedPreferences;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.my_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.item_1) {
+            Intent bearPage = new Intent(CurrencyActivity.this, BearActivity.class);
+            startActivity(bearPage);
+        } else if (item.getItemId() == R.id.item_2) {
+            Intent main = new Intent(CurrencyActivity.this, MainActivity.class);
+            startActivity(main);
+        } else if (item.getItemId() == R.id.item_3) {
+            Intent flight = new Intent(CurrencyActivity.this, FlightActivity.class);
+            startActivity(flight);
+        } else if (item.getItemId() == R.id.item_4) {
+            Intent trivia = new Intent(CurrencyActivity.this, TriviaActivity.class);
+            startActivity(trivia);
+        }
+        return true;
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCurrencyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        View rootView = binding.getRoot();
+        setSupportActionBar(binding.myToolbar);
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.currency_array, android.R.layout.simple_spinner_item);
@@ -66,19 +88,15 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         binding.spinnerToCurrency.setOnItemSelectedListener(this);
         binding.spinnerFromCurrency.setOnItemSelectedListener(this);
         setupCurrenciesSpinner();
-        binding.recyclerView.setAdapter(myAdapter);
-        conversions = new ArrayList<>();
         myDB = Room.databaseBuilder(getApplicationContext(), ConversionDatabase.class, "conversion-database").fallbackToDestructiveMigration().build();
         myDAO = myDB.cDAO();
         conversionModel = new ViewModelProvider(this).get(CurrencyActivityViewModel.class);
         loadSavedConversions();
+        conversions = conversionModel.conversions.getValue();
         if (conversions == null) {
             conversions = new ArrayList<>();
             conversionModel.conversions.postValue(conversions);
         }
-        myAdapter = new ConversionAdapter(conversions, this); // Initialize the adapter here
-        binding.recyclerView.setAdapter(myAdapter); // Set the adapter for the RecyclerView
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.buttonConvert.setOnClickListener(click -> {
             String amountText = binding.editTextAmount.getText().toString();
             if (!amountText.isEmpty()) {
@@ -90,18 +108,37 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                 editor.apply();
                 double resultAmount = convertCurrency(amount, fromCurrency, toCurrency);
                 String currentDateAndTime = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a").format(new Date());
-
+                binding.editTextResult.setText(String.valueOf(resultAmount));
                 Conversion newConversion = new Conversion(String.valueOf(resultAmount), currentDateAndTime, "null");
                 conversions.add(newConversion);
                 myAdapter.notifyItemInserted(conversions.size() - 1);
-
-                // Clear the edit text after conversion and notify adapter of data change
-                binding.editTextAmount.setText("");
                 myAdapter.notifyDataSetChanged();
             } else {
                 Toast.makeText(CurrencyActivity.this, "Please enter an amount", Toast.LENGTH_SHORT).show();
             }
         });
+        binding.recyclerView.setAdapter(myAdapter = new RecyclerView.Adapter<MyRowHolder>() {
+            @NonNull
+            @Override
+            public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+               View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_conversion, parent, false);
+                return new MyRowHolder(itemView);
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
+                Conversion con = conversions.get(position);
+                //holder.editTextAmount.setText(con.getConversionResult());
+                holder.textViewDate.setText(con.getTimeSemt());
+                holder.textViewResultAmount.setText(con.getConversionResult());
+            }
+
+            @Override
+            public int getItemCount() {
+                return conversions.size();
+            }
+        });
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         String savedAmount = sharedPreferences.getString(AMOUNT_KEY, "");
         binding.editTextAmount.setText(savedAmount);
         binding.displayQueries.setOnClickListener(click -> {
@@ -110,6 +147,73 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         binding.ClearAll.setOnClickListener(click -> {
             deleteAllConversions();
         });
+        conversionModel.selectedConversion.observe(this, (newConversionValue) -> {
+            if (newConversionValue != null) {
+                FragmentManager fMgr = getSupportFragmentManager();
+                FragmentTransaction tx = fMgr.beginTransaction();
+                binding.fragmentLocation.setVisibility(View.VISIBLE);
+                ConversionDetailsFragment conversionFragment = new ConversionDetailsFragment(newConversionValue);
+                tx.add(R.id.fragmentLocation, conversionFragment);
+                tx.replace(R.id.fragmentLocation, conversionFragment);
+                tx.commit();
+            }
+        });
+    }
+
+    class MyRowHolder extends RecyclerView.ViewHolder {
+        TextView editTextResult;
+        TextView editTextAmount;
+        TextView textViewDate;
+        TextView textViewResultAmount;
+
+        public MyRowHolder(@NonNull View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(clk -> {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    Conversion selectedConversion = conversions.get(position);
+                    ConversionDetailsFragment fragment = ConversionDetailsFragment.newInstance(selectedConversion);
+                    displayedFragment = fragment;
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.fragmentLocation, fragment)
+                            .commit();
+                }
+//                if (position != RecyclerView.NO_POSITION) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(CurrencyActivity.this);
+//                    builder.setTitle("Question");
+//                    builder.setNegativeButton("No", (dialog, cl) -> {
+//                    });
+//                    builder.setPositiveButton("Yes", (dialog, cl) -> {
+//                        Conversion c = conversions.get(position);
+//                        Executor thread1 = Executors.newSingleThreadExecutor();
+//                        thread1.execute(() -> {
+//                            myDAO.deleteConversion(c);
+//                            conversions.remove(position);
+//                            runOnUiThread(() -> {
+//                                myAdapter.notifyDataSetChanged();
+//                            });
+//                        });
+//                        Snackbar.make(editTextResult, "You deleted the conversion #" + position, Snackbar.LENGTH_LONG)
+//                                .setAction("Undo", click -> {
+//                                    Executor thread2 = Executors.newSingleThreadExecutor();
+//                                    thread2.execute(() -> {
+//                                        myDAO.insertConversion(c);
+//                                        conversions.add(position, c);
+//                                        runOnUiThread(() -> {
+//                                            myAdapter.notifyDataSetChanged();
+//                                        });
+//                                    });
+//                                })
+//                                .show();
+//                    }).create().show();
+//                  }
+            });
+            editTextResult = itemView.findViewById(R.id.editTextResult);
+            editTextAmount = itemView.findViewById(R.id.editTextAmount);
+            textViewDate = itemView.findViewById(R.id.textViewDate);
+            textViewResultAmount = itemView.findViewById(R.id.textViewResultAmount);
+        }
     }
 
     private void setupCurrenciesSpinner() {
@@ -159,17 +263,6 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         }
     }
 
-    @Override
-    public void onItemClick(Conversion selectedItem) {
-        // Show the fragment ItemDetailFragment using the FragmentManager
-        ConversionDetailsFragment fragment = ConversionDetailsFragment.newInstance(selectedItem);
-        displayedFragment = fragment;
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentLocation, fragment)
-                .commit();
-    }
-
     private void loadSavedConversions() {
         Executor loadThread = Executors.newSingleThreadExecutor();
         loadThread.execute(() -> {
@@ -178,7 +271,12 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             runOnUiThread(() -> {
                 conversions.clear();
                 conversions.addAll(savedConversions);
-                myAdapter.notifyDataSetChanged();
+                if (myAdapter == null) {
+
+                    binding.recyclerView.setAdapter(null);
+                } else {
+                    myAdapter.notifyDataSetChanged();
+                }
                 Log.d("CurrencyActivity", "Posted " + savedConversions.size() + " conversions to the ViewModel.");
             });
         });
@@ -193,4 +291,7 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             });
         });
     }
+
+
+
 }
