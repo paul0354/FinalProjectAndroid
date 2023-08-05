@@ -112,9 +112,9 @@ public class FlightActivity extends AppCompatActivity {
                         "Searching Airport " + binding.inputCode.getText().toString(),
                         Toast.LENGTH_SHORT).show();
 
-                String api = "2450b1bc2a63456a382b6f220853639c";
+                String api = "70ecb37f100c89920ba0342196798895";
                 String url = "http://api.aviationstack.com/v1/flights?access_key="
-                        + api + "?dep_iata=" + encode;
+                        + api + "&dep_iata=" + encode;
 
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                         (response) ->{
@@ -215,14 +215,17 @@ public class FlightActivity extends AppCompatActivity {
             destCode = itemView.findViewById(R.id.destination);
 
             itemView.setOnClickListener(clk -> {
-                //int pos = getAbsoluteAdapterPosition();
+                int pos = getAbsoluteAdapterPosition();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(FlightActivity.this);
-                builder.setMessage("")
-                        .setTitle("Flight XXXXXX")
-                        .setPositiveButton("Save to Favourites", (dialog, cl) -> {})
-                        .setNegativeButton("Close", (dialog, cl) -> {})
-                        .show();
+                FlightInfo s = flights.get(pos);
+                flightModel.listing.postValue(s);
+
+//                AlertDialog.Builder builder = new AlertDialog.Builder(FlightActivity.this);
+//                builder.setMessage("")
+//                        .setTitle("Flight XXXXXX")
+//                        .setPositiveButton("Save to Favourites", (dialog, cl) -> {})
+//                        .setNegativeButton("Close", (dialog, cl) -> {})
+//                        .show();
 
             });
 
