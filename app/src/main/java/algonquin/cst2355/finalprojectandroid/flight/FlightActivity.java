@@ -94,6 +94,10 @@ public class FlightActivity extends AppCompatActivity {
 
             Log.w(TAG, "Button has been clicked");
 
+            //saves flight code when clicked
+            edt.putString("FlightData", binding.inputCode.getText().toString());
+            edt.apply();
+
             airportCode = binding.inputCode.getText().toString(); //gets input
             String encode = "";
             try {
