@@ -14,27 +14,49 @@ public class Conversion implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")
     public int id;
-   @ColumnInfo(name="conversionResult")
-    public String conversionResult;
+   @ColumnInfo(name="conversionAmount")
+    public String conversionAmount;
    @ColumnInfo(name="TimeSent")
    public String timeSemt;
-   @ColumnInfo(name="convertedCurrencies")
-   public String convertedCurrencies;
+   @ColumnInfo(name="convertedDetails")
+   public String convertedDetails;
 
-    public Conversion(String conversionResult, String timeSemt, String currencyConversion) {
-        this.conversionResult = conversionResult;
+    @ColumnInfo(name = "currencyFrom")
+    public String currencyFrom;
+
+    @ColumnInfo(name = "currencyTo")
+    public String currencyTo;
+    public Conversion(String conversionResult, String timeSemt, String convertedDetails) {
+        this.conversionAmount = conversionResult;
         this.timeSemt = timeSemt;
-        this.convertedCurrencies = currencyConversion;
+        this.convertedDetails = convertedDetails;
     }
+
+    public String getCurrencyFrom() {
+        return currencyFrom;
+    }
+
+    public String getCurrencyTo() {
+        return currencyTo;
+    }
+
+    public Conversion(String conversionAmount, String timeSemt, String convertedDetails, String currencyFrom, String currencyTo) {
+        this.conversionAmount = conversionAmount;
+        this.timeSemt = timeSemt;
+        this.convertedDetails = convertedDetails;
+        this.currencyFrom = currencyFrom;
+        this.currencyTo = currencyTo;
+    }
+
     public Conversion() {
     }
 
 
     protected Conversion(Parcel in) {
         id = in.readInt();
-        conversionResult = in.readString();
+        conversionAmount = in.readString();
         timeSemt = in.readString();
-        convertedCurrencies = in.readString();
+        convertedDetails = in.readString();
     }
 
     public static final Creator<Conversion> CREATOR = new Creator<Conversion>() {
@@ -49,16 +71,19 @@ public class Conversion implements Parcelable {
         }
     };
 
-    public String getConversionResult() {
-        return conversionResult;
+    public String getConvertedDetails() {
+        return convertedDetails;
+    }
+    public void setConversionDetails(String conversionDetails) {
+        this.convertedDetails = convertedDetails;
+    }
+
+    public String getConversionAmount() {
+        return conversionAmount;
     }
 
     public String getTimeSemt() {
         return timeSemt;
-    }
-
-    public String getCurrencyConversion() {
-        return convertedCurrencies;
     }
 
     @Override
@@ -68,7 +93,7 @@ public class Conversion implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(conversionResult);
+        dest.writeString(conversionAmount);
         dest.writeString(timeSemt);
     }
 

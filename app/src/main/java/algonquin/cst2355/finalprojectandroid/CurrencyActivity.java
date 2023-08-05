@@ -15,7 +15,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +27,14 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import algonquin.cst2355.finalprojectandroid.data.CurrencyActivityViewModel;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityCurrencyBinding;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class CurrencyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener , ConversionDetailsFragment.OnConversionDeletedListener  {
 
@@ -44,6 +51,9 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
     private static final String AMOUNT_KEY = "amountKey"; // Key for storing the amount
 
     private SharedPreferences sharedPreferences;
+    private static final String BASE_URL = "https://api.getgeoapi.com/v2/currency/convert";
+    private static final String API_KEY = "1a9730ee2471b4251cc0d57ae0195921fa687677";
+    private RequestQueue queue;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,15 +98,19 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         binding.spinnerToCurrency.setOnItemSelectedListener(this);
         binding.spinnerFromCurrency.setOnItemSelectedListener(this);
         setupCurrenciesSpinner();
-        myDB = Room.databaseBuilder(getApplicationContext(), ConversionDatabase.class, "conversion-database").fallbackToDestructiveMigration().build();
+        myDB = Room.databaseBuilder(getApplicationContext(), ConversionDatabase.class, "conversion-database")
+                .fallbackToDestructiveMigration().build();
         myDAO = myDB.cDAO();
         conversionModel = new ViewModelProvider(this).get(CurrencyActivityViewModel.class);
-        loadSavedConversions();
+        // to get the conversions displayed at first ( next line )
+        //loadSavedConversions();
         conversions = conversionModel.conversions.getValue();
         if (conversions == null) {
             conversions = new ArrayList<>();
             conversionModel.conversions.postValue(conversions);
         }
+
+        queue = Volley.newRequestQueue(this);
         binding.buttonConvert.setOnClickListener(click -> {
             String amountText = binding.editTextAmount.getText().toString();
             if (!amountText.isEmpty()) {
@@ -104,15 +118,41 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                 String fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
                 String toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
+                String stringUrl = BASE_URL + "?format=json&from=" + fromCurrency + "&to=" + toCurrency + "&amount=" + amount + "&api_key=" + API_KEY;
                 editor.putString(AMOUNT_KEY, amountText);
                 editor.apply();
-                double resultAmount = convertCurrency(amount, fromCurrency, toCurrency);
                 String currentDateAndTime = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a").format(new Date());
-                binding.editTextResult.setText(String.valueOf(resultAmount));
-                Conversion newConversion = new Conversion(String.valueOf(resultAmount), currentDateAndTime, "null");
-                conversions.add(newConversion);
-                myAdapter.notifyItemInserted(conversions.size() - 1);
-                myAdapter.notifyDataSetChanged();
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringUrl, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    // Parse the response JSON
+                                    JSONObject rates = response.getJSONObject("rates");
+                                    JSONObject cadObject = rates.getJSONObject(toCurrency);
+                                    double rateForAmount = cadObject.getDouble("rate_for_amount");
+                                    String rateText = String.valueOf(rateForAmount);
+                                    // Update the UI with the converted rate
+                                    binding.editTextResult.setText(rateText);
+                                    // Your existing code to add the conversion to the list
+                                    String currentDateAndTime = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a").format(new Date());
+                                    String convertedDetails = amountText + " " + fromCurrency + " corresponds to " + rateText + " " + toCurrency;
+                                    Conversion newConversion = new Conversion(amountText, currentDateAndTime, convertedDetails, fromCurrency, toCurrency);
+                                    conversions.add(newConversion);
+                                    myAdapter.notifyItemInserted(conversions.size() - 1);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error
+                        Toast.makeText(CurrencyActivity.this, "Error occurred during conversion.", Toast.LENGTH_SHORT).show();
+                        error.printStackTrace();
+                    }
+                });
+                queue.add(request);
             } else {
                 Toast.makeText(CurrencyActivity.this, "Please enter an amount", Toast.LENGTH_SHORT).show();
             }
@@ -127,10 +167,14 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
 
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
+                if(conversions.isEmpty()){
+     //               myAdapter.notifyDataSetChanged();
+                    return;
+                }
                 Conversion con = conversions.get(position);
-                //holder.editTextAmount.setText(con.getConversionResult());
+                holder.textViewResultAmount.setText(con.getConvertedDetails());
                 holder.textViewDate.setText(con.getTimeSemt());
-                holder.textViewResultAmount.setText(con.getConversionResult());
+
             }
 
             @Override
@@ -189,35 +233,6 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                             .replace(R.id.fragmentLocation, displayedFragment)
                             .commit();
                 }
-//                if (position != RecyclerView.NO_POSITION) {
-//                    AlertDialog.Builder builder = new AlertDialog.Builder(CurrencyActivity.this);
-//                    builder.setTitle("Question");
-//                    builder.setNegativeButton("No", (dialog, cl) -> {
-//                    });
-//                    builder.setPositiveButton("Yes", (dialog, cl) -> {
-//                        Conversion c = conversions.get(position);
-//                        Executor thread1 = Executors.newSingleThreadExecutor();
-//                        thread1.execute(() -> {
-//                            myDAO.deleteConversion(c);
-//                            conversions.remove(position);
-//                            runOnUiThread(() -> {
-//                                myAdapter.notifyDataSetChanged();
-//                            });
-//                        });
-//                        Snackbar.make(editTextResult, "You deleted the conversion #" + position, Snackbar.LENGTH_LONG)
-//                                .setAction("Undo", click -> {
-//                                    Executor thread2 = Executors.newSingleThreadExecutor();
-//                                    thread2.execute(() -> {
-//                                        myDAO.insertConversion(c);
-//                                        conversions.add(position, c);
-//                                        runOnUiThread(() -> {
-//                                            myAdapter.notifyDataSetChanged();
-//                                        });
-//                                    });
-//                                })
-//                                .show();
-//                    }).create().show();
-//                  }
             });
             editTextResult = itemView.findViewById(R.id.editTextResult);
             editTextAmount = itemView.findViewById(R.id.editTextAmount);
@@ -230,6 +245,8 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         // Create a list of currencies to populate the spinners
         currenciesList.add("USD");
         currenciesList.add("CAD");
+        currenciesList.add("EUR");
+        currenciesList.add("DZD");
 
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, currenciesList);
@@ -241,18 +258,18 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // Check which spinner triggered the selection
-        if (parent.getId() == binding.spinnerFromCurrency.getId() || parent.getId() == binding.spinnerToCurrency.getId()) {
-            // Get the selected currencies
-            String fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
-            String toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
-            String amountText = binding.editTextAmount.getText().toString();
-            if (!amountText.isEmpty()) {
-                double amount = Double.parseDouble(amountText);
-                fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
-                toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
-            }
-        }
+//        // Check which spinner triggered the selection
+//        if (parent.getId() == binding.spinnerFromCurrency.getId() || parent.getId() == binding.spinnerToCurrency.getId()) {
+//            // Get the selected currencies
+//            String fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
+//            String toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
+//            String amountText = binding.editTextAmount.getText().toString();
+//            if (!amountText.isEmpty()) {
+//                double amount = Double.parseDouble(amountText);
+//                fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
+//                toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
+
+
     }
 
     @Override
@@ -260,34 +277,24 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         // Handle the case when nothing is selected in the spinners (if required)
     }
 
-    private double convertCurrency(double amount, String fromCurrency, String toCurrency) {
-        double conversionRate = 2.0;
-
-        if (fromCurrency.equals("USD") && toCurrency.equals("CAD")) {
-            return amount * conversionRate;
-        } else if (fromCurrency.equals("CAD") && toCurrency.equals("USD")) {
-            return amount / conversionRate;
-        } else {
-            // Handle unsupported currency conversion here, if needed
-            return amount;
-        }
-    }
-
     private void loadSavedConversions() {
         Executor loadThread = Executors.newSingleThreadExecutor();
         loadThread.execute(() -> {
             List<Conversion> savedConversions = myDAO.getAllConversions();
-            Log.d("CurrencyActivity", "Loaded " + savedConversions.size() + " conversions from the database.");
             runOnUiThread(() -> {
                 conversions.clear();
-                conversions.addAll(savedConversions);
-                if (myAdapter == null) {
-
-                    binding.recyclerView.setAdapter(null);
+                if (!savedConversions.isEmpty()) {
+                    for (Conversion savedConversion : savedConversions) {
+                        double amount = Double.parseDouble(savedConversion.getConversionAmount());
+                        String fromCurrency = savedConversion.getCurrencyFrom();
+                        String toCurrency = savedConversion.getCurrencyTo();
+                        performConversion(amount, fromCurrency, toCurrency, savedConversion);
+                        conversions.add(savedConversion);
+                    }
+                    myAdapter.notifyDataSetChanged(); // Notify the adapter once after all conversions are added
                 } else {
-                    myAdapter.notifyDataSetChanged();
+                    myAdapter.notifyDataSetChanged(); // Notify the adapter to clear the RecyclerView when no conversions are present
                 }
-                Log.d("CurrencyActivity", "Posted " + savedConversions.size() + " conversions to the ViewModel.");
             });
         });
     }
@@ -301,7 +308,46 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             });
         });
     }
+    private void performConversion(double amount, String fromCurrency, String toCurrency, Conversion conversion) {
+        String stringUrl = BASE_URL + "?format=json&from=" + fromCurrency + "&to=" + toCurrency + "&amount=" + amount + "&api_key=" + API_KEY;
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringUrl, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            // Parse the response JSON
+                            JSONObject rates = response.getJSONObject("rates");
+                            JSONObject cadObject = rates.getJSONObject(toCurrency);
+                            double rateForAmount = cadObject.getDouble("rate_for_amount");
+                            String rateText = String.valueOf(rateForAmount);
 
+                            // Update the converted details for the conversion
+                            String convertedDetails = amount + " " + fromCurrency + " corresponds to " + rateText + " " + toCurrency;
+                            conversion.setConversionDetails(convertedDetails);
 
+                            // Save the updated conversion to the database using Executor
+                            Executor updateThread = Executors.newSingleThreadExecutor();
+                            updateThread.execute(() -> {
+                                myDAO.updateConversion(conversion);
+                            });
+
+                            // Notify the adapter to update the RecyclerView with the updated conversion
+                            runOnUiThread(() -> {
+                                myAdapter.notifyDataSetChanged();
+                            });
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // Handle error
+                error.printStackTrace();
+            }
+        });
+        queue.add(request);
+    }
 
 }
