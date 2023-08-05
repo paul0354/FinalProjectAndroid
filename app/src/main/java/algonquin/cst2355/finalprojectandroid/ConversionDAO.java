@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -21,4 +22,9 @@ public interface ConversionDAO {
 
     @Query("DELETE FROM conversion")
     void deleteAllConversions();
+
+    @Update
+    void updateConversion(Conversion conversion);
+    @Query("SELECT EXISTS(SELECT 1 FROM conversion WHERE currencyFrom = :fromCurrency AND currencyTo = :toCurrency AND conversionAmount = :amount LIMIT 1)")
+    boolean conversionExists(String fromCurrency, String toCurrency, double amount);
 }

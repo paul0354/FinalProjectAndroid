@@ -8,24 +8,18 @@
         android:id="@+id/textViewAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Amount" />
-
-    <TextView
-        android:id="@+id/textViewDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date" />
-    <TextView
-        android:id="@+id/currencyTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Currency" />
+        android:text="Conversion Result" />
     <TextView
         android:id="@+id/textViewResultAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Result" />
 
-    <!-- Add other views here if needed for displaying data -->
+    <TextView
+        android:id="@+id/textViewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date" />
+
 
 </LinearLayout>
