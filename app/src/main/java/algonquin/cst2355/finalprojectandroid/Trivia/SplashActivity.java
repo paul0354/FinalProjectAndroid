@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.R;
+
+import algonquin.cst2355.finalprojectandroid.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -18,9 +18,9 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_item);
+        setContentView(R.layout.activity_splash); // Assuming you have this layout in your project
 
-        SharedPreferences mPref = this.getSharedPreferences("myprefs", MODE_PRIVATE);
+        mPref = this.getSharedPreferences("mpref", MODE_PRIVATE); // Changed this line
 
         Category = mPref.getString(Constant.CATEGORY,"");
         catId = mPref.getInt(Constant.CATID,0);

@@ -18,28 +18,36 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import algonquin.cst2355.finalprojectandroid.R;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 /*
-    Main activity for the trivia functionality of your app
+    Main activity for the trivia functionality of your app, handles user interactions related to category selection and input of number of questions for a trivia game, it fetches
+    categories from an API, validates user input, and navigates to the next screen if inputs are valid. If inputs are not valid, it provides feedback for the user to correct them.
  */
 public class TriviaActivity extends AppCompatActivity {
 
-   /*
-   Declaring variables with UI elements
-    */
+    /*
+    Declaring variables with UI elements
+     */
     RelativeLayout progressing;
     Spinner spinner_category;
     List<CategoryModel> categoryList;
@@ -51,7 +59,6 @@ public class TriviaActivity extends AppCompatActivity {
     EditText editNumber; // Number of questions
     SharedPreferences mPref; // To store data across app restart
     String category; // Selected category name
-
 
 
     @Override
@@ -114,130 +121,140 @@ public class TriviaActivity extends AppCompatActivity {
 
 
     // Method to validate user input before search
-    private void VerifyData(){
+    private void VerifyData() {
 
         String strNumber = editNumber.getText().toString().trim();
+
+        if (strNumber.isEmpty()) {
+            setEditTextError(editNumber);
+            return;
+        }
+
         int intNumber = Integer.parseInt(strNumber);
 
-        if(spinner_category.getSelectedItem() == "Select Category"){
+        if ("Select Category".equals(spinner_category.getSelectedItem())) {
             spinner_category.requestFocus();
             Toast.makeText(this, "Please select category first", Toast.LENGTH_SHORT).show();
-        } else if(TextUtils.isEmpty(strNumber)){
-            editNumber.requestFocus();
-            inputLayout.setErrorEnabled(true);
-            inputLayout.setError("Please enter number is max to 50");
-            inputLayout.getEditText().addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    inputLayout.setErrorEnabled(false);
-                    inputLayout.setError(null);
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-        } else if(intNumber > 50){
-            editNumber.requestFocus();
-            inputLayout.setErrorEnabled(true);
-            inputLayout.setError("Please enter number is max to 50");
-            inputLayout.getEditText().addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    inputLayout.setErrorEnabled(false);
-                    inputLayout.setError(null);
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
+        } else if (intNumber > 50) {
+            setEditTextError(editNumber);
         } else {
-            mPref.edit().putInt(Constant.CATID,catId).apply();
-            mPref.edit().putInt(Constant.NUMBER,intNumber).apply();
-            mPref.edit().putString(Constant.CATEGORY,category).apply();
-            mPref.edit().putString(Constant.FLAG,"Trivia").apply();
+            mPref.edit().putInt(Constant.CATID, catId).putInt(Constant.NUMBER, intNumber).putString(Constant.CATEGORY, category).putString(Constant.FLAG, "Trivia").apply();
 
-            Intent intent = new Intent(TriviaActivity.this,QuestionListActivity.class);
+            Intent intent = new Intent(TriviaActivity.this, QuestionListActivity.class);
             startActivity(intent);
         }
     }
 
-    private void FetchAllCategory(){
-        //fetch all category of trivia questions from the API
-        progressing.setVisibility(View.VISIBLE); // Show the loading spinner or progress bar
+    private void setEditTextError(EditText editText) {
+        editText.requestFocus();
+        inputLayout.setErrorEnabled(true);
+        inputLayout.setError("Please enter number is max to 50");
 
-
-        // create a gson object that can be used to convert objects to their JSON representation
-        Gson gson = new GsonBuilder()
-                .setLenient() // Configuration option to enable more relaxed parsing rules.
-                .create();
-
-        // Create a new Retrofit instance. Retrofit is a type-safe  HTTP client for android and JAVA.
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(RetrofitInterface.BASE_URL) // Set the API base URL
-                .addConverterFactory(GsonConverterFactory.create(gson)) // Add converter factory for serialization and deserialization of objects
-                .build(); // Build the retrofit instance.
-
-        // Create an implementation of hte API endpoints defined by the RetrofitInterface interface.
-        RetrofitInterface apiService=retrofit.create(RetrofitInterface.class);
-
-        Call<CategoryModel> call = apiService.FETCHALLCATEGORY();
-        call.enqueue(new Callback<CategoryModel>() {
+        inputLayout.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void onResponse(Call<CategoryModel> call, Response<CategoryModel> response) {
-                if(response.body().getTriviaCategories() != null){
-                    progressing.setVisibility(View.GONE);
-
-                    title = new String[response.body().getTriviaCategories().size()];
-                    List<String> lables = new ArrayList<String>();
-
-                    categoryList = response.body().getTriviaCategories();
-
-                    lables.add("Select Category");
-                    for (int i = 0; i < categoryList.size(); i++) {
-                        title[i] = categoryList.get(i).getName();
-                        lables.add(categoryList.get(i).getName());
-                    }
-
-                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(TriviaActivity.this, android.R.layout.simple_spinner_item, lables);
-                    // Drop down layout style - list view with radio button
-                    spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    // attaching data adapter to spinner
-                    spinner_category.setAdapter(spinnerAdapter);
-
-                } else {
-                    progressing.setVisibility(View.GONE);
-                    Toast.makeText(TriviaActivity.this,"Failure while fetching data !! try again later.",Toast.LENGTH_SHORT).show();
-                }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onFailure(Call<CategoryModel> call, Throwable t) {
-                progressing.setVisibility(View.GONE);
-                Toast.makeText(TriviaActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                inputLayout.setErrorEnabled(false);
+                inputLayout.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
     }
 
+
+    // This method fetches all category of trivia questions from the API
+    private void FetchAllCategory() {
+        //fetch all category of trivia questions from the API
+        progressing.setVisibility(View.VISIBLE); // Show the loading spinner or progress bar
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://opentdb.com/api_category.php";
+
+
+        // Request a string response from the provided URL.
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+
+                    public void onResponse(JSONArray response) {
+                        // Dismiss progress
+                        progressing.setVisibility(View.GONE);
+
+                        List<String> labels = new ArrayList<String>();
+                        labels.add("Select Category");
+
+                        // Parse your response
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                CategoryModel categoryModel = new CategoryModel();
+
+                                categoryModel.setName(jsonObject.getString("name"));
+                                categoryModel.setId(jsonObject.getInt("id"));  // Replace with your JSON key
+
+                                categoryList.add(categoryModel);
+                                labels.add(jsonObject.getString("name"));  // Replace with your JSON key
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(TriviaActivity.this, android.R.layout.simple_spinner_item, labels);
+                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinner_category.setAdapter(spinnerAdapter);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressing.setVisibility(View.GONE);
+                Toast.makeText(TriviaActivity.this, "Failure while fetching data !! try again later.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queue.add(jsonArrayRequest);
+    }
+
     private int getSelectedCatId(String Category) {
-        for (int i = 0; i < categoryList.size(); i++) {
-            if (Category.equals(categoryList.get(i).getName())) {
-                return categoryList.get(i).getId();
+        for (CategoryModel categoryModel : categoryList) {
+            if (Category.equals(categoryModel.getName())) {
+                return categoryModel.getId();
             }
         }
         return -1;
+    }
+
+    private void FetchQuestions(int amount, int category, String type) {
+        progressing.setVisibility(View.VISIBLE); // Show the loading spinner or progress bar
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        //construct url
+        String url = "https://opentdb.com/api.php?amount=" + amount + "&category=" + category + "&type=" + type;
+
+        // Request a string response from the provided URL.
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+
+                    public void onResponse(JSONObject response) {
+
+                        progressing.setVisibility(View.GONE);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressing.setVisibility(View.GONE);
+                Toast.makeText(TriviaActivity.this, "Failure while fetching data !! try again later.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queue.add(jsonObjectRequest);
     }
 }
