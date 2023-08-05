@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nom</string>
+    <string name="bear_app_name">Generateur d\'image d\'ours</string>
+    <string name="flight_app_name">Traqueur de vol</string>
+    <string name="currency_app_name">"Convertisseur de monnaie "</string>
+    <string name="trivia_app_name">Trivia test</string>
+    <string name="welcome_msg">Bienvenue</string>
+    <string name="Display_All">Afficher tout</string>
+    <string name="Clear_All">Effacer tout</string>
+    <string name="Convert">Convertir</string>
+    <string name="Delete">Supprimer</string>
+    <string name="Save">Sauvegarder</string>
+</resources>
