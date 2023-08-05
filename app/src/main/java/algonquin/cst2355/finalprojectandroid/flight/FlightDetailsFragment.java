@@ -44,6 +44,7 @@ public class FlightDetailsFragment extends Fragment {
 
                     });
 
+            //text is not appearing
             Snackbar.make(b.getRoot(), "Flight added to the database.", Snackbar.LENGTH_LONG)
                     .show();
 

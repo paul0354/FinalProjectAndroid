@@ -38,6 +38,19 @@ import algonquin.cst2355.finalprojectandroid.R;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityFlightBinding;
 import algonquin.cst2355.finalprojectandroid.databinding.FlightListBinding;
 
+/*
+TODO: Figure out why the details are sometimes null
+TODO: Fix the Snackbar in the FlightDetailsFragment
+TODO: Add a toolbar that goes to another activity and a help menu
+TODO: Add a new activity that shows the saved flights
+TODO: Add an AlertDialog
+TODO: Add deletion functionality
+TODO: Refactor the strings to strings.xml and add a new language
+TODO: Javadoc
+TODO: Make it look nice lol
+TODO: Anything I'm missing
+ */
+
 public class FlightActivity extends AppCompatActivity {
     ActivityFlightBinding binding;
     SharedPreferences prefs;
