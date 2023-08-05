@@ -11,24 +11,26 @@
         android:id="@+id/triviatool"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="@color/text_primary"
+        app:titleTextColor="@color/task_secondary"
         android:background="@color/primary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme"
+
+        android:hint="Trivia"/>
 
     <RelativeLayout
         android:id="@+id/progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone">
 
         <ProgressBar
-            android:indeterminateOnly="true"
-            android:indeterminateTintMode="src_atop"
-            android:layout_centerInParent="true"
-            android:indeterminateTint="@color/primary"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateOnly="true"
+            android:indeterminateTint="@color/primary"
+            android:indeterminateTintMode="src_atop" />
 
     </RelativeLayout>
 
@@ -62,9 +64,9 @@
                 app:hintAnimationEnabled="true"
                 app:boxBackgroundColor="@color/background"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:hint="No of Question"
+
                 app:boxStrokeColor="@color/primary"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/text_primary"
                 android:layout_height="wrap_content">
 
 
@@ -74,8 +76,10 @@
                     android:layout_height="50dp"
                     android:inputType="number"
                     android:maxLength="2"
-                    android:textColor="@color/black"
-                    android:textSize="12dp" />
+                    android:textColor="@color/text_primary"
+                    android:textSize="12dp"
+                    android:hint="Enter the number of questions"
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 

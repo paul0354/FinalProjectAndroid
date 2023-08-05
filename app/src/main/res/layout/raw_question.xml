@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         app:cardElevation="5dp"
         app:cardCornerRadius="15dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/black"
         app:cardUseCompatPadding="true"
         app:cardPreventCornerOverlap="true">
 

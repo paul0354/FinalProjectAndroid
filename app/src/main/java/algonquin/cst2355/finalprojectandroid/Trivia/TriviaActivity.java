@@ -32,43 +32,58 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
+/*
+    Main activity for the trivia functionality of your app
+ */
 public class TriviaActivity extends AppCompatActivity {
 
+   /*
+   Declaring variables with UI elements
+    */
     RelativeLayout progressing;
     Spinner spinner_category;
     List<CategoryModel> categoryList;
     int catId;
     String[] title;
 
-    MaterialButton buttonSearch;
-    TextInputLayout inputLayout;
-    EditText editNumber;
-    SharedPreferences mPref;
-    String category;
+    MaterialButton buttonSearch; // Button to start the search
+    TextInputLayout inputLayout; // Layout for the input field
+    EditText editNumber; // Number of questions
+    SharedPreferences mPref; // To store data across app restart
+    String category; // Selected category name
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trivia);
 
+        // Initialize shared preferences
         mPref = PreferenceManager.getDefaultSharedPreferences(TriviaActivity.this);
 
+        // Set up the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.triviatool);
-        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        setSupportActionBar(toolbar);
 
+
+        // Link UI elements with their corresponding views
         progressing = (RelativeLayout) findViewById(R.id.progress);
         spinner_category = (Spinner) findViewById(R.id.spincat);
         inputLayout = (TextInputLayout) findViewById(R.id.rl1);
         editNumber = (EditText) findViewById(R.id.number);
         buttonSearch = (MaterialButton) findViewById(R.id.search_question);
 
+
+        // Initialize category list
         categoryList = new ArrayList<>();
 
         FetchAllCategory();
 
+
+        // Set a listener for the spinner to update the selected category when it changes
         spinner_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -87,6 +102,8 @@ public class TriviaActivity extends AppCompatActivity {
             }
         });
 
+
+        //  Set a click listener for the search button to validate input when clicked
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +112,8 @@ public class TriviaActivity extends AppCompatActivity {
         });
     }
 
+
+    // Method to validate user input before search
     private void VerifyData(){
 
         String strNumber = editNumber.getText().toString().trim();
@@ -157,18 +176,22 @@ public class TriviaActivity extends AppCompatActivity {
     }
 
     private void FetchAllCategory(){
-        //fetch all category of trivia
-        progressing.setVisibility(View.VISIBLE);
+        //fetch all category of trivia questions from the API
+        progressing.setVisibility(View.VISIBLE); // Show the loading spinner or progress bar
 
+
+        // create a gson object that can be used to convert objects to their JSON representation
         Gson gson = new GsonBuilder()
-                .setLenient()
+                .setLenient() // Configuration option to enable more relaxed parsing rules.
                 .create();
 
+        // Create a new Retrofit instance. Retrofit is a type-safe  HTTP client for android and JAVA.
         Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(RetrofitInterface.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+                .baseUrl(RetrofitInterface.BASE_URL) // Set the API base URL
+                .addConverterFactory(GsonConverterFactory.create(gson)) // Add converter factory for serialization and deserialization of objects
+                .build(); // Build the retrofit instance.
 
+        // Create an implementation of hte API endpoints defined by the RetrofitInterface interface.
         RetrofitInterface apiService=retrofit.create(RetrofitInterface.class);
 
         Call<CategoryModel> call = apiService.FETCHALLCATEGORY();

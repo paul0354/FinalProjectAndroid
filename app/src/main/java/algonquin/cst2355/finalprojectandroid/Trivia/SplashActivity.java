@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,9 +18,10 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_list_item);
 
-        mPref = PreferenceManager.getDefaultSharedPreferences(SplashActivity.this);
+        SharedPreferences mPref = this.getSharedPreferences("myprefs", MODE_PRIVATE);
+
         Category = mPref.getString(Constant.CATEGORY,"");
         catId = mPref.getInt(Constant.CATID,0);
         amount = mPref.getInt(Constant.NUMBER,0);

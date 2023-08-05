@@ -16,11 +16,10 @@
             android:name=".Trivia.TriviaActivity"
             android:exported="false" />
         <activity
-            android:name=".QuestionListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true">
+            android:name=".Trivia.SplashActivity"
+            android:exported="false">
+        </activity>
+
 
         <activity
             android:name=".FlightActivity"
