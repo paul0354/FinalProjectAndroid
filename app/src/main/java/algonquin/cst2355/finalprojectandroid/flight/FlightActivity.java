@@ -43,9 +43,9 @@ public class FlightActivity extends AppCompatActivity {
     SharedPreferences prefs;
     SharedPreferences.Editor edt;
     private RecyclerView.Adapter adpt;
-    FlightInfoDAO fDAO;
+    static FlightInfoDAO fDAO;
     ArrayList<FlightInfo> flights = new ArrayList<>();
-    ArrayList<FlightInfo> savedFlights = new ArrayList<>();
+    static ArrayList<FlightInfo> savedFlights = new ArrayList<>();
     FlightViewModel flightModel;
     RequestQueue queue = null;
     protected String airportCode;
@@ -67,26 +67,27 @@ public class FlightActivity extends AppCompatActivity {
 
         //Sets up the database and view model
         flightModel = new ViewModelProvider(this).get(FlightViewModel.class);
-        savedFlights = flightModel.listings.getValue();
+        //savedFlights = flightModel.listings.getValue();
         FlightDatabase db = Room.databaseBuilder(getApplicationContext(), FlightDatabase.class, "database-name").build();
         fDAO = db.cmDAO();
 
         //gets saved messages
-        if(savedFlights == null) {
+        //if(savedFlights == null) {
             Log.w(TAG, "savedFlights is not null");
-            flightModel.listings.postValue(savedFlights = new ArrayList<>());
+            //flightModel.listings.postValue(savedFlights = new ArrayList<>());
+            savedFlights = new ArrayList<>();
             Executor thread = Executors.newSingleThreadExecutor();
             thread.execute(() -> {
                 savedFlights.addAll(fDAO.getAllFlights());
             });
-        }
+        //}
 
         //Sets up shared pref
         prefs = getSharedPreferences("FlightData", Context.MODE_PRIVATE);
         edt = prefs.edit();
 
         //sets input to what is saved
-        binding.inputCode.setText(prefs.getString("AirportCode", ""));
+        binding.inputCode.setText(prefs.getString("FlightData", ""));
 
         //sets what happens when search button is clicked
         binding.searchFlight.setOnClickListener(clk -> {
@@ -153,6 +154,8 @@ public class FlightActivity extends AppCompatActivity {
             }
         });
 
+        //gets the airport code from shared prefs
+
         //for recyclerview
         binding.flights.setAdapter(adpt = new RecyclerView.Adapter<FlightRowHolder>() {
             @NonNull
@@ -182,6 +185,9 @@ public class FlightActivity extends AppCompatActivity {
 
         //for the fragment view
         flightModel.listing.observe(this, (newFlightValue) -> {
+
+            int size = savedFlights.size();
+
             FlightDetailsFragment flightFragment = new FlightDetailsFragment(newFlightValue);
             FragmentManager fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
@@ -219,14 +225,6 @@ public class FlightActivity extends AppCompatActivity {
 
                 FlightInfo s = flights.get(pos);
                 flightModel.listing.postValue(s);
-
-//                AlertDialog.Builder builder = new AlertDialog.Builder(FlightActivity.this);
-//                builder.setMessage("")
-//                        .setTitle("Flight XXXXXX")
-//                        .setPositiveButton("Save to Favourites", (dialog, cl) -> {})
-//                        .setNegativeButton("Close", (dialog, cl) -> {})
-//                        .show();
-
             });
 
         }
