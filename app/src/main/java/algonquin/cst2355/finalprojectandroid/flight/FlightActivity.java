@@ -1,6 +1,7 @@
 package algonquin.cst2355.finalprojectandroid.flight;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,12 +9,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
+import androidx.appcompat.widget.Toolbar;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -100,6 +103,8 @@ public class FlightActivity extends AppCompatActivity {
 
         //sets input to what is saved
         binding.inputCode.setText(prefs.getString("FlightData", ""));
+
+        setSupportActionBar(binding.flightToolbar);
 
         //sets what happens when search button is clicked
         binding.searchFlight.setOnClickListener(clk -> {
@@ -222,6 +227,58 @@ public class FlightActivity extends AppCompatActivity {
         super.onPause();
         edt.putString("FlightData", binding.inputCode.getText().toString());
         edt.apply();
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.flight_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(item.getItemId()==R.id.savedFlights) {
+
+            //TODO: add new activity here
+
+        }
+        else if(item.getItemId()==R.id.flightHelp) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(FlightActivity.this);
+            builder.setMessage("To use this app, type an airport code into the searchbar. " +
+                            "When you click the search button, a list of flights from that " +
+                            "airport will appear, along with their destination airport.\n\n" +
+                            "To save a flight, click on one of the flights in the list, then click " +
+                            "on the Save To Database button.\n\n" +
+                            "To view your saved flights, click on the three dots, then click on the " +
+                            "View Saved Flights button.\n\n" +
+                            "To delete a saved flight, click on one of your saved flights, then " +
+                            "click on the Remove From Database button.")
+                    .setTitle("How To Use The Flight Tracker")
+                    .setPositiveButton("OK", (dialog, cl) -> {})
+                    .create().show();
+
+        }
+        else if(item.getItemId()==R.id.flightToBear) {
+
+            //TODO: add functionality to go to the bear activity
+
+        }
+        else if(item.getItemId()==R.id.flightToCurrency) {
+
+            //TODO: add functionality to go to the currency activity
+
+        }
+        else if(item.getItemId()==R.id.flightToTrivia) {
+
+            //TODO: add functionality to go to the trivia activity
+
+        }
+
+        return true;
 
     }
 

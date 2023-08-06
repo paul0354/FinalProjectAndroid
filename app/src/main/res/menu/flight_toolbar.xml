@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/savedFlights"
+        android:title="View Saved Flights" />
+    <item
+        android:id="@+id/flightToTrivia"
+        android:icon="@drawable/trivia_icon"
+        android:title="trivia"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/flightHelp"
+        android:title="Help"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/flightToBear"
+        android:icon="@drawable/bear_icon"
+        android:title="Bear"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/flightToCurrency"
+        android:icon="@drawable/currency_icon"
+        android:title="Currency"
+        app:showAsAction="always" />
+</menu>
