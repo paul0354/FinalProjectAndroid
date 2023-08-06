@@ -3,217 +3,116 @@ package algonquin.cst2355.finalprojectandroid.Trivia;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputLayout;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import android.view.Menu;
-import android.view.MenuItem;
-
 import algonquin.cst2355.finalprojectandroid.R;
 
+import algonquin.cst2355.finalprojectandroid.databinding.ActivityTriviaBinding;
+
 public class TriviaActivity extends AppCompatActivity {
-
-    RelativeLayout progressing;
-    Spinner spinner_category;
-    List<CategoryModel> categoryList;
-    int catId;
-
-    MaterialButton buttonSearch;
-    TextInputLayout inputLayout;
-    EditText editNumber;
-    SharedPreferences mPref;
-    String category;
+    ArrayList<QuestionObj> getQuestions;
+    static QuizActivityViewModel quizModel;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    protected ActivityTriviaBinding variableBinding;
+    private ArrayList<QuestionObj> questions = new ArrayList<>();
+    private RecyclerView.Adapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trivia);
 
-        mPref = PreferenceManager.getDefaultSharedPreferences(TriviaActivity.this);
+        variableBinding = ActivityTriviaBinding.inflate(getLayoutInflater());
+        View view = variableBinding.getRoot();
+        setContentView(view);
 
-        Toolbar toolbar = findViewById(R.id.triviatool);
-        setSupportActionBar(toolbar);
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
-        progressing = findViewById(R.id.progress);
-        spinner_category = findViewById(R.id.spincat);
-        inputLayout = findViewById(R.id.rl1);
-        editNumber = findViewById(R.id.number);
-        buttonSearch = findViewById(R.id.search_question);
-
-        categoryList = new ArrayList<>();
-        FetchAllCategory();
-
-        spinner_category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (spinner_category.getSelectedItem().equals("Select Category")) {
-                } else {
-                    category = spinner_category.getSelectedItem().toString().trim();
-                    catId = getSelectedCatId(category);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+        variableBinding.button1.setOnClickListener(clk -> {
+            fetchQuestions(9); // 9 is the category for General Knowledge, replace it with your desired category number
         });
 
-        buttonSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                VerifyData();
-            }
+        variableBinding.button2.setOnClickListener(clk -> {
+            fetchQuestions(18); // 18 is the category for Computers, replace it with your desired category number
         });
     }
 
-    private void VerifyData() {
+    private void fetchQuestions(int category) {
+        String numQuestions = variableBinding.editTextNumber.getText().toString();
+        editor.putString("userInputKey", numQuestions);
+        editor.apply();
+        String url = "https://opentdb.com/api.php?amount=" + numQuestions + "&category=" + category + "&type=multiple";
 
-        String strNumber = editNumber.getText().toString().trim();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("Network Response", "Response received!");
+                        try {
+                            JSONArray results = response.getJSONArray("results");
+                            int length = results.length();
 
-        if (strNumber.isEmpty()) {
-            setEditTextError(editNumber, "Please enter a number");
-            return;
-        }
+                            for (int i = 0; i < length; i++) {
+                                JSONObject question = results.getJSONObject(i);
+                                String questionString = question.getString("question");
+                                String correctAnswer = question.getString("correct_answer");
+                                JSONArray incorrectAnswers = question.getJSONArray("incorrect_answers");
+                                int incorrectLength = incorrectAnswers.length();
+                                ArrayList<String> incorrectTexts = new ArrayList<>();
+                                for (int j = 0; j < incorrectLength; j++) {
+                                    incorrectTexts.add(incorrectAnswers.getString(j));
+                                }
+                                int q = 0;
+                                questions.add(new QuestionObj(questionString, correctAnswer, incorrectTexts));
+                            }
+                            Intent intent = new Intent(TriviaActivity.this, QuizActivity.class);
+                            intent.putExtra("questions", questions);
+                            startActivity(intent);
 
-        int intNumber = Integer.parseInt(strNumber);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("JSON Parsing Error", "Error parsing JSON response: " + e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Network Error", "Error response: " + error.toString());
+                    }
+                });
 
-        if (spinner_category.getSelectedItem().equals("Select Category")) {
-            spinner_category.requestFocus();
-            Toast.makeText(this, "Please select a category first", Toast.LENGTH_SHORT).show();
-        } else if (intNumber > 50) {
-            setEditTextError(editNumber, "The number should be less than or equal to 50");
-        } else {
-            mPref.edit().putInt(Constant.CATID, catId).putInt(Constant.NUMBER, intNumber).putString(Constant.CATEGORY, category).putString(Constant.FLAG, "Trivia").apply();
-
-            Intent intent = new Intent(TriviaActivity.this, QuestionListActivity.class);
-            startActivity(intent);
-        }
+       // MySingleton.getInstance(this).addToRequestQueue(request); // I assumed you have a MySingleton class for handling Volley RequestQueue
     }
 
-    private void setEditTextError(EditText editText, String message) {
-        editText.requestFocus();
-        inputLayout.setErrorEnabled(true);
-        inputLayout.setError(message);
-
-        inputLayout.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                inputLayout.setErrorEnabled(false);
-                inputLayout.setError(null);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-
-
-
-        });
-    }
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_help) {
-            // Display a Toast message with the text "Help"
-            Toast.makeText(this, "Help", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
+        // Handle menu item selection
         return super.onOptionsItemSelected(item);
-    }
-
-
-    private void FetchAllCategory() {
-        progressing.setVisibility(View.VISIBLE);
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://opentdb.com/api_category.php";
-
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-
-                    public void onResponse(JSONArray response) {
-                        progressing.setVisibility(View.GONE);
-
-                        List<String> labels = new ArrayList<>();
-                        labels.add("Select Category");
-
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                CategoryModel categoryModel = new CategoryModel();
-
-                                categoryModel.setName(jsonObject.getString("name"));
-                                categoryModel.setId(jsonObject.getInt("id"));
-
-                                categoryList.add(categoryModel);
-                                labels.add(jsonObject.getString("name"));
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(TriviaActivity.this, android.R.layout.simple_spinner_item, labels);
-                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        spinner_category.setAdapter(spinnerAdapter);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                progressing.setVisibility(View.GONE);
-                Toast.makeText(TriviaActivity.this, "Error while fetching data. Please try again later.", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        queue.add(jsonArrayRequest);
-    }
-
-    private int getSelectedCatId(String Category) {
-        for (CategoryModel categoryModel : categoryList) {
-            if (Category.equals(categoryModel.getName())) {
-                return categoryModel.getId();
-            }
-        }
-        return -1;
     }
 }

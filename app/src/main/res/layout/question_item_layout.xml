@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/questionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:text="QUESTIONS"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/answersRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp">
+
+        <!-- RadioButtons for answer choices -->
+        <RadioButton
+            android:id="@+id/answerRadioButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            android:text="Answer choice 1"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/answerRadioButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            android:text="Answer choice 2"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/answerRadioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            android:text="Answer choice 3"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/answerRadioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            android:text="Answer choice 4"
+            android:textSize="16sp" />
+
+
+
+        <!-- Add more RadioButtons for additional answer choices if needed -->
+
+    </RadioGroup>
+</LinearLayout>
