@@ -12,6 +12,7 @@ import androidx.room.Room;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,15 +38,16 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2355.finalprojectandroid.BearActivity;
+import algonquin.cst2355.finalprojectandroid.CurrencyActivity;
 import algonquin.cst2355.finalprojectandroid.R;
+import algonquin.cst2355.finalprojectandroid.TriviaActivity;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityFlightBinding;
 import algonquin.cst2355.finalprojectandroid.databinding.FlightListBinding;
 
 /*
-TODO: Figure out why the details are sometimes null - Most likely unfixable
-TODO: Add a toolbar that goes to another activity and a help menu
-TODO: Add a new activity that shows the saved flights
-TODO: Add an AlertDialog
+TODO: Fix the colors of the toolbar
+TODO: New activity shows the saved flights
 TODO: Add deletion functionality
 TODO: Refactor the strings to strings.xml and add a new language
 TODO: Javadoc
@@ -242,7 +244,8 @@ public class FlightActivity extends AppCompatActivity {
 
         if(item.getItemId()==R.id.savedFlights) {
 
-            //TODO: add new activity here
+            Intent saved = new Intent(FlightActivity.this, SavedFlightsActivity.class);
+            startActivity(saved);
 
         }
         else if(item.getItemId()==R.id.flightHelp) {
@@ -264,17 +267,20 @@ public class FlightActivity extends AppCompatActivity {
         }
         else if(item.getItemId()==R.id.flightToBear) {
 
-            //TODO: add functionality to go to the bear activity
+            Intent bear = new Intent(FlightActivity.this, BearActivity.class);
+            startActivity(bear);
 
         }
         else if(item.getItemId()==R.id.flightToCurrency) {
 
-            //TODO: add functionality to go to the currency activity
+            Intent currency = new Intent(FlightActivity.this, CurrencyActivity.class);
+            startActivity(currency);
 
         }
         else if(item.getItemId()==R.id.flightToTrivia) {
 
-            //TODO: add functionality to go to the trivia activity
+            Intent trivia = new Intent(FlightActivity.this, TriviaActivity.class);
+            startActivity(trivia);
 
         }
 
