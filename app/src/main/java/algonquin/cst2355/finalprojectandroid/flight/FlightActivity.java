@@ -39,8 +39,7 @@ import algonquin.cst2355.finalprojectandroid.databinding.ActivityFlightBinding;
 import algonquin.cst2355.finalprojectandroid.databinding.FlightListBinding;
 
 /*
-TODO: Figure out why the details are sometimes null
-TODO: Fix the Snackbar in the FlightDetailsFragment
+TODO: Figure out why the details are sometimes null - Most likely unfixable
 TODO: Add a toolbar that goes to another activity and a help menu
 TODO: Add a new activity that shows the saved flights
 TODO: Add an AlertDialog

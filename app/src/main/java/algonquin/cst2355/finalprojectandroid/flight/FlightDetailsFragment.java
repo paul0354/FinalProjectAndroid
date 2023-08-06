@@ -1,6 +1,7 @@
 package algonquin.cst2355.finalprojectandroid.flight;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,8 @@ public class FlightDetailsFragment extends Fragment {
                     });
 
             //text is not appearing
-            Snackbar.make(b.getRoot(), "Flight added to the database.", Snackbar.LENGTH_LONG)
+            Snackbar.make(b.frag, "Flight added to the database.", Snackbar.LENGTH_LONG)
+                    .setTextColor(Color.BLACK)
                     .show();
 
         });
