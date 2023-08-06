@@ -2,7 +2,6 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.FinalProjectAndroid" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Background brand color. -->
-        <item name="android:background">@color/background</item>
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
@@ -25,8 +24,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.FinalProjectAndroid" parent="Base.Theme.FinalProjectAndroid" />
-
     <style name="ToolbarTheme">
         <item name="titleTextAppearance">@style/ToolbarTheme.Title</item>
         <item name="android:background">@color/task_primary</item>
@@ -36,4 +33,10 @@
         <item name="titleTextColor">@color/secondary</item>
         <item name="android:background">@color/task_primary</item>
     </style>
+
+    <style name="toolBarPopUpTheme" parent="Theme.AppCompat.Light">
+        <item name="android:background">@color/background</item>
+        <item name="android:textColor">@color/task_primary</item>
+    </style>
+
 </resources>

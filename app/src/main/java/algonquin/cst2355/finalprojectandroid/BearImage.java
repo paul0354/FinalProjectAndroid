@@ -19,14 +19,14 @@ public class BearImage {
     @ColumnInfo(name="height")
     protected int height;
 
-    @ColumnInfo(name="wasCropped")
-    protected boolean wasCropped;
+    @ColumnInfo(name="byteSize")
+    protected int byteSize;
 
-    public BearImage(String imageName, int width, int height, boolean wasCropped){
+    public BearImage(String imageName, int width, int height){
         this.imageName = imageName;
         this.width = width;
         this.height = height;
-        this.wasCropped = wasCropped;
+        this.byteSize = ((width*height*32)/8);
     }
 
     public String getImageName(){
@@ -40,4 +40,6 @@ public class BearImage {
     public int getHeight(){
         return height;
     }
+
+    public int getByteSize() { return byteSize; }
 }

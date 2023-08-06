@@ -15,4 +15,25 @@
     <string name="save_img">Save Image</string>
     <string name="curr_img_text">Current Image:</string>
     <string name="save_to_db">SAVE TO DATABASE</string>
+    <string name="delete">DELETE?</string>
+    <string name="del_bear_sb">You deleted image # </string>
+    <string name="no_gen_bear_toast">Sorry, you haven\'t generated an image yet!</string>
+    <string name="save_success_toast">Image added to database</string>
+    <string name="size_in_bytes">The size of this image in bytes is </string>
+    <string name="del_bear_alert">Do you want to delete this image: </string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="size_too_big_toast">Sorry! Height and/or width cannot exceed 5000. Try again.</string>
+    <string name="provide_size_toast">You must supply a non-negative height and width</string>
+    <string name="help_blurb">
+        If you would like to make a new bear image, please type
+        a width and height in the text fields, then click
+        on &lt;i&gt;Generate Image&lt;/i&gt;.&lt;br&gt;&lt;/br&gt;&lt;b&gt;Height and/or width cannot exceed 5000.&lt;/b&gt;&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+        If you would like to save the generated image, please click &lt;i&gt;Save Image&lt;/i&gt;.&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+        If you would like to view all saved images, please click &lt;i&gt;View All Images.&lt;/i&gt;&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+        &lt;u&gt;Within View All Images:&lt;/u&gt;&lt;br&gt;&lt;/br&gt;Tap any image to see additional details about it, or to be
+        given the option to delete it from the list.
+    </string>
+    <string name="about_bear">About the Bear Image Generator</string>
+    <string name="bear_menu_help">Help</string>
 </resources>

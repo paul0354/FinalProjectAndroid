@@ -10,15 +10,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import algonquin.cst2355.finalprojectandroid.data.BearImagesViewModel;
 import algonquin.cst2355.finalprojectandroid.data.ImgSaver;
@@ -31,10 +42,19 @@ public class BearImagesFragment extends Fragment {
     BearImagesLayoutBinding binding;
     Bitmap currImage;
 
+    RecyclerView recyclerView;
+
     RecyclerView.Adapter myAdapter;
 
     private ImgSaver imgSaver;
 
+    int position;
+
+    boolean hasImageBeenGenerated;
+
+    public BearImagesFragment(boolean hasImageBeenGenerated){
+        this.hasImageBeenGenerated = hasImageBeenGenerated;
+    }
     public BearImagesFragment(Bitmap b){
         currImage = b;
     }
@@ -44,12 +64,19 @@ public class BearImagesFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         binding = BearImagesLayoutBinding.inflate(inflater);
-        binding.currentImage.setImageBitmap(currImage);
+        if(hasImageBeenGenerated){
+            File file = new File(getActivity().getFilesDir(), "currBear.png");
+            Bitmap currBear = BitmapFactory.decodeFile(file.getAbsolutePath());
+            binding.currentImage.setImageBitmap(currBear);
+        }
+
         bearModel = new ViewModelProvider(getActivity()).get(BearImagesViewModel.class);
         if(images == null){
             images = bearModel.images.getValue();
             binding.bearImagesList.setAdapter(myAdapter);
         }
+        BearImageDatabase db = Room.databaseBuilder(getActivity().getApplicationContext(), BearImageDatabase.class,"database-name").build();
+        BearImageDAO biDAO = db.biDAO();
 
         binding.bearImagesList.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
@@ -89,13 +116,62 @@ public class BearImagesFragment extends Fragment {
         });
 
         binding.saveBtn.setOnClickListener(clk -> {
-            File file = new File(getActivity().getFilesDir(),"currBear.png");
-            if(file.exists()){
-                imgSaver.saveImage(file);
+            if(!hasImageBeenGenerated){
+                Toast toast = Toast.makeText(this.getContext(),getString(R.string.no_gen_bear_toast),Toast.LENGTH_LONG);
+                toast.show();
+            }else{
+                File file = new File(getActivity().getFilesDir(),"currBear.png");
+                if(file.exists()){
+                    imgSaver.saveImage(file);
+                }
+                myAdapter.notifyItemInserted(myAdapter.getItemCount()-1);
+                Toast toast = Toast.makeText(this.getContext(),R.string.save_success_toast,Toast.LENGTH_SHORT);
+                toast.show();
+                binding.bearImagesList.smoothScrollToPosition(myAdapter.getItemCount()-1);
             }
-            myAdapter.notifyItemInserted(myAdapter.getItemCount()-1);
-            binding.bearImagesList.smoothScrollToPosition(myAdapter.getItemCount()-1);
         });
+
+        bearModel.selectedImage.observe(getViewLifecycleOwner(),(newImageValue)-> {
+            if(newImageValue != null) {
+                BearDetailsFragment bearDetails = new BearDetailsFragment(newImageValue);
+                FragmentManager fMgr = getParentFragmentManager();
+                FragmentTransaction tx = fMgr.beginTransaction();
+
+                fMgr.setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+                    @Override
+                    public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                        Boolean result = bundle.getBoolean("bundleKey");
+                        if(result){
+                            binding.bearImagesList.smoothScrollToPosition(position);
+                            BearImage removedImg = images.get(position);
+                            Executor thread = Executors.newSingleThreadExecutor();
+                            thread.execute(() -> {
+                                biDAO.deleteImage(removedImg);
+
+                                getActivity().runOnUiThread( () -> binding.bearImagesList.setAdapter((myAdapter)));
+                            });
+                            images.remove(position);
+                            myAdapter.notifyItemRemoved(position);
+                            Snackbar.make(binding.currentText,getString(R.string.del_bear_sb) + position, Snackbar.LENGTH_LONG)
+                                    .setAction("Undo", clk -> {
+                                        images.add(position,removedImg);
+                                        thread.execute(() -> {
+                                            biDAO.insertImage(removedImg);
+                                            getActivity().runOnUiThread( () -> binding.bearImagesList.setAdapter(myAdapter));
+                                        });
+                                        myAdapter.notifyItemInserted(position);
+                                        binding.bearImagesList.smoothScrollToPosition(position);
+                                    }).show();
+                        }
+                    }
+                });
+
+                tx.addToBackStack("Placeholder");
+                tx.add(R.id.imgDetailsLocation,bearDetails);
+                tx.commit();
+            }
+        });
+
         return binding.getRoot();
     }
 
@@ -115,6 +191,13 @@ public class BearImagesFragment extends Fragment {
         ImageView bear;
         public MyRowHolder(@NonNull View itemView){
             super(itemView);
+
+            itemView.setOnClickListener(clk -> {
+               position = getAbsoluteAdapterPosition();
+               BearImage selected = images.get(position);
+
+               bearModel.selectedImage.postValue(selected);
+            });
             height = itemView.findViewById(R.id.height);
             width = itemView.findViewById(R.id.width);
             bear = itemView.findViewById(R.id.bearImage);

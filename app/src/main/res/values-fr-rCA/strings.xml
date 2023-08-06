@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Projet Final D\'Android</string>
+    <string name="bear_app_name">G\u00E9n\u00E9rateur d\'Ours</string>
+    <string name="flight_app_name">Suivi Des Vols</string>
+    <string name="currency_app_name">Convertisseur de Devices</string>
+    <string name="trivia_app_name">Jeu-Questionnaire</string>
+    <string name="welcome_msg">Bienvenue dans notre Suite d\'Android</string>
+    <string name="bear_h">H (px)</string>
+    <string name="bear_h_hint">Hauter</string>
+    <string name="bear_w">I (px)</string>
+    <string name="bear_w_hint">Largeur</string>
+    <string name="make_img">G\u00E9n\u00E9rer L'Image</string>
+    <string name="view_imgs">Voir Toutes</string>
+    <string name="save_img">Enregistrer L\'Image</string>
+    <string name="curr_img_text">Image Actuelle</string>
+    <string name="save_to_db">ENREGISTRER</string>
+    <string name="delete">SUPPRIMER?</string>
+    <string name="del_bear_sb">Vous avez supprim\u00E9 l\'image # </string>
+    <string name="no_gen_bear_toast">D\u00E9sol\u00E9! Vous n\'avez pas g\u00E9n\u00E9r\u00E9 d\'image.</string>
+    <string name="save_success_toast">Image enregistr\u00E9e</string>
+    <string name="size_in_bytes">La taille de l\'image en octets</string>
+    <string name="del_bear_alert">"Voulez-vous supprimer cette image: "</string>
+    <string name="no">Non</string>
+    <string name="yes">Oui</string>
+    <string name="size_too_big_toast">D\u00E9sol\u00E9! Hauteur et largeur ne peut pas d\u00E9passer 5000.</string>
+    <string name="provide_size_toast">La hauteur ou la largeur sont manquantes ou n\u00E9gatives</string>
+    <string name="help_blurb">
+        H: hauteur en px, I: largeur en px&lt;br&gt;&lt;/br&gt;
+        Entrez la taille de l\'image et appuyer sur &lt;i&gt;G\u00E9n\u00E9rateur d\'Ours.&lt;/i&gt;&lt;br&gt;&lt;/br&gt;
+        &lt;b&gt;La hauteur ou la largeur ne peux pas d\u00E9passer 5000.&lt;/b&gt;&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+        Appuyer &lt;i&gt;Enregistrer L\'image&lt;/i&gt; pour enregistrer l\'image g\u00E9n\u00E9r\u00E9.&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+        Appoyer &lt;i&gt;Voir Toutes&lt;/i&gt; pour voir toutes des images.&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+        &lt;u&gt;Apr\u00E9s appuyer Voir Toutes&lt;/u&gt;&lt;br&gt;&lt;/br&gt;
+        Appuyer une image pour voir d\u00E9tails suppl\u00E9mentaires, et pour supprimer l\'image.
+    </string>
+    <string name="about_bear">\u00C0 propos de l\'application</string>
+    <string name="bear_menu_help">Aide</string>
+</resources>
