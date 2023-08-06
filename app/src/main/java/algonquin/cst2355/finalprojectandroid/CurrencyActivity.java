@@ -1,4 +1,6 @@
 package algonquin.cst2355.finalprojectandroid;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
+import com.google.android.material.snackbar.Snackbar;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,7 +64,6 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         //super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.my_menu, menu);
         return super.onCreateOptionsMenu(menu);
-
     }
 
     @Override
@@ -69,8 +72,9 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             Intent bearPage = new Intent(CurrencyActivity.this, BearActivity.class);
             startActivity(bearPage);
         } else if (item.getItemId() == R.id.item_2) {
-            Intent main = new Intent(CurrencyActivity.this, MainActivity.class);
-            startActivity(main);
+            View parentView = findViewById(android.R.id.content); // Get the root view of the activity
+            Snackbar snackbar = Snackbar.make(parentView, "This function is provided by Chawki.", Snackbar.LENGTH_LONG);
+            snackbar.show();
         } else if (item.getItemId() == R.id.item_3) {
             Intent flight = new Intent(CurrencyActivity.this, FlightActivity.class);
             startActivity(flight);
@@ -80,7 +84,6 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         }
         return true;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +105,6 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                 .fallbackToDestructiveMigration().build();
         myDAO = myDB.cDAO();
         conversionModel = new ViewModelProvider(this).get(CurrencyActivityViewModel.class);
-        // to get the conversions displayed at first ( next line )
-        //loadSavedConversions();
         conversions = conversionModel.conversions.getValue();
         if (conversions == null) {
             conversions = new ArrayList<>();
@@ -131,6 +132,8 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                                     JSONObject rates = response.getJSONObject("rates");
                                     JSONObject cadObject = rates.getJSONObject(toCurrency);
                                     double rateForAmount = cadObject.getDouble("rate_for_amount");
+                                    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                                    rateForAmount = Double.parseDouble(decimalFormat.format(rateForAmount));
                                     String rateText = String.valueOf(rateForAmount);
                                     // Update the UI with the converted rate
                                     binding.editTextResult.setText(rateText);
@@ -168,15 +171,12 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 if(conversions.isEmpty()){
-     //               myAdapter.notifyDataSetChanged();
                     return;
                 }
                 Conversion con = conversions.get(position);
                 holder.textViewResultAmount.setText(con.getConvertedDetails());
                 holder.textViewDate.setText(con.getTimeSemt());
-
             }
-
             @Override
             public int getItemCount() {
                 return conversions.size();
@@ -258,23 +258,10 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//        // Check which spinner triggered the selection
-//        if (parent.getId() == binding.spinnerFromCurrency.getId() || parent.getId() == binding.spinnerToCurrency.getId()) {
-//            // Get the selected currencies
-//            String fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
-//            String toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
-//            String amountText = binding.editTextAmount.getText().toString();
-//            if (!amountText.isEmpty()) {
-//                double amount = Double.parseDouble(amountText);
-//                fromCurrency = binding.spinnerFromCurrency.getSelectedItem().toString();
-//                toCurrency = binding.spinnerToCurrency.getSelectedItem().toString();
-
-
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        // Handle the case when nothing is selected in the spinners (if required)
     }
 
     private void loadSavedConversions() {
@@ -299,14 +286,31 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
         });
     }
     private void deleteAllConversions() {
-        Executor deleteThread = Executors.newSingleThreadExecutor();
-        deleteThread.execute(() -> {
-            myDAO.deleteAllConversions(); // Delete all conversions from the database
-            runOnUiThread(() -> {
-                conversions.clear();
-                myAdapter.notifyDataSetChanged();
-            });
-        });
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Clear All Conversions")
+                .setMessage("Are you sure you want to delete all saved conversions?")
+                .setPositiveButton("Delete All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Execute the delete operation on a separate thread
+                        Executor deleteThread = Executors.newSingleThreadExecutor();
+                        deleteThread.execute(() -> {
+                            myDAO.deleteAllConversions(); // Delete all conversions from the database
+                            runOnUiThread(() -> {
+                                conversions.clear();
+                                myAdapter.notifyDataSetChanged();
+                            });
+                        });
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Cancel the delete operation
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
     private void performConversion(double amount, String fromCurrency, String toCurrency, Conversion conversion) {
         String stringUrl = BASE_URL + "?format=json&from=" + fromCurrency + "&to=" + toCurrency + "&amount=" + amount + "&api_key=" + API_KEY;
@@ -319,6 +323,8 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                             JSONObject rates = response.getJSONObject("rates");
                             JSONObject cadObject = rates.getJSONObject(toCurrency);
                             double rateForAmount = cadObject.getDouble("rate_for_amount");
+                            DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                            rateForAmount = Double.parseDouble(decimalFormat.format(rateForAmount));
                             String rateText = String.valueOf(rateForAmount);
 
                             // Update the converted details for the conversion
@@ -343,7 +349,6 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                // Handle error
                 error.printStackTrace();
             }
         });

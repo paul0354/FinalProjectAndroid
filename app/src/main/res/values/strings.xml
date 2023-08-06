@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Name</string>
+    <string name="app_name">Converter</string>
     <string name="bear_app_name">Bear Image Generator</string>
     <string name="flight_app_name">Flight Tracker</string>
     <string name="currency_app_name">Currency Converter</string>
