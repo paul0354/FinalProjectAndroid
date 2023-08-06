@@ -122,7 +122,7 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                 String stringUrl = BASE_URL + "?format=json&from=" + fromCurrency + "&to=" + toCurrency + "&amount=" + amount + "&api_key=" + API_KEY;
                 editor.putString(AMOUNT_KEY, amountText);
                 editor.apply();
-                String currentDateAndTime = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a").format(new Date());
+                // String currentDateAndTime = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a").format(new Date());
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringUrl, null,
                         new Response.Listener<JSONObject>() {
                             @Override
@@ -130,14 +130,12 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                                 try {
                                     // Parse the response JSON
                                     JSONObject rates = response.getJSONObject("rates");
-                                    JSONObject cadObject = rates.getJSONObject(toCurrency);
-                                    double rateForAmount = cadObject.getDouble("rate_for_amount");
+                                    JSONObject currencyObject = rates.getJSONObject(toCurrency);
+                                    double rateForAmount = currencyObject.getDouble("rate_for_amount");
                                     DecimalFormat decimalFormat = new DecimalFormat("#.##");
                                     rateForAmount = Double.parseDouble(decimalFormat.format(rateForAmount));
                                     String rateText = String.valueOf(rateForAmount);
-                                    // Update the UI with the converted rate
                                     binding.editTextResult.setText(rateText);
-                                    // Your existing code to add the conversion to the list
                                     String currentDateAndTime = new SimpleDateFormat("EEEE, dd-MMM-yyyy hh-mm-ss a").format(new Date());
                                     String convertedDetails = amountText + " " + fromCurrency + " corresponds to " + rateText + " " + toCurrency;
                                     Conversion newConversion = new Conversion(amountText, currentDateAndTime, convertedDetails, fromCurrency, toCurrency);
@@ -275,7 +273,7 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                         double amount = Double.parseDouble(savedConversion.getConversionAmount());
                         String fromCurrency = savedConversion.getCurrencyFrom();
                         String toCurrency = savedConversion.getCurrencyTo();
-                        performConversion(amount, fromCurrency, toCurrency, savedConversion);
+                        updateConversion(amount, fromCurrency, toCurrency, savedConversion);
                         conversions.add(savedConversion);
                     }
                     myAdapter.notifyDataSetChanged(); // Notify the adapter once after all conversions are added
@@ -312,7 +310,7 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                 })
                 .show();
     }
-    private void performConversion(double amount, String fromCurrency, String toCurrency, Conversion conversion) {
+    private void updateConversion(double amount, String fromCurrency, String toCurrency, Conversion conversion) {
         String stringUrl = BASE_URL + "?format=json&from=" + fromCurrency + "&to=" + toCurrency + "&amount=" + amount + "&api_key=" + API_KEY;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, stringUrl, null,
                 new Response.Listener<JSONObject>() {
@@ -321,8 +319,8 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                         try {
                             // Parse the response JSON
                             JSONObject rates = response.getJSONObject("rates");
-                            JSONObject cadObject = rates.getJSONObject(toCurrency);
-                            double rateForAmount = cadObject.getDouble("rate_for_amount");
+                            JSONObject currencyObject = rates.getJSONObject(toCurrency);
+                            double rateForAmount = currencyObject.getDouble("rate_for_amount");
                             DecimalFormat decimalFormat = new DecimalFormat("#.##");
                             rateForAmount = Double.parseDouble(decimalFormat.format(rateForAmount));
                             String rateText = String.valueOf(rateForAmount);

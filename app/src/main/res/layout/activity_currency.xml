@@ -107,8 +107,8 @@
     <Spinner
         android:id="@+id/spinnerToCurrency"
         style="@style/AppSpinnerStyle"
-        android:layout_width="63dp"
-        android:layout_height="49dp"
+        android:layout_width="60dp"
+        android:layout_height="46dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/editTextResult"
         app:layout_constraintStart_toEndOf="@+id/editTextResult"

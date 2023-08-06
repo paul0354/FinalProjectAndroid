@@ -15,17 +15,17 @@ public class Conversion implements Parcelable {
     @ColumnInfo(name="id")
     public int id;
    @ColumnInfo(name="conversionAmount")
-    public String conversionAmount;
+    protected String conversionAmount;
    @ColumnInfo(name="TimeSent")
-   public String timeSemt;
+   protected String timeSemt;
    @ColumnInfo(name="convertedDetails")
-   public String convertedDetails;
+   protected String convertedDetails;
 
     @ColumnInfo(name = "currencyFrom")
-    public String currencyFrom;
+    protected String currencyFrom;
 
     @ColumnInfo(name = "currencyTo")
-    public String currencyTo;
+    protected String currencyTo;
     public Conversion(String conversionResult, String timeSemt, String convertedDetails) {
         this.conversionAmount = conversionResult;
         this.timeSemt = timeSemt;
