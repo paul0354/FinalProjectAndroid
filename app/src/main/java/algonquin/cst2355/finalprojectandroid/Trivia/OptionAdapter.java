@@ -4,20 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import algonquin.cst2355.finalprojectandroid.R;
 
-public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.MyViewHolder>{
+public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.MyViewHolder> {
 
     private Context context;
     private List<String> optionList;
@@ -27,7 +23,8 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.MyViewHold
     List<AnswerModel> answerModels;
     int questionPosition;
     List<QuestionModel> nquestionModelList;
-    public OptionAdapter(Context context, List<String> optionList1,QuestionModel questionModelList,int questionPosition,List<QuestionModel> nquestionModelList1,List<AnswerModel> answerModels) {
+
+    public OptionAdapter(Context context, List<String> optionList1, QuestionModel questionModelList, int questionPosition, List<QuestionModel> nquestionModelList1, List<AnswerModel> answerModels) {
         this.context = context;
         this.optionList = optionList1;
         this.questionModelList = questionModelList;
@@ -42,7 +39,6 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.MyViewHold
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.raw_option, parent, false);
 
-
         return new MyViewHolder(itemView);
     }
 
@@ -54,7 +50,6 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.MyViewHold
         holder.radioButton.setChecked(position == selectedPosition);
 
     }
-
 
     @Override
     public int getItemCount() {
@@ -68,10 +63,11 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         RadioButton radioButton;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            radioButton = (RadioButton) itemView.findViewById(R.id.selectOption);
+            radioButton = itemView.findViewById(R.id.selectOption);
 
             radioButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,12 +78,12 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.MyViewHold
                     answerModels.get(questionPosition).setCorrectAnswer(questionModelList.getCorrectAnswer());
                     answerModels.get(questionPosition).setYourAnswer(optionList.get(selectedPosition));
 
-                    if(questionModelList.getCorrectAnswer().equals(optionList.get(selectedPosition))){
+                    if (questionModelList.getCorrectAnswer().equals(optionList.get(selectedPosition))) {
                         System.out.println("Answer is Correct");
-                        answerModels.get(questionPosition).setResult(true);
+                        answerModels.get(questionPosition).setIsCorrect(true);
                     } else {
                         System.out.println("Answer is Wrong");
-                        answerModels.get(questionPosition).setResult(false);
+                        answerModels.get(questionPosition).setIsCorrect(false);
                     }
 
                     notifyDataSetChanged();
@@ -95,5 +91,5 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.MyViewHold
             });
         }
     }
-
 }
+

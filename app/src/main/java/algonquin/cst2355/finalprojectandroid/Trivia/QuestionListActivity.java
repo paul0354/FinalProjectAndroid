@@ -14,7 +14,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ArrayAdapter;
+
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,17 +22,23 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import algonquin.cst2355.finalprojectandroid.R;
+
 
 public class QuestionListActivity extends AppCompatActivity {
 
@@ -55,11 +61,12 @@ public class QuestionListActivity extends AppCompatActivity {
 
         databaseHelper = new DatabaseHelper(QuestionListActivity.this);
 
-        mPref = PreferenceManager.getDefaultSharedPreferences(QuestionListActivity.this);
+        mPref = this.getSharedPreferences("myPreferences", MODE_PRIVATE);
+
         flag = mPref.getString(Constant.FLAG,"");
         category = mPref.getString(Constant.CATEGORY,"");
-        catId = mPref.getInt(Constant.CATID,0);
-        amount = mPref.getInt(Constant.NUMBER,0);
+        //catId = mPref.getInt(Constant.CATID,0);
+        //amount = mPref.getInt(Constant.NUMBER,0);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.questiontool);
         setSupportActionBar(toolbar);
@@ -108,7 +115,7 @@ public class QuestionListActivity extends AppCompatActivity {
         //dialouge for entering name
 
         AlertDialog.Builder builder = new AlertDialog.Builder(QuestionListActivity.this);
-        View view1 = getLayoutInflater().inflate(R.layout.dialouge_name, null);
+        View view1 = getLayoutInflater().inflate(R.layout.dialogue_name, null);
         builder.setView(view1);
 
         final ImageView imgclose = (ImageView) view1.findViewById(R.id.close);
@@ -151,7 +158,7 @@ public class QuestionListActivity extends AppCompatActivity {
                     if (answerModels != null && !answerModels.isEmpty()) {
                         for (int i = 0; i < answerModels.size(); i++) {
 
-                            if(answerModels.get(i).isResult()){
+                            if(answerModels.get(i).isCorrect()){
                                 totalMarks = totalMarks + 1;
                             }
                         }
@@ -189,7 +196,7 @@ public class QuestionListActivity extends AppCompatActivity {
         FetchAllUserResult();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(QuestionListActivity.this);
-        View view1 = getLayoutInflater().inflate(R.layout.dialouge_user_result, null);
+        View view1 = getLayoutInflater().inflate(R.layout.dialogue_user_result, null);
         builder.setView(view1);
 
         final ImageView imgclose = (ImageView) view1.findViewById(R.id.close);
@@ -244,45 +251,68 @@ public class QuestionListActivity extends AppCompatActivity {
     }
 
     private void FetchAllQuestions(){
+
+        String url = Constant.API_URL;
+
         //that function is using for fetching questions
         progressing.setVisibility(View.VISIBLE);
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+        // Create a new RequestQueue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        Retrofit retrofit=new Retrofit.Builder()
-                .baseUrl(RetrofitInterface.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
+        // Create a new JsonArrayRequest
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        progressing.setVisibility(View.GONE);
 
-        RetrofitInterface apiService=retrofit.create(RetrofitInterface.class);
+                        List<QuestionModel> questionModelList = new ArrayList<>();
 
-        Call<QuestionModel> call = apiService.FetchQuestions(amount,catId,"multiple");
-        call.enqueue(new Callback<QuestionModel>() {
-            @Override
-            public void onResponse(Call<QuestionModel> call, Response<QuestionModel> response) {
-                if(response.body().getQuestionModelList() != null){
-                    progressing.setVisibility(View.GONE);
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject questionObject = response.getJSONObject(i);
 
-                    //set adapter for questions
+                                QuestionModel questionModel = new QuestionModel();
 
-                    questionListAdapter = new QuestionListAdapter(QuestionListActivity.this,response.body().getQuestionModelList());
-                    recyclerQuestions.setAdapter(questionListAdapter);
+                                questionModel.setCategory(questionObject.getString("category"));
+                                questionModel.setType(questionObject.getString("type"));
+                                questionModel.setDifficulty(questionObject.getString("difficulty"));
+                                questionModel.setQuestion(questionObject.getString("question"));
+                                questionModel.setCorrectAnswer(questionObject.getString("correct_answer"));
 
-                } else {
-                    progressing.setVisibility(View.GONE);
-                    Toast.makeText(QuestionListActivity.this,"Failure while fetching data !! try again later.",Toast.LENGTH_SHORT).show();
-                }
-            }
+                                JSONArray incorrectAnswersArray = questionObject.getJSONArray("incorrect_answers");
+                                List<String> incorrectAnswers = new ArrayList<>();
+                                for (int j = 0; j < incorrectAnswersArray.length(); j++) {
+                                    incorrectAnswers.add(incorrectAnswersArray.getString(j));
+                                }
+                                questionModel.setIncorrectAnswers(incorrectAnswers);
 
-            @Override
-            public void onFailure(Call<QuestionModel> call, Throwable t) {
-                progressing.setVisibility(View.GONE);
-                Toast.makeText(QuestionListActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
-            }
-        });
+                                questionModelList.add(questionModel);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        //set adapter for questions
+                        questionListAdapter = new QuestionListAdapter(QuestionListActivity.this, questionModelList);
+                        recyclerQuestions.setAdapter(questionListAdapter);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+        public void onErrorResponse(VolleyError error) {
+            progressing.setVisibility(View.GONE);
+            Toast.makeText(QuestionListActivity.this, "Failure while fetching data !! try again later.", Toast.LENGTH_SHORT).show();
+        }
     }
+    );
+
+    // Add JsonArrayRequest to the RequestQueue
+    requestQueue.add(jsonArrayRequest);
+}
 
     @Override
     public void onBackPressed() {

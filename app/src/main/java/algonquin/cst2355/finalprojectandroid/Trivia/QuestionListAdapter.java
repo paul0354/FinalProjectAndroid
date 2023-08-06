@@ -15,6 +15,8 @@ import com.google.android.material.button.MaterialButton;
 import java.util.ArrayList;
 import java.util.List;
 
+import algonquin.cst2355.finalprojectandroid.R;
+
 public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapter.MyViewHolder>{
 
     private Context context;

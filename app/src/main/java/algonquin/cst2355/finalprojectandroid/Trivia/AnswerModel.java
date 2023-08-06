@@ -5,13 +5,13 @@ public class AnswerModel {
     private String question;
     private String yourAnswer;
     private String correctAnswer;
-    private boolean result;
+    private boolean isCorrect;
 
     public AnswerModel(String question,String yourAnswer,String correctAnswer,boolean result){
         this.question = question;
         this.yourAnswer = yourAnswer;
         this.correctAnswer = correctAnswer;
-        this.result = result;
+        this.isCorrect = isCorrect;
     }
 
     public AnswerModel(){
@@ -34,12 +34,12 @@ public class AnswerModel {
         this.correctAnswer = correctAnswer;
     }
 
-    public boolean isResult() {
-        return result;
+    public boolean isCorrect() {
+        return isCorrect;
     }
 
-    public void setResult(boolean result) {
-        this.result = result;
+    public void setIsCorrect(boolean isCorrect) { // renamed from isCorrect to setIsCorrect
+        this.isCorrect = isCorrect;
     }
 
     public String getQuestion() {

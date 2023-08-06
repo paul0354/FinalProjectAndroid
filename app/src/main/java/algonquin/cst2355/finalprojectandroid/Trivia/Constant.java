@@ -8,4 +8,6 @@ public class Constant {
 
     public static String FLAG = "flag";
 
+    public static String API_URL = "https://opentdb.com/api_category.php";
+
 }

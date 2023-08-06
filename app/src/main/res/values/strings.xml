@@ -5,4 +5,7 @@
     <string name="currency_app_name">Currency Converter</string>
     <string name="trivia_app_name">Trivia Tester</string>
     <string name="welcome_msg">Welcome to our Android Suite</string>
+    <string name="select_category">Select a category</string>
+    <string name="action_help">Help</string>
+
 </resources>

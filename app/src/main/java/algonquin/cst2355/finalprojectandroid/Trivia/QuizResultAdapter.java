@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import algonquin.cst2355.finalprojectandroid.R;
 public class QuizResultAdapter extends RecyclerView.Adapter<QuizResultAdapter.MyViewHolder>{
 
     private Context context;

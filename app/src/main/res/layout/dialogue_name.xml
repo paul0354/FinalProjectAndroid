@@ -24,8 +24,7 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="14dp"></TextView>
-
+            android:textSize="14dp" />
 
         <ImageView
             android:layout_gravity="center"
@@ -33,13 +32,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
-            android:src="@drawable/baseline_close_24"></ImageView>
+            android:src="@drawable/baseline_close_24"
+            android:contentDescription="Close Icon" />
 
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/rl1"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:hintAnimationEnabled="true"
         app:boxBackgroundColor="@color/white"
@@ -49,7 +50,7 @@
         android:layout_marginLeft="20dp"
         app:boxStrokeColor="@color/primary"
         android:textColorHint="@color/black"
-        android:layout_height="wrap_content">
+        android:contentDescription="Enter name">
 
         <EditText
             android:id="@+id/name"
@@ -57,10 +58,9 @@
             android:layout_height="50dp"
             android:inputType="textPersonName"
             android:textColor="@color/black"
-            android:textSize="12dp" />
+            android:textSize="15dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/submit_details"
@@ -73,6 +73,6 @@
         android:textSize="16dp"
         android:textStyle="bold"
         app:cornerRadius="20dp"
-        app:elevation="5dp"/>
+        app:elevation="5dp" />
 
 </LinearLayout>
