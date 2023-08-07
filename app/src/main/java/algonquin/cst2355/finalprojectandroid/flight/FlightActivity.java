@@ -43,12 +43,6 @@ import algonquin.cst2355.finalprojectandroid.TriviaActivity;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityFlightBinding;
 import algonquin.cst2355.finalprojectandroid.databinding.FlightListBinding;
 
-/*
-TODO: Fix the colors of the toolbar
-TODO: Refactor the strings to strings.xml and add a new language
-TODO: Anything I'm missing
- */
-
 /**
  * This page allows the user to search for flights after entering a source airport code.
  * The user can save the flights from a fragment, and view them from the toolbar.
@@ -147,14 +141,14 @@ public class FlightActivity extends AppCompatActivity {
             if(encode.length() != 3) {
 
                 Toast.makeText(this,
-                        "Invalid airport code.",
+                        R.string.flight_invalid,
                         Toast.LENGTH_SHORT).show();
 
             }
             else {
                 //lets the user know that flights are being searched for
                 Toast.makeText(this,
-                        "Searching Airport " + binding.inputCode.getText().toString(),
+                        R.string.flight_searching + binding.inputCode.getText().toString(),
                         Toast.LENGTH_SHORT).show();
 
                 String api = "70ecb37f100c89920ba0342196798895";
@@ -175,7 +169,7 @@ public class FlightActivity extends AppCompatActivity {
                             JSONObject dep = data.getJSONObject(i).getJSONObject("departure");
                             JSONObject arr = data.getJSONObject(i).getJSONObject("arrival");
 
-                            String fN = data.getJSONObject(i).getJSONObject("flight").getString("number") + " from " + airportCode.toUpperCase();
+                            String fN = data.getJSONObject(i).getJSONObject("flight").getString("number") + R.string.flight_joiner + airportCode.toUpperCase();
                             String des = arr.getString("iata");
                             String ter = dep.getString("terminal");
                             String gat = dep.getString("gate");
@@ -283,17 +277,9 @@ public class FlightActivity extends AppCompatActivity {
         else if(item.getItemId()==R.id.flightHelp) { //Opens a help dialog
 
             AlertDialog.Builder builder = new AlertDialog.Builder(FlightActivity.this);
-            builder.setMessage("To use this app, type an airport code into the searchbar. " +
-                            "When you click the search button, a list of flights from that " +
-                            "airport will appear, along with their destination airport.\n\n" +
-                            "To save a flight, click on one of the flights in the list, then click " +
-                            "on the Save To Database button.\n\n" +
-                            "To view your saved flights, click on the three dots, then click on the " +
-                            "View Saved Flights button.\n\n" +
-                            "To delete a saved flight, click on one of your saved flights, then " +
-                            "click on the Remove From Database button.")
-                    .setTitle("How To Use The Flight Tracker")
-                    .setPositiveButton("OK", (dialog, cl) -> {})
+            builder.setMessage(R.string.flight_help)
+                    .setTitle(R.string.flight_help_title)
+                    .setPositiveButton(R.string.flight_confirm, (dialog, cl) -> {})
                     .create().show();
 
         }

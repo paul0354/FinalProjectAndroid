@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/savedFlights"
-        android:title="View Saved Flights" />
+        android:title="@string/flight_saved_button" />
     <item
         android:id="@+id/flightToTrivia"
         android:icon="@drawable/trivia_icon"
@@ -12,7 +12,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/flightHelp"
-        android:title="Help"
+        android:title="@string/flight_help_button"
         app:showAsAction="never" />
     <item
         android:id="@+id/flightToBear"

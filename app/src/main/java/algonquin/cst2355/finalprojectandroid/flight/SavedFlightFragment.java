@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2355.finalprojectandroid.R;
 import algonquin.cst2355.finalprojectandroid.databinding.SavedFlightsLayoutBinding;
 
 /**
@@ -55,30 +56,30 @@ public class SavedFlightFragment extends Fragment {
 
         SavedFlightsLayoutBinding b = SavedFlightsLayoutBinding.inflate(inflater);
 
-        b.savedFlightNum.setText("Flight " + selected.getFlightNum());
-        b.savedDes.setText("Destination airport = " + selected.getDestination());
-        b.savedGate.setText("Gate = " + selected.getGate());
-        b.savedDelay.setText("Delay = " + selected.getDelay());
-        b.savedTerminal.setText("Terminal = " + selected.getTerminal());
+        b.savedFlightNum.setText(R.string.flight_flight + selected.getFlightNum());
+        b.savedDes.setText(R.string.flight_des + selected.getDestination());
+        b.savedGate.setText(R.string.flight_gate + selected.getGate());
+        b.savedDelay.setText(R.string.flight_delay + selected.getDelay());
+        b.savedTerminal.setText(R.string.flight_ter + selected.getTerminal());
 
         //Allows the user to delete the flight from their saved flights
         //So jank
         b.deleteButton.setOnClickListener(clk -> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("Would you like to remove this from your saved flights?")
-                    .setTitle("Question:")
-                    .setPositiveButton("Yes", (dialog, cl) -> {
+            builder.setMessage(R.string.flight_prompt)
+                    .setTitle(R.string.flight_question)
+                    .setPositiveButton(R.string.flight_yes, (dialog, cl) -> {
                         Executor t = Executors.newSingleThreadExecutor();
                         t.execute(() -> {
                             FlightActivity.fDAO.deleteFlight(selected);
                         });
                         SavedFlightsActivity.temp--;
-                        Snackbar.make(b.getRoot(), "Flight removed.", Snackbar.LENGTH_LONG)
+                        Snackbar.make(b.getRoot(), R.string.flight_remove, Snackbar.LENGTH_LONG)
                                 .setTextColor(Color.BLACK)
                                 .show();
                     })
-                    .setNegativeButton("No", (dialog, cl) -> {})
+                    .setNegativeButton(R.string.flight_no, (dialog, cl) -> {})
                     .create().show();
 
 

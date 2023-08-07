@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import algonquin.cst2355.finalprojectandroid.R;
 import algonquin.cst2355.finalprojectandroid.databinding.FlightDetailsLayoutBinding;
 
 /**
@@ -50,11 +51,11 @@ public class FlightDetailsFragment extends Fragment {
         FlightDetailsLayoutBinding b = FlightDetailsLayoutBinding.inflate(inflater);
 
         //Displays the info in the fragment
-        b.flightNum.setText("Flight " + selected.getFlightNum());
-        b.des.setText("Destination airport = " + selected.getDestination());
-        b.gate.setText("Gate = " + selected.getGate());
-        b.delay.setText("Delay = " + selected.getDelay());
-        b.terminal.setText("Terminal = " + selected.getTerminal());
+        b.flightNum.setText(R.string.flight_flight + selected.getFlightNum());
+        b.des.setText(R.string.flight_des + selected.getDestination());
+        b.gate.setText(R.string.flight_gate + selected.getGate());
+        b.delay.setText(R.string.flight_delay + selected.getDelay());
+        b.terminal.setText(R.string.flight_ter + selected.getTerminal());
 
         //Sets what happens when you click the save to database button
         b.databaseButton.setOnClickListener(clk -> {
@@ -68,7 +69,7 @@ public class FlightDetailsFragment extends Fragment {
                     });
 
             //Displays that the save was successful
-            Snackbar.make(b.frag, "Flight added to the database.", Snackbar.LENGTH_LONG)
+            Snackbar.make(b.frag, R.string.flight_add, Snackbar.LENGTH_LONG)
                     .setTextColor(Color.BLACK)
                     .show();
 

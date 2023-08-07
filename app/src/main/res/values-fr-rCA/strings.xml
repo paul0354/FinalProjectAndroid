@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Final Project</string>
+    <string name="bear_app_name">Générateur d\'Ours</string>
+    <string name="flight_app_name">Suivi des Vols</string>
+    <string name="currency_app_name">Convertisseur de Devices</string>
+    <string name="trivia_app_name">Jeu-Questionaire</string>
+    <string name="welcome_msg">Beinvenue dans notre Suite d\'Android</string>
+    <string name="saved_flights_name">Vols Enregistrés</string>
+    <string name="flight_hint">Entrez un code de l\'aéroport...</string>
+    <string name="search_flight">Chercher</string>
+    <string name="flight_joiner">" de "</string>
+    <string name="flight_flight">Vol</string>
+    <string name="flight_des">"Aéroport de destination = "</string>
+    <string name="flight_gate">"Porte = "</string>
+    <string name="flight_delay">"Retard = "</string>
+    <string name="flight_ter">"Terminal = "</string>
+    <string name="flight_add">Vol ajouté à vos vols enregistrés.</string>
+    <string name="flight_prompt">Souhaitez-vous supprimer ceci de vos vols enregistrés?</string>
+    <string name="flight_question">Question:</string>
+    <string name="flight_yes">Oui</string>
+    <string name="flight_remove">Vol retiré de vos vols enregistrés.</string>
+    <string name="flight_no">Non</string>
+    <string name="flight_searching">"Cherché l'aéroport "</string>
+    <string name="flight_invalid">Code d\'aéroport invalide.</string>
+    <string name="flight_help_title">Comment Utiliser le Suivi de Vol</string>
+    <string name="flight_confirm">OK</string>
+    <string name="flight_add_button">Ajouter Aux Vols Enregistrés</string>
+    <string name="flight_remove_button">Supprimer Des Vols Enregistrés</string>
+    <string name="flight_saved_button">Voir Les Vols Enregistrés</string>
+    <string name="flight_help_button">Aide</string>
+    <string name="flight_help">Pour utiliser cette application, tapez un code d\'aéroport dans la barre de recherche. Lorsque vous cliquez sur le bouton de recherche, une liste des vols au départ de cet aéroport apparaîtra, ainsi que leur aéroport de destination. \n\nPour enregistrer un vol, cliquez sur l\'un des vols de la liste, puis cliquez sur le bouton Ajouter aux vols enregistrés.\n\nPour afficher vos vols enregistrés, cliquez sur les trois points, puis cliquez sur le bouton Afficher les vols enregistrés.\n\nPour supprimer un vol enregistré, cliquez sur l\'un de vos vols enregistrés, puis cliquez sur le bouton Supprimer des vols enregistrés.</string>
+</resources>
