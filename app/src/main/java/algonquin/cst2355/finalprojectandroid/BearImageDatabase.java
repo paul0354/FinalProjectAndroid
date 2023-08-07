@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 /**
  * Represents a bear images database.
  */
-@Database(entities = {BearImage.class}, version=1)
+@Database(entities = {BearImage.class}, version=2)
 public abstract class BearImageDatabase extends RoomDatabase {
     /**
      * Creates a bear image database access object.

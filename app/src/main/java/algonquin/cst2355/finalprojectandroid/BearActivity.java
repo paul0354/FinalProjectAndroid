@@ -109,9 +109,8 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
         binding.heightInput.setText(prefs.getString("Height",""));
         binding.widthInput.setText(prefs.getString("Width",""));
 
-        BearImageDatabase db = Room.databaseBuilder(getApplicationContext(),BearImageDatabase.class,"database-name").build();
+        BearImageDatabase db = Room.databaseBuilder(getApplicationContext(),BearImageDatabase.class,"database-name").fallbackToDestructiveMigration().build();
         bDAO = db.biDAO();
-
         queue = Volley.newRequestQueue(this);
         bearModel = new ViewModelProvider(this).get(BearImagesViewModel.class);
         images = bearModel.images.getValue();

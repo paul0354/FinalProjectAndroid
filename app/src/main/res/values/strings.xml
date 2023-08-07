@@ -10,6 +10,10 @@
     <string name="Convert">Convert</string>
     <string name="Delete">Delete</string>
     <string name="Save">Save</string>
+    <string name="bear_h">Height (px)</string>
+    <string name="bear_h_hint">Height</string>
+    <string name="bear_w">Width (px)</string>
+    <string name="bear_w_hint">Width</string>
     <string-array name="currency_array">
         <item>USD</item>
         <item>EUR</item>
