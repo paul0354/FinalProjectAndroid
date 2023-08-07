@@ -16,7 +16,7 @@
     <string name="curr_img_text">Current Image:</string>
     <string name="save_to_db">SAVE TO DATABASE</string>
     <string name="delete">DELETE?</string>
-    <string name="del_bear_sb">You deleted image # </string>
+    <string name="del_bear_sb">You deleted the image at position # </string>
     <string name="no_gen_bear_toast">Sorry, you haven\'t generated an image yet!</string>
     <string name="save_success_toast">Image added to database</string>
     <string name="size_in_bytes">The size of this image in bytes is </string>

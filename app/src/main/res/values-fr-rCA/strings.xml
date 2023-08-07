@@ -9,13 +9,13 @@
     <string name="bear_h_hint">Hauter</string>
     <string name="bear_w">I (px)</string>
     <string name="bear_w_hint">Largeur</string>
-    <string name="make_img">G\u00E9n\u00E9rer L'Image</string>
+    <string name="make_img">G\u00E9n\u00E9rer L\'Image</string>
     <string name="view_imgs">Voir Toutes</string>
     <string name="save_img">Enregistrer L\'Image</string>
     <string name="curr_img_text">Image Actuelle</string>
     <string name="save_to_db">ENREGISTRER</string>
     <string name="delete">SUPPRIMER?</string>
-    <string name="del_bear_sb">Vous avez supprim\u00E9 l\'image # </string>
+    <string name="del_bear_sb">Vous avez supprim\u00E9 l\'image en place # </string>
     <string name="no_gen_bear_toast">D\u00E9sol\u00E9! Vous n\'avez pas g\u00E9n\u00E9r\u00E9 d\'image.</string>
     <string name="save_success_toast">Image enregistr\u00E9e</string>
     <string name="size_in_bytes">La taille de l\'image en octets</string>

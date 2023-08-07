@@ -39,24 +39,65 @@ import algonquin.cst2355.finalprojectandroid.data.BearImagesViewModel;
 import algonquin.cst2355.finalprojectandroid.data.ImgSaver;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityBearBinding;
 
+/**
+ * Program to generate, save, and view bear images in a database. Contains functionality to
+ * request a bear image from a server, display this image to the user, save the image to a database,
+ * and launch a fragment which allows users to view all images, view additional details about the
+ * images, and delete images from the database. Contains a toolbar which can be used to navigate to
+ * other app activities, as well as used to display information about how to use this GUI. Contains
+ * functionality to store data entered by the user for use future application sessions. Provides
+ * users with feedback if they enter inappropriate data.
+ */
 public class BearActivity extends AppCompatActivity implements ImgSaver {
-
+    /**
+     * A fragment manager for Bear Activity, used to launch a new fragment.
+     */
     FragmentManager fMgr;
+    /**
+     * A request queue for the Bear Image Generator. Used to queue requests to the server.
+     */
     RequestQueue queue = null;
+    /**
+     * View binding for the Bear Image Generator's GUI.
+     */
     ActivityBearBinding binding;
+    /**
+     * An array of bear images.
+     */
     ArrayList<BearImage> images = new ArrayList<>();
 
+    /**
+     * A view model for accessing bear images.
+     */
     BearImagesViewModel bearModel;
 
+    /**
+     * The database access object for manipulating the bear image database.
+     */
     BearImageDAO bDAO;
 
+    /**
+     * The height of the currently generated bear image.
+     */
+    private int currHeight;
 
-    int currHeight;
-    int currWidth;
+    /**
+     * The width of the currently generated bear image.
+     */
+    private int currWidth;
 
-    boolean hasBearBeenGenerated;
+    /**
+     * Whether or not a bear image has been generated since opening the app.
+     */
+    private boolean hasBearBeenGenerated;
 
-
+    /**
+     * Contains functionality to allow user to generate, save, and view all bear images.
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +116,6 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
         bearModel = new ViewModelProvider(this).get(BearImagesViewModel.class);
         images = bearModel.images.getValue();
 
-
-
         if(images == null){
             bearModel.images.postValue(images = new ArrayList<>());
 
@@ -90,7 +129,6 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
         binding.makeImageBtn.setOnClickListener(v -> {
             hideKeyboard(v);
             if (generateImage(binding.heightInput.getText().toString(), binding.widthInput.getText().toString())){
-
                 currHeight = Integer.parseInt(binding.heightInput.getText().toString());
                 currWidth = Integer.parseInt(binding.widthInput.getText().toString());
                 hasBearBeenGenerated = true;
@@ -110,35 +148,15 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
             fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
 
-            tx.addToBackStack("null");
+            tx.addToBackStack("bearimgs");
             tx.replace(R.id.bearListLocation,bearImagesFragment);
             tx.commit();
-            /*
-            File file = new File(getFilesDir(),"currBear.png");
-            if(file.exists()) {
-                Bitmap image = BitmapFactory.decodeFile(file.getAbsolutePath());
-                BearImagesFragment bearImagesFragment = new BearImagesFragment(image);
-                fMgr = getSupportFragmentManager();
-                FragmentTransaction tx = fMgr.beginTransaction();
-
-                tx.addToBackStack("null");
-                tx.replace(R.id.bearListLocation, bearImagesFragment);
-                tx.commit();
-            }
-             */
-            /*
-                        Bitmap image;
-            image = BitmapFactory.decodeResource(getResources(), R.drawable.bear_icon);
-            if(hasBearBeenGenerated){
-                File file = new File(getFilesDir(), "currBear.png");
-                if (file.exists()) {
-                    image = BitmapFactory.decodeFile(file.getAbsolutePath());
-                }
-            }
-             */
         });
     }
 
+    /**
+     * Stores the height and width currently entered in the editable text fields on pause.
+     */
     @Override
     protected void onPause() {
         super.onPause();
@@ -148,8 +166,22 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
         editor.putString("Width",binding.widthInput.getText().toString());
         editor.apply();
     }
+
+    /**
+     * Saves the currently generated bear image to the users device and to the image database.
+     * Uses a semi-unique name to preserve space on users device (multiple copies of the same image
+     * will overwrite each other upon save, rather than be saved alongside each other). Displays a
+     * message to the user upon successfully saving the image. Does not permit a user to save an
+     * image if they have not yet generated an image.
+     * @param f The image file to be saved into the database.
+     */
     @Override
-    public void saveImage(File f){
+    public boolean saveImage(File f){
+        if(!hasBearBeenGenerated) {
+            Toast toast = Toast.makeText(this, getString(R.string.no_gen_bear_toast), Toast.LENGTH_LONG);
+            toast.show();
+            return false;
+        }
         Bitmap image = BitmapFactory.decodeFile(f.getAbsolutePath());
         String imageName = "bear" + currWidth + "x" +  currHeight + ".png";
         FileOutputStream fOut;
@@ -168,8 +200,22 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
         {
             bDAO.insertImage(bear);
         });
+        Toast toast = Toast.makeText(this,R.string.save_success_toast,Toast.LENGTH_SHORT);
+        toast.show();
+        return true;
     }
 
+    /**
+     * Generates an image of a bear using user inputted parameters to request an image from a
+     * public server. Does not permit requests for images which are greater than or equal to 5000px
+     * tall or wide, as these will crash the application due to limited storage for bitmaps. Prevents
+     * server requests and provides feedback to user if supplied height and/or width exceed this
+     * limit, are left empty, or are negative numbers. Upon response from the server, stores the
+     * requested image as "currBear.png" for further use in application.
+     * @param height A height provided by the user.
+     * @param width A width provide by the user.
+     * @return A boolean result representing whether the image was generated or not.
+     */
     protected boolean generateImage(String height, String width){
         if((!height.isEmpty()) && (!width.isEmpty())
                 && Integer.parseInt(height) > 0
@@ -189,7 +235,7 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
                         bmp = bitmap;
                         bmp.compress(Bitmap.CompressFormat.PNG,100,BearActivity.this.openFileOutput("currBear.png", Activity.MODE_PRIVATE));
                     }catch(Exception e){
-
+                        e.printStackTrace();
                     } finally {
                         runOnUiThread( () -> {
                             File file = new File(getFilesDir(),"currBear.png");
@@ -212,6 +258,11 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
         }
     }
 
+    /**
+     * Creates the toolbar navigation menu for the Bear Image Generator.
+     * @param menu The options menu in which you place your items.
+     * @return boolean result for creation of menu.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -219,6 +270,11 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
         return true;
     }
 
+    /**
+     * Provides functionality for selected menu items.
+     * @param item The menu item that was selected.
+     * @return a boolean result for the selection of a menu item.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int selectedItem = item.getItemId();
@@ -240,33 +296,28 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
                             Html.FROM_HTML_MODE_LEGACY))
                     .setTitle(getString(R.string.about_bear))
                     .create().show();
-            /*
-            builder.setMessage(Html.fromHtml("If you would like to make a new bear image, please type " +
-                            "a width and height in the text fields, then click " +
-                            "on <i>Generate Image</i>.<br><b>Height and/or width cannot exceed 5000.</b><br><br>" +
-                            "If you would like to save the generated image, please click <i>Save Image</i>.<br><br>" +
-                            "If you would like to view all saved images, please click <i>View All Images.</i><br><br>" +
-                            "<u>Within View All Images:</u><br>Tap any image to see additional details about it, or to be " +
-                            "given the option to delete it from the list.",
-                            Html.FROM_HTML_MODE_LEGACY))
-                    .setTitle("About The Bear Image Generator")
-                    .create().show();
-
-             */
             return true;
         }
         return false;
     }
 
+    /**
+     * Hides the keyboard from the user. Called when user clicks on Generate or View All buttons.
+     * @param view The current view
+     */
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    /**
+     * Provides support for removing fragments from the back stack.
+     */
+
     @Override
     public void onBackPressed() {
         if (fMgr.getBackStackEntryCount() > 0 ){
-            getSupportFragmentManager().popBackStackImmediate();
+            fMgr.popBackStackImmediate();
         } else {
             super.onBackPressed();
         }
