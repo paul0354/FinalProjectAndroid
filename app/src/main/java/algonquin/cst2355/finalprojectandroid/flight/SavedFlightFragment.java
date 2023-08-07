@@ -9,25 +9,46 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import algonquin.cst2355.finalprojectandroid.databinding.FlightDetailsLayoutBinding;
 import algonquin.cst2355.finalprojectandroid.databinding.SavedFlightsLayoutBinding;
 
+/**
+ * Fragment containing the info of a saved flight. Allows user to remove flight from the saved flights.
+ * This is honestly one of the worse things I have ever coded. I wish I did this differently.
+ *
+ * @author Owen Austin
+ * @version 1.0
+ */
 public class SavedFlightFragment extends Fragment {
 
+    /** Message selected by user */
     FlightInfo selected;
 
+    /**
+     * Constructor, sets the message variable to the one clicked by the user
+     */
     public SavedFlightFragment(FlightInfo f) {
         selected = f;
     }
 
+    /**
+     * Creates the view of the fragement and adds functionality to it
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return the saved flights layout view
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -40,6 +61,8 @@ public class SavedFlightFragment extends Fragment {
         b.savedDelay.setText("Delay = " + selected.getDelay());
         b.savedTerminal.setText("Terminal = " + selected.getTerminal());
 
+        //Allows the user to delete the flight from their saved flights
+        //So jank
         b.deleteButton.setOnClickListener(clk -> {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -51,8 +74,6 @@ public class SavedFlightFragment extends Fragment {
                             FlightActivity.fDAO.deleteFlight(selected);
                         });
                         SavedFlightsActivity.temp--;
-//                        FlightActivity.savedFlights.remove(selected.getId());
-                        //SavedFlightsActivity.adapt.notifyItemRemoved((int)selected.getId());
                         Snackbar.make(b.getRoot(), "Flight removed.", Snackbar.LENGTH_LONG)
                                 .setTextColor(Color.BLACK)
                                 .show();
@@ -67,17 +88,4 @@ public class SavedFlightFragment extends Fragment {
 
     }
 
-//    private reset r;
-//
-//    public interface reset{
-//        void resetInterface();
-//    }
-
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        if(r != null) {
-//            r.resetInterface();
-//        }
-//    }
 }
