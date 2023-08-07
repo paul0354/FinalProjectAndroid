@@ -1,10 +1,17 @@
 package algonquin.cst2355.finalprojectandroid;
+/**
+ * Name : Chawki Moulayat
+ * Section : 23S_CST2335_022
+ * Project : Final Project
+ * Function : Currency Converter
+ *
+ * @Author : Chawki Moulayat
+ */
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
