@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import algonquin.cst2355.finalprojectandroid.R;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivitySavedFlightsBinding;
@@ -29,6 +30,8 @@ public class SavedFlightsActivity extends AppCompatActivity {
 
     static protected RecyclerView.Adapter adapt;
     //ArrayList<FlightInfo> saved = new ArrayList<>();
+    int pos;
+    int messageID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,8 @@ public class SavedFlightsActivity extends AppCompatActivity {
 
         flightModel.listing.observe(this, (savedFlight) -> {
 
+            messageID = (int)savedFlight.id;
+
             SavedFlightFragment frag = new SavedFlightFragment(savedFlight);
             FragmentManager fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
@@ -84,11 +89,33 @@ public class SavedFlightsActivity extends AppCompatActivity {
                     .commit();
 
 //            adapt.notifyDataSetChanged();
+
         });
 
     }
 
-//    @Override
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ArrayList<FlightInfo> temp = new ArrayList<FlightInfo>();
+        Executor t = Executors.newSingleThreadExecutor();
+        t.execute(() ->{
+            temp.addAll(FlightActivity.fDAO.getAllFlights());
+        });
+
+        if(FlightActivity.savedFlights.size() != temp.size()) {
+            FlightActivity.savedFlights.remove(pos);
+            adapt.notifyItemRemoved(pos);
+        }
+
+    }
+
+    //    @Override
+//    public void resetInterface() {
+//        recreate();
+//    }
+
+    //    @Override
 //    protected void onResume() {
 //        super.onResume();
 //
@@ -108,7 +135,7 @@ public class SavedFlightsActivity extends AppCompatActivity {
             destCode = itemView.findViewById(R.id.destination);
 
             itemView.setOnClickListener(clk -> {
-                int pos = getAbsoluteAdapterPosition();
+                pos = getAbsoluteAdapterPosition();
 
                 FlightInfo s = FlightActivity.savedFlights.get(pos);
                 flightModel.listing.postValue(s);

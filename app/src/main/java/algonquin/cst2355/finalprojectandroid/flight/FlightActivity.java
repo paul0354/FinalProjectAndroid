@@ -47,8 +47,6 @@ import algonquin.cst2355.finalprojectandroid.databinding.FlightListBinding;
 
 /*
 TODO: Fix the colors of the toolbar
-TODO: New activity shows the saved flights
-TODO: Add deletion functionality
 TODO: Refactor the strings to strings.xml and add a new language
 TODO: Javadoc
 TODO: Make it look nice lol

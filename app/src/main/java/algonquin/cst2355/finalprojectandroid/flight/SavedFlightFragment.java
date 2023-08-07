@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -49,8 +50,8 @@ public class SavedFlightFragment extends Fragment {
                         t.execute(() -> {
                             FlightActivity.fDAO.deleteFlight(selected);
                         });
-                        FlightActivity.savedFlights.remove(selected.getId());
-                        SavedFlightsActivity.adapt.notifyItemRemoved((int)selected.getId());
+                        //FlightActivity.savedFlights.remove(selected.getId());
+                        //SavedFlightsActivity.adapt.notifyItemRemoved((int)selected.getId());
                         Snackbar.make(b.getRoot(), "Flight removed.", Snackbar.LENGTH_LONG)
                                 .setTextColor(Color.BLACK)
                                 .show();
@@ -65,4 +66,17 @@ public class SavedFlightFragment extends Fragment {
 
     }
 
+//    private reset r;
+//
+//    public interface reset{
+//        void resetInterface();
+//    }
+
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        if(r != null) {
+//            r.resetInterface();
+//        }
+//    }
 }
