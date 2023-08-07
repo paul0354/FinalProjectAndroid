@@ -373,16 +373,13 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
      * Initializes and sets up the currencies spinner with available currencies.
      */
     private void setupCurrenciesSpinner() {
-        // Create a list of currencies to populate the spinners
         currenciesList.add("USD");
         currenciesList.add("CAD");
         currenciesList.add("EUR");
         currenciesList.add("DZD");
-
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, currenciesList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         binding.spinnerFromCurrency.setAdapter(spinnerAdapter);
         binding.spinnerToCurrency.setAdapter(spinnerAdapter);
     }
