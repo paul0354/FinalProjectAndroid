@@ -109,6 +109,9 @@ public class FlightActivity extends AppCompatActivity {
         //sets what happens when search button is clicked
         binding.searchFlight.setOnClickListener(clk -> {
 
+            flights.clear();
+            adpt.notifyDataSetChanged();
+
             Log.w(TAG, "Button has been clicked");
 
             //saves flight code when clicked
