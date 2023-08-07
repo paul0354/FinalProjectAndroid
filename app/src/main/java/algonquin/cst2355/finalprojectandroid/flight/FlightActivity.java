@@ -152,7 +152,7 @@ public class FlightActivity extends AppCompatActivity {
                             JSONObject dep = data.getJSONObject(i).getJSONObject("departure");
                             JSONObject arr = data.getJSONObject(i).getJSONObject("arrival");
 
-                            String fN = data.getJSONObject(i).getJSONObject("flight").getString("number");
+                            String fN = data.getJSONObject(i).getJSONObject("flight").getString("number") + " from " + airportCode.toUpperCase();
                             String des = arr.getString("iata");
                             String ter = dep.getString("terminal");
                             String gat = dep.getString("gate");

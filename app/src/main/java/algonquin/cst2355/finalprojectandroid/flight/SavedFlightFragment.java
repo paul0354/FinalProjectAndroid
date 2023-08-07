@@ -50,7 +50,8 @@ public class SavedFlightFragment extends Fragment {
                         t.execute(() -> {
                             FlightActivity.fDAO.deleteFlight(selected);
                         });
-                        //FlightActivity.savedFlights.remove(selected.getId());
+                        SavedFlightsActivity.temp--;
+//                        FlightActivity.savedFlights.remove(selected.getId());
                         //SavedFlightsActivity.adapt.notifyItemRemoved((int)selected.getId());
                         Snackbar.make(b.getRoot(), "Flight removed.", Snackbar.LENGTH_LONG)
                                 .setTextColor(Color.BLACK)

@@ -29,9 +29,10 @@ public class SavedFlightsActivity extends AppCompatActivity {
     FlightViewModel flightModel;
 
     static protected RecyclerView.Adapter adapt;
-    //ArrayList<FlightInfo> saved = new ArrayList<>();
+    //ArrayList<FlightInfo> temp = new ArrayList<>();
     int pos;
     int messageID;
+    static int temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class SavedFlightsActivity extends AppCompatActivity {
             Executor t = Executors.newSingleThreadExecutor();
             t.execute(() -> {
                 FlightActivity.savedFlights.addAll(FlightActivity.fDAO.getAllFlights());
+                temp = FlightActivity.savedFlights.size();
                 runOnUiThread(() -> binding.savedFlightsRecycler.setAdapter(adapt));
             });
         }
@@ -97,13 +99,8 @@ public class SavedFlightsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        ArrayList<FlightInfo> temp = new ArrayList<FlightInfo>();
-        Executor t = Executors.newSingleThreadExecutor();
-        t.execute(() ->{
-            temp.addAll(FlightActivity.fDAO.getAllFlights());
-        });
 
-        if(FlightActivity.savedFlights.size() != temp.size()) {
+        if(FlightActivity.savedFlights.size() != temp) {
             FlightActivity.savedFlights.remove(pos);
             adapt.notifyItemRemoved(pos);
         }
