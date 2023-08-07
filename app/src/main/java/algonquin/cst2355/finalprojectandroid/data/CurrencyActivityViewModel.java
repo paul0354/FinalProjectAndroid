@@ -1,5 +1,12 @@
 package algonquin.cst2355.finalprojectandroid.data;
-
+/**
+ * Name : Chawki Moulayat
+ * Section : 23S_CST2335_022
+ * Project : Final Project
+ * Function : Currency Converter
+ *
+ * @Author : Chawki Moulayat
+ */
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

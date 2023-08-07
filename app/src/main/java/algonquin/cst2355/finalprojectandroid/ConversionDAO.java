@@ -1,5 +1,12 @@
 package algonquin.cst2355.finalprojectandroid;
-
+/**
+ * Name : Chawki Moulayat
+ * Section : 23S_CST2335_022
+ * Project : Final Project
+ * Function : Currency Converter
+ *
+ * @Author : Chawki Moulayat
+ */
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
