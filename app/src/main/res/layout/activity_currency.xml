@@ -1,19 +1,170 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".CurrencyActivity">
 
+    <FrameLayout
+        android:id="@+id/fragmentLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recyclerView">
+        <!-- Add your fragment content here -->
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/fragmentLocation"
+        app:layout_constraintBottom_toTopOf="@id/editTextAmount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextResult"
+        style="@style/AppEditTextStyle"
+        android:layout_width="164dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="108dp"
+        android:autofillHints=""
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:inputType="number"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/task_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/to" />
+
+
+    <Button
+        android:id="@+id/buttonConvert"
+
+        android:layout_width="118dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/Convert"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/to"
+        style="@style/AppTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="@string/currency_app_name"
-        android:textSize="34sp"
+        android:text="Result :"
+        android:textColor="@color/task_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextResult"
+        app:layout_constraintEnd_toEndOf="@+id/from"
+        app:layout_constraintStart_toStartOf="@+id/from"
+        app:layout_constraintTop_toTopOf="@+id/editTextResult"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/from"
+        style="@style/AppTextViewStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Amount :"
+        android:textColor="@color/task_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextAmount"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextAmount"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextAmount"
+        android:layout_width="164dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="68dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textColor="@color/task_primary"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/editTextResult"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerFromCurrency"
+        app:layout_constraintStart_toStartOf="@+id/editTextResult" />
+
+    <Spinner
+        android:id="@+id/spinnerToCurrency"
+        style="@style/AppSpinnerStyle"
+        android:layout_width="60dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextResult"
+        app:layout_constraintStart_toEndOf="@+id/editTextResult"
+        app:layout_constraintTop_toTopOf="@+id/editTextResult"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/spinnerFromCurrency"
+        style="@style/AppSpinnerStyle"
+        android:layout_width="60dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextAmount"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerToCurrency"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editTextResult"
+        app:layout_constraintTop_toTopOf="@+id/editTextAmount"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/ClearAll"
+        android:layout_width="118dp"
+        android:layout_height="45dp"
+        android:text="@string/Clear_All"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonConvert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonConvert"
+        app:layout_constraintTop_toTopOf="@+id/buttonConvert"
+        />
+
+    <Button
+        android:id="@+id/displayQueries"
+
+        android:layout_width="118dp"
+        android:layout_height="45dp"
+        android:text="@string/Display_All"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonConvert"
+        app:layout_constraintEnd_toStartOf="@+id/buttonConvert"
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/buttonConvert"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:titleTextColor="#FFFFFF"
+        android:backgroundTint="@color/task_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
