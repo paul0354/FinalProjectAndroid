@@ -1,9 +1,14 @@
 package algonquin.cst2355.finalprojectandroid.Trivia;
 
+import static algonquin.cst2355.finalprojectandroid.R.id.question_toolbar;
+
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,10 +40,6 @@ import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScoreDao;
 import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScoreDatabase;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityTriviaBinding;
 
-
-/**
- * An activity that displays trivia questions and handles user interactions for answering and submitting the quiz.
- */
 public class QuestionsActivity extends AppCompatActivity {
 
     private ActivityTriviaBinding binding;
@@ -52,14 +54,21 @@ public class QuestionsActivity extends AppCompatActivity {
         binding = ActivityTriviaBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_questions);
 
-        // Retrieve the category from the previous intent.
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"})
+        Toolbar toolbar = findViewById(question_toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setOnCreateContextMenuListener(this);
+
         String category = getIntent().getStringExtra("category");
+
+
 
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
 
 
         EditText numOfQuestions = binding.editTextNumber;
-        // Set the number of questions based on user preference.
         numOfQuestions.setText(sharedPreferences.getString("numOfQuestions", "2"));
 
         int numberOfQuestions = Integer.parseInt(numOfQuestions.getText().toString());
@@ -68,7 +77,6 @@ public class QuestionsActivity extends AppCompatActivity {
 
         Button submitButton = findViewById(R.id.submit_result);
 
-        // On click listener to evaluate the quiz once the user submits.
         submitButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -80,12 +88,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * Fetches trivia questions from the specified category.
-     *
-     * @param category          The category of trivia questions to fetch.
-     * @param numberOfQuestions The number of trivia questions to fetch.
-     */
+
     private void fetchQuestions(String category, int numberOfQuestions) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://the-trivia-api.com/api/questions?categories=" + category + "&limit=" + numberOfQuestions;
@@ -93,8 +96,6 @@ public class QuestionsActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
-
-                // Parse the JSON response to get the list of questions.
                 questionList =
                         gson.fromJson(response, new TypeToken<List<QuestionDetails>>() {
                         }.getType());
@@ -107,12 +108,7 @@ public class QuestionsActivity extends AppCompatActivity {
         }, error -> System.out.println("Unable to find questions"));
         queue.add(stringRequest);
     }
-    /**
-     * Calculates the score based on user's responses.
-     *
-     * @param questions List of trivia questions.
-     * @return Score based on correct answers.
-     */
+
     private int calculateScore(List<QuestionDetails> questions) {
         AtomicInteger score = new AtomicInteger();
         questions.forEach(question -> {
@@ -122,11 +118,7 @@ public class QuestionsActivity extends AppCompatActivity {
         });
         return score.get();
     }
-    /**
-     * Displays a dialog showing the user's score and prompts for the user's name.
-     *
-     * @param score The score to display.
-     */
+
     private void createDialog(int score) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(QuestionsActivity.this);
 
@@ -162,6 +154,29 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         });
         dialogBuilder.show();
+    }
+    private void createHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(QuestionsActivity.this);
+        builder.setTitle("Help");
+        builder.setMessage("Enter Number of Question in text Field and select the Category");
+        builder.create().show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.toolbar_help) {
+            createHelpDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.trivia_toolbar, menu);
+        return true;
     }
 
 }

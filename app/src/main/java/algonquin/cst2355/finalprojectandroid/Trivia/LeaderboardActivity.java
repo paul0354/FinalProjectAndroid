@@ -1,8 +1,15 @@
 package algonquin.cst2355.finalprojectandroid.Trivia;
 
-import android.os.Bundle;
+import static algonquin.cst2355.finalprojectandroid.R.id.leaderboard_toolbar;
 
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,46 +22,33 @@ import algonquin.cst2355.finalprojectandroid.R;
 import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScore;
 import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScoreDao;
 import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScoreDatabase;
+import algonquin.cst2355.finalprojectandroid.TriviaActivity;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityTriviaBinding;
 
-
-/**
- * LeaderboardActivity class responsible for displaying user scores on a leaderboard.
- * It fetches data from the database and sorts them in descending order based on scores.
- * The scores are then displayed on a RecyclerView.
- */
 public class LeaderboardActivity extends AppCompatActivity {
-
-    // Binding object for the activity layout.
     private ActivityTriviaBinding binding;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        // Inflate the layout using ViewBinding.
         binding = ActivityTriviaBinding.inflate(getLayoutInflater());
-
-        // Set the content view of this activity.
         setContentView(R.layout.leaderboard_layout);
 
-        // Instantiate database and dao objects.
+        Toolbar toolbar = findViewById(leaderboard_toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setOnCreateContextMenuListener(this);
+
         UserScoreDatabase userScoreDatabase = UserScoreDatabase.getDatabase(LeaderboardActivity.this);
         UserScoreDao userScoreDao = userScoreDatabase.getUserScoreDao();
-
-        // Use a single-thread executor to execute database operations off the main thread.
         Executor executor = Executors.newSingleThreadExecutor();
 
 
 
         executor.execute(() -> {
             List<UserScore> userScores = userScoreDao.getAllUsers();
-
-            // Sort the user scores in descending order based on calculated scores.
             userScores.sort(Comparator.comparingDouble(UserScore::calculateScore).reversed());
-
-            // Initialize and set the RecyclerView to display the sorted user scores.
             RecyclerView recyclerView = findViewById(R.id.leaderboard_recycler);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(new LeaderboardAdapter(userScores));
@@ -62,6 +56,28 @@ public class LeaderboardActivity extends AppCompatActivity {
 
 
     }
+    private void createHelpDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(LeaderboardActivity.this);
+        builder.setTitle("Help");
+        builder.setMessage("Enter Number of Question in text Field and select the Category");
+        builder.create().show();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.toolbar_help) {
+            createHelpDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.trivia_toolbar, menu);
+        return true;
+    }
 
 }

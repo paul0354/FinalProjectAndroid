@@ -11,18 +11,18 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/triviatool"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="25dp"
-        android:background="@color/primary"
-        android:hint="Trivia"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@+id/rl1"
+        android:theme="@style/ToolbarTheme"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/task_secondary" />
+        app:title="Group 2 - 022"
+        app:titleTextColor="@color/background"
+        app:popupTheme="@style/toolBarPopUpTheme"
+        />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -31,9 +31,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="9dp"
-        android:layout_marginLeft="9dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
         android:layout_marginBottom="30dp"
         android:textColorHint="@color/text_primary"
         app:boxBackgroundColor="@color/background"
@@ -113,18 +112,5 @@
         app:layout_constraintTop_toBottomOf="@+id/button2"
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/help_button"
-        android:layout_width="52dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="62dp"
-        android:layout_marginEnd="16dp"
-        android:background="#00000000"
-        android:clickable="true"
-        app:backgroundTint="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/triviatool"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_help" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

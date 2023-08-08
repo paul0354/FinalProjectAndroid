@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/toolbar_currency"
+        android:icon="@drawable/currency_icon"
+        android:title="@string/currency_app_name"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/toolbar_bear"
+        android:icon="@drawable/bear_icon"
+        android:title="@string/bear_app_name"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/toolbar_flight"
+        android:icon="@drawable/flight_icon"
+        android:title="@string/flight_app_name"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/toolbar_help"
+        android:title="@string/bear_menu_help"
+        app:showAsAction="never" />
+
+</menu>
