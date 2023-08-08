@@ -83,6 +83,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BearDetailsFragment</span>
 <span class="extends-implements">extends androidx.fragment.app.Fragment</span></div>
+<div class="block">A fragment containing additional details about a bear image object, as well
+ as the GUI functionality to delete the bear image from the images list and the
+ database. Alerts the user and prompts for confirmation before any such deletion occurs.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,7 +109,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>(package private) <a href="BearImage.html" title="class in algonquin.cst2355.finalprojectandroid">BearImage</a></code></div>
 <div class="col-second even-row-color"><code><a href="#selected" class="member-name-link">selected</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The selected bear image.</div>
+</div>
 </div>
 </section>
 </li>
@@ -119,7 +124,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(algonquin.cst2355.finalprojectandroid.BearImage)" class="member-name-link">BearDetailsFragment</a><wbr>(<a href="BearImage.html" title="class in algonquin.cst2355.finalprojectandroid">BearImage</a>&nbsp;b)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new bear details fragment using the selected bear image.</div>
+</div>
 </div>
 </section>
 </li>
@@ -138,7 +145,10 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)" class="member-name-link">onCreateView</a><wbr>(android.view.LayoutInflater&nbsp;inflater,
  android.view.ViewGroup&nbsp;container,
  android.os.Bundle&nbsp;savedInstanceState)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates the displayed view of the details for the selected bear image, and provides
+ users with the option to delete the currently displayed bear image.</div>
+</div>
 </div>
 </div>
 </div>
@@ -166,6 +176,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="selected">
 <h3>selected</h3>
 <div class="member-signature"><span class="return-type"><a href="BearImage.html" title="class in algonquin.cst2355.finalprojectandroid">BearImage</a></span>&nbsp;<span class="element-name">selected</span></div>
+<div class="block">The selected bear image.</div>
 </section>
 </li>
 </ul>
@@ -180,6 +191,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(algonquin.cst2355.finalprojectandroid.BearImage)">
 <h3>BearDetailsFragment</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BearDetailsFragment</span><wbr><span class="parameters">(<a href="BearImage.html" title="class in algonquin.cst2355.finalprojectandroid">BearImage</a>&nbsp;b)</span></div>
+<div class="block">Creates a new bear details fragment using the selected bear image.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>b</code> - The selected bear image.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -196,9 +212,21 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">android.view.View</span>&nbsp;<span class="element-name">onCreateView</span><wbr><span class="parameters">(android.view.LayoutInflater&nbsp;inflater,
  android.view.ViewGroup&nbsp;container,
  android.os.Bundle&nbsp;savedInstanceState)</span></div>
+<div class="block">Creates the displayed view of the details for the selected bear image, and provides
+ users with the option to delete the currently displayed bear image.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code>onCreateView</code>&nbsp;in class&nbsp;<code>androidx.fragment.app.Fragment</code></dd>
+<dt>Parameters:</dt>
+<dd><code>inflater</code> - The LayoutInflater object that can be used to inflate
+ any views in the fragment,</dd>
+<dd><code>container</code> - If non-null, this is the parent view that the fragment's
+ UI should be attached to.  The fragment should not add the view itself,
+ but this can be used to generate the LayoutParams of the view.</dd>
+<dd><code>savedInstanceState</code> - If non-null, this fragment is being re-constructed
+ from a previous saved state as given here.</dd>
+<dt>Returns:</dt>
+<dd>View the view of the bear detail fragment.</dd>
 </dl>
 </section>
 </li>

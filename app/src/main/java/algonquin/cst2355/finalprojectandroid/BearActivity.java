@@ -125,6 +125,8 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
             });
         }
 
+        fMgr = getSupportFragmentManager();
+
         binding.makeImageBtn.setOnClickListener(v -> {
             hideKeyboard(v);
             if (generateImage(binding.heightInput.getText().toString(), binding.widthInput.getText().toString())){
@@ -144,7 +146,6 @@ public class BearActivity extends AppCompatActivity implements ImgSaver {
         binding.viewImagesBtn.setOnClickListener(v -> {
             hideKeyboard(v);
             BearImagesFragment bearImagesFragment = new BearImagesFragment(hasBearBeenGenerated);
-            fMgr = getSupportFragmentManager();
             FragmentTransaction tx = fMgr.beginTransaction();
 
             tx.addToBackStack("bearimgs");

@@ -83,6 +83,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BearImagesFragment</span>
 <span class="extends-implements">extends androidx.fragment.app.Fragment</span></div>
+<div class="block">Represents a list of all bear images in a database, with a GUI for saving the currently generated
+ image to the database. Updates the list upon user actions (adding/removing items from list).</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -106,25 +108,38 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>(package private) <a href="data/BearImagesViewModel.html" title="class in algonquin.cst2355.finalprojectandroid.data">BearImagesViewModel</a></code></div>
 <div class="col-second even-row-color"><code><a href="#bearModel" class="member-name-link">bearModel</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>(package private) <a href="databinding/BearImagesLayoutBinding.html" title="class in algonquin.cst2355.finalprojectandroid.databinding">BearImagesLayoutBinding</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#binding" class="member-name-link">binding</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">The view model for bear images.</div>
+</div>
+<div class="col-first odd-row-color"><code>(package private) <a href="BearImageDAO.html" title="interface in algonquin.cst2355.finalprojectandroid">BearImageDAO</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#biDAO" class="member-name-link">biDAO</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>(package private) android.graphics.Bitmap</code></div>
-<div class="col-second even-row-color"><code><a href="#currImage" class="member-name-link">currImage</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>(package private) <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="BearImage.html" title="class in algonquin.cst2355.finalprojectandroid">BearImage</a>&gt;</code></div>
-<div class="col-second odd-row-color"><code><a href="#images" class="member-name-link">images</a></code></div>
+<div class="col-first even-row-color"><code>(package private) <a href="databinding/BearImagesLayoutBinding.html" title="class in algonquin.cst2355.finalprojectandroid.databinding">BearImagesLayoutBinding</a></code></div>
+<div class="col-second even-row-color"><code><a href="#binding" class="member-name-link">binding</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">The view binding for the bear images fragment.</div>
+</div>
+<div class="col-first odd-row-color"><code>(package private) androidx.fragment.app.FragmentManager</code></div>
+<div class="col-second odd-row-color"><code><a href="#fMgr" class="member-name-link">fMgr</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>(package private) androidx.recyclerview.widget.RecyclerView.Adapter</code></div>
-<div class="col-second even-row-color"><code><a href="#myAdapter" class="member-name-link">myAdapter</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>(package private) int</code></div>
-<div class="col-second odd-row-color"><code><a href="#position" class="member-name-link">position</a></code></div>
+<div class="col-first even-row-color"><code>(package private) boolean</code></div>
+<div class="col-second even-row-color"><code><a href="#hasImageBeenGenerated" class="member-name-link">hasImageBeenGenerated</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">Whether or not a bear image has been generated during this launch of the Bear Image Generator.</div>
+</div>
+<div class="col-first odd-row-color"><code>(package private) boolean</code></div>
+<div class="col-second odd-row-color"><code><a href="#hasImageBeenSelected" class="member-name-link">hasImageBeenSelected</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>(package private) androidx.recyclerview.widget.RecyclerView</code></div>
-<div class="col-second even-row-color"><code><a href="#recyclerView" class="member-name-link">recyclerView</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><code>(package private) <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="BearImage.html" title="class in algonquin.cst2355.finalprojectandroid">BearImage</a>&gt;</code></div>
+<div class="col-second even-row-color"><code><a href="#images" class="member-name-link">images</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">A list of all bear images.</div>
+</div>
+<div class="col-first odd-row-color"><code>(package private) androidx.recyclerview.widget.RecyclerView.Adapter</code></div>
+<div class="col-second odd-row-color"><code><a href="#myAdapter" class="member-name-link">myAdapter</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">The adapter for the recycler view holding the bear images.</div>
+</div>
 </div>
 </section>
 </li>
@@ -136,8 +151,11 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(android.graphics.Bitmap)" class="member-name-link">BearImagesFragment</a><wbr>(android.graphics.Bitmap&nbsp;b)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(boolean)" class="member-name-link">BearImagesFragment</a><wbr>(boolean&nbsp;hasImageBeenGenerated)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new BearImages fragment and establishes whether a bear image has been generated
+ during this launch of the Bear Image Generator.</div>
+</div>
 </div>
 </section>
 </li>
@@ -154,12 +172,16 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onAttach(android.content.Context)" class="member-name-link">onAttach</a><wbr>(android.content.Context&nbsp;context)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Allows use of Image Saver methods defined in parent activity.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>android.view.View</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle)" class="member-name-link">onCreateView</a><wbr>(android.view.LayoutInflater&nbsp;inflater,
  android.view.ViewGroup&nbsp;container,
  android.os.Bundle&nbsp;savedInstanceState)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Creates the view of the bear images lists.</div>
+</div>
 </div>
 </div>
 </div>
@@ -187,42 +209,53 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="bearModel">
 <h3>bearModel</h3>
 <div class="member-signature"><span class="return-type"><a href="data/BearImagesViewModel.html" title="class in algonquin.cst2355.finalprojectandroid.data">BearImagesViewModel</a></span>&nbsp;<span class="element-name">bearModel</span></div>
+<div class="block">The view model for bear images.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="images">
 <h3>images</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="BearImage.html" title="class in algonquin.cst2355.finalprojectandroid">BearImage</a>&gt;</span>&nbsp;<span class="element-name">images</span></div>
+<div class="block">A list of all bear images.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="binding">
 <h3>binding</h3>
 <div class="member-signature"><span class="return-type"><a href="databinding/BearImagesLayoutBinding.html" title="class in algonquin.cst2355.finalprojectandroid.databinding">BearImagesLayoutBinding</a></span>&nbsp;<span class="element-name">binding</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="currImage">
-<h3>currImage</h3>
-<div class="member-signature"><span class="return-type">android.graphics.Bitmap</span>&nbsp;<span class="element-name">currImage</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="recyclerView">
-<h3>recyclerView</h3>
-<div class="member-signature"><span class="return-type">androidx.recyclerview.widget.RecyclerView</span>&nbsp;<span class="element-name">recyclerView</span></div>
+<div class="block">The view binding for the bear images fragment.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="myAdapter">
 <h3>myAdapter</h3>
 <div class="member-signature"><span class="return-type">androidx.recyclerview.widget.RecyclerView.Adapter</span>&nbsp;<span class="element-name">myAdapter</span></div>
+<div class="block">The adapter for the recycler view holding the bear images.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="position">
-<h3>position</h3>
-<div class="member-signature"><span class="return-type">int</span>&nbsp;<span class="element-name">position</span></div>
+<section class="detail" id="hasImageBeenGenerated">
+<h3>hasImageBeenGenerated</h3>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">hasImageBeenGenerated</span></div>
+<div class="block">Whether or not a bear image has been generated during this launch of the Bear Image Generator.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="hasImageBeenSelected">
+<h3>hasImageBeenSelected</h3>
+<div class="member-signature"><span class="return-type">boolean</span>&nbsp;<span class="element-name">hasImageBeenSelected</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="biDAO">
+<h3>biDAO</h3>
+<div class="member-signature"><span class="return-type"><a href="BearImageDAO.html" title="interface in algonquin.cst2355.finalprojectandroid">BearImageDAO</a></span>&nbsp;<span class="element-name">biDAO</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="fMgr">
+<h3>fMgr</h3>
+<div class="member-signature"><span class="return-type">androidx.fragment.app.FragmentManager</span>&nbsp;<span class="element-name">fMgr</span></div>
 </section>
 </li>
 </ul>
@@ -234,9 +267,15 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(android.graphics.Bitmap)">
+<section class="detail" id="&lt;init&gt;(boolean)">
 <h3>BearImagesFragment</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BearImagesFragment</span><wbr><span class="parameters">(android.graphics.Bitmap&nbsp;b)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BearImagesFragment</span><wbr><span class="parameters">(boolean&nbsp;hasImageBeenGenerated)</span></div>
+<div class="block">Creates a new BearImages fragment and establishes whether a bear image has been generated
+ during this launch of the Bear Image Generator.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>hasImageBeenGenerated</code> - Whether an image has been generated during this launch of app</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -253,9 +292,22 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">android.view.View</span>&nbsp;<span class="element-name">onCreateView</span><wbr><span class="parameters">(android.view.LayoutInflater&nbsp;inflater,
  android.view.ViewGroup&nbsp;container,
  android.os.Bundle&nbsp;savedInstanceState)</span></div>
+<div class="block">Creates the view of the bear images lists. Checks whether a bear image has been generated
+ during this launch of the Bear Image Generator, and if so, displays the most recently
+ generated bear image to the user in the top panel of the GUI.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code>onCreateView</code>&nbsp;in class&nbsp;<code>androidx.fragment.app.Fragment</code></dd>
+<dt>Parameters:</dt>
+<dd><code>inflater</code> - The LayoutInflater object that can be used to inflate
+ any views in the fragment,</dd>
+<dd><code>container</code> - If non-null, this is the parent view that the fragment's
+ UI should be attached to.  The fragment should not add the view itself,
+ but this can be used to generate the LayoutParams of the view.</dd>
+<dd><code>savedInstanceState</code> - If non-null, this fragment is being re-constructed
+ from a previous saved state as given here.</dd>
+<dt>Returns:</dt>
+<dd>View the view of the bear images fragment.</dd>
 </dl>
 </section>
 </li>
@@ -264,9 +316,12 @@ loadScripts(document, 'script');</script>
 <h3>onAttach</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onAttach</span><wbr><span class="parameters">(@NonNull
  android.content.Context&nbsp;context)</span></div>
+<div class="block">Allows use of Image Saver methods defined in parent activity.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code>onAttach</code>&nbsp;in class&nbsp;<code>androidx.fragment.app.Fragment</code></dd>
+<dt>Parameters:</dt>
+<dd><code>context</code> - The context of the fragment</dd>
 </dl>
 </section>
 </li>

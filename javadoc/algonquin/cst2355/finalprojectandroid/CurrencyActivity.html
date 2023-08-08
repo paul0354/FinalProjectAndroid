@@ -92,11 +92,14 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code>android.content.ComponentCallbacks</code>, <code>android.content.ComponentCallbacks2</code>, <code>android.view.KeyEvent.Callback</code>, <code>android.view.LayoutInflater.Factory</code>, <code>android.view.LayoutInflater.Factory2</code>, <code>android.view.View.OnCreateContextMenuListener</code>, <code>android.view.Window.Callback</code>, <code>androidx.activity.contextaware.ContextAware</code>, <code>androidx.activity.OnBackPressedDispatcherOwner</code>, <code>androidx.activity.result.ActivityResultCaller</code>, <code>androidx.activity.result.ActivityResultRegistryOwner</code>, <code>androidx.appcompat.app.ActionBarDrawerToggle.DelegateProvider</code>, <code>androidx.appcompat.app.AppCompatCallback</code>, <code>androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback</code>, <code>androidx.core.app.ActivityCompat.RequestPermissionsRequestCodeValidator</code>, <code>androidx.core.app.OnMultiWindowModeChangedProvider</code>, <code>androidx.core.app.OnNewIntentProvider</code>, <code>androidx.core.app.OnPictureInPictureModeChangedProvider</code>, <code>androidx.core.app.TaskStackBuilder.SupportParentable</code>, <code>androidx.core.content.OnConfigurationChangedProvider</code>, <code>androidx.core.content.OnTrimMemoryProvider</code>, <code>androidx.core.view.KeyEventDispatcher.Component</code>, <code>androidx.core.view.MenuHost</code>, <code>androidx.lifecycle.HasDefaultViewModelProviderFactory</code>, <code>androidx.lifecycle.LifecycleOwner</code>, <code>androidx.lifecycle.ViewModelStoreOwner</code>, <code>androidx.savedstate.SavedStateRegistryOwner</code></dd>
+<dd><code><a href="ConversionDetailsFragment.OnConversionDeletedListener.html" title="interface in algonquin.cst2355.finalprojectandroid">ConversionDetailsFragment.OnConversionDeletedListener</a></code>, <code>android.content.ComponentCallbacks</code>, <code>android.content.ComponentCallbacks2</code>, <code>android.view.KeyEvent.Callback</code>, <code>android.view.LayoutInflater.Factory</code>, <code>android.view.LayoutInflater.Factory2</code>, <code>android.view.View.OnCreateContextMenuListener</code>, <code>android.view.Window.Callback</code>, <code>android.widget.AdapterView.OnItemSelectedListener</code>, <code>androidx.activity.contextaware.ContextAware</code>, <code>androidx.activity.OnBackPressedDispatcherOwner</code>, <code>androidx.activity.result.ActivityResultCaller</code>, <code>androidx.activity.result.ActivityResultRegistryOwner</code>, <code>androidx.appcompat.app.ActionBarDrawerToggle.DelegateProvider</code>, <code>androidx.appcompat.app.AppCompatCallback</code>, <code>androidx.core.app.ActivityCompat.OnRequestPermissionsResultCallback</code>, <code>androidx.core.app.ActivityCompat.RequestPermissionsRequestCodeValidator</code>, <code>androidx.core.app.OnMultiWindowModeChangedProvider</code>, <code>androidx.core.app.OnNewIntentProvider</code>, <code>androidx.core.app.OnPictureInPictureModeChangedProvider</code>, <code>androidx.core.app.TaskStackBuilder.SupportParentable</code>, <code>androidx.core.content.OnConfigurationChangedProvider</code>, <code>androidx.core.content.OnTrimMemoryProvider</code>, <code>androidx.core.view.KeyEventDispatcher.Component</code>, <code>androidx.core.view.MenuHost</code>, <code>androidx.lifecycle.HasDefaultViewModelProviderFactory</code>, <code>androidx.lifecycle.LifecycleOwner</code>, <code>androidx.lifecycle.ViewModelStoreOwner</code>, <code>androidx.savedstate.SavedStateRegistryOwner</code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CurrencyActivity</span>
-<span class="extends-implements">extends androidx.appcompat.app.AppCompatActivity</span></div>
+<span class="extends-implements">extends androidx.appcompat.app.AppCompatActivity
+implements android.widget.AdapterView.OnItemSelectedListener, <a href="ConversionDetailsFragment.OnConversionDeletedListener.html" title="interface in algonquin.cst2355.finalprojectandroid">ConversionDetailsFragment.OnConversionDeletedListener</a></span></div>
+<div class="block">The CurrencyActivity class represents the main activity of the currency conversion app.
+ It allows users to convert currencies, view saved conversions, and get updated conversions.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -120,7 +123,34 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>(package private) <a href="databinding/ActivityCurrencyBinding.html" title="class in algonquin.cst2355.finalprojectandroid.databinding">ActivityCurrencyBinding</a></code></div>
 <div class="col-second even-row-color"><code><a href="#binding" class="member-name-link">binding</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Represents the binding object for the CurrencyActivity layout.</div>
+</div>
+<div class="col-first odd-row-color"><code>(package private) <a href="data/CurrencyActivityViewModel.html" title="class in algonquin.cst2355.finalprojectandroid.data">CurrencyActivityViewModel</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#conversionModel" class="member-name-link">conversionModel</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">An instance of the CurrencyActivityViewModel used to handle data related to currency conversions.</div>
+</div>
+<div class="col-first even-row-color"><code>(package private) <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Conversion.html" title="class in algonquin.cst2355.finalprojectandroid">Conversion</a>&gt;</code></div>
+<div class="col-second even-row-color"><code><a href="#conversions" class="member-name-link">conversions</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">A list to store the Conversion objects representing the saved conversions.</div>
+</div>
+<div class="col-first odd-row-color"><code>(package private) <a href="ConversionDetailsFragment.html" title="class in algonquin.cst2355.finalprojectandroid">ConversionDetailsFragment</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#displayedFragment" class="member-name-link">displayedFragment</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">Represents the currently displayed ConversionDetailsFragment in the activity.</div>
+</div>
+<div class="col-first even-row-color"><code>(package private) <a href="ConversionDAO.html" title="interface in algonquin.cst2355.finalprojectandroid">ConversionDAO</a></code></div>
+<div class="col-second even-row-color"><code><a href="#myDAO" class="member-name-link">myDAO</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">The Data Access Object (DAO) for accessing the ConversionDatabase and performing database operations.</div>
+</div>
+<div class="col-first odd-row-color"><code>(package private) <a href="ConversionDatabase.html" title="class in algonquin.cst2355.finalprojectandroid">ConversionDatabase</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#myDB" class="member-name-link">myDB</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">The database instance for handling conversions database.</div>
+</div>
 </div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-android.app.Activity">Fields inherited from class&nbsp;android.app.Activity</h3>
@@ -157,9 +187,39 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreate(android.os.Bundle)" class="member-name-link">onCreate</a><wbr>(android.os.Bundle&nbsp;savedInstanceState)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onConversionDeleted(algonquin.cst2355.finalprojectandroid.Conversion)" class="member-name-link">onConversionDeleted</a><wbr>(<a href="Conversion.html" title="class in algonquin.cst2355.finalprojectandroid">Conversion</a>&nbsp;deletedConversion)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Callback method invoked when a Conversion is deleted.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreate(android.os.Bundle)" class="member-name-link">onCreate</a><wbr>(android.os.Bundle&nbsp;savedInstanceState)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called when the activity is created.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreateOptionsMenu(android.view.Menu)" class="member-name-link">onCreateOptionsMenu</a><wbr>(android.view.Menu&nbsp;menu)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Initialize the options menu for the activity.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onItemSelected(android.widget.AdapterView,android.view.View,int,long)" class="member-name-link">onItemSelected</a><wbr>(android.widget.AdapterView&lt;?&gt;&nbsp;parent,
+ android.view.View&nbsp;view,
+ int&nbsp;position,
+ long&nbsp;id)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Callback method triggered when an item in the AdapterView is selected.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onNothingSelected(android.widget.AdapterView)" class="member-name-link">onNothingSelected</a><wbr>(android.widget.AdapterView&lt;?&gt;&nbsp;parent)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Callback method triggered when nothing is selected in the AdapterView.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onOptionsItemSelected(android.view.MenuItem)" class="member-name-link">onOptionsItemSelected</a><wbr>(android.view.MenuItem&nbsp;item)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called when a menu item is selected from the options menu.</div>
+</div>
 </div>
 </div>
 </div>
@@ -177,7 +237,7 @@ loadScripts(document, 'script');</script>
 <code>dispatchKeyShortcutEvent, getExtraData, putExtraData, shouldDumpInternalState, superDispatchKeyEvent</code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-android.app.Activity">Methods inherited from class&nbsp;android.app.Activity</h3>
-<code>closeContextMenu, createPendingResult, dismissDialog, dismissKeyboardShortcutsHelper, dispatchGenericMotionEvent, dispatchPopulateAccessibilityEvent, dispatchTouchEvent, dispatchTrackballEvent, enterPictureInPictureMode, enterPictureInPictureMode, finish, finishActivity, finishActivityFromChild, finishAffinity, finishAfterTransition, finishAndRemoveTask, finishFromChild, getActionBar, getApplication, getCallingActivity, getCallingPackage, getChangingConfigurations, getComponentName, getContentScene, getContentTransitionManager, getCurrentFocus, getFragmentManager, getIntent, getLastNonConfigurationInstance, getLayoutInflater, getLoaderManager, getLocalClassName, getMaxNumPictureInPictureActions, getMediaController, getOnBackInvokedDispatcher, getParent, getParentActivityIntent, getPreferences, getReferrer, getRequestedOrientation, getSearchEvent, getSplashScreen, getSystemService, getTaskId, getTitle, getTitleColor, getVoiceInteractor, getVolumeControlStream, getWindow, getWindowManager, hasWindowFocus, isActivityTransitionRunning, isChangingConfigurations, isChild, isDestroyed, isFinishing, isImmersive, isInMultiWindowMode, isInPictureInPictureMode, isLaunchedFromBubble, isLocalVoiceInteractionSupported, isTaskRoot, isVoiceInteraction, isVoiceInteractionRoot, managedQuery, moveTaskToBack, navigateUpTo, navigateUpToFromChild, onActionModeFinished, onActionModeStarted, onActivityReenter, onApplyThemeResource, onAttachedToWindow, onAttachFragment, onChildTitleChanged, onContextItemSelected, onContextMenuClosed, onCreate, onCreateContextMenu, onCreateDescription, onCreateDialog, onCreateDialog, onCreateNavigateUpTaskStack, onCreateOptionsMenu, onCreatePanelView, onCreateThumbnail, onDetachedFromWindow, onEnterAnimationComplete, onGenericMotionEvent, onGetDirectActions, onKeyLongPress, onKeyMultiple, onKeyShortcut, onKeyUp, onLocalVoiceInteractionStarted, onLocalVoiceInteractionStopped, onNavigateUp, onNavigateUpFromChild, onOptionsItemSelected, onOptionsMenuClosed, onPerformDirectAction, onPictureInPictureRequested, onPictureInPictureUiStateChanged, onPostCreate, onPrepareDialog, onPrepareDialog, onPrepareNavigateUpTaskStack, onPrepareOptionsMenu, onProvideAssistContent, onProvideAssistData, onProvideKeyboardShortcuts, onProvideReferrer, onRestart, onRestoreInstanceState, onRestoreInstanceState, onSaveInstanceState, onSearchRequested, onSearchRequested, onTopResumedActivityChanged, onTouchEvent, onTrackballEvent, onUserInteraction, onUserLeaveHint, onVisibleBehindCanceled, onWindowAttributesChanged, onWindowFocusChanged, onWindowStartingActionMode, onWindowStartingActionMode, openContextMenu, overridePendingTransition, overridePendingTransition, postponeEnterTransition, recreate, registerActivityLifecycleCallbacks, registerComponentCallbacks, registerForContextMenu, releaseInstance, removeDialog, requestDragAndDropPermissions, requestPermissions, requestShowKeyboardShortcuts, requestVisibleBehind, requestWindowFeature, requireViewById, runOnUiThread, setActionBar, setContentTransitionManager, setDefaultKeyMode, setEnterSharedElementCallback, setExitSharedElementCallback, setFeatureDrawable, setFeatureDrawableAlpha, setFeatureDrawableResource, setFeatureDrawableUri, setFinishOnTouchOutside, setImmersive, setInheritShowWhenLocked, setIntent, setLocusContext, setMediaController, setPictureInPictureParams, setProgress, setProgressBarIndeterminate, setProgressBarIndeterminateVisibility, setProgressBarVisibility, setRecentsScreenshotEnabled, setRequestedOrientation, setResult, setResult, setSecondaryProgress, setShouldDockBigOverlays, setShowWhenLocked, setTaskDescription, setTitle, setTitle, setTitleColor, setTranslucent, setTurnScreenOn, setVisible, setVolumeControlStream, setVrModeEnabled, shouldDockBigOverlays, shouldShowRequestPermissionRationale, shouldUpRecreateTask, showAssist, showDialog, showDialog, showLockTaskEscapeMessage, startActionMode, startActionMode, startActivities, startActivities, startActivity, startActivity, startActivityFromChild, startActivityFromChild, startActivityFromFragment, startActivityFromFragment, startActivityIfNeeded, startActivityIfNeeded, startIntentSender, startIntentSender, startIntentSenderFromChild, startIntentSenderFromChild, startLocalVoiceInteraction, startLockTask, startManagingCursor, startNextMatchingActivity, startNextMatchingActivity, startPostponedEnterTransition, startSearch, stopLocalVoiceInteraction, stopLockTask, stopManagingCursor, takeKeyEvents, triggerSearch, unregisterActivityLifecycleCallbacks, unregisterComponentCallbacks, unregisterForContextMenu</code></div>
+<code>closeContextMenu, createPendingResult, dismissDialog, dismissKeyboardShortcutsHelper, dispatchGenericMotionEvent, dispatchPopulateAccessibilityEvent, dispatchTouchEvent, dispatchTrackballEvent, enterPictureInPictureMode, enterPictureInPictureMode, finish, finishActivity, finishActivityFromChild, finishAffinity, finishAfterTransition, finishAndRemoveTask, finishFromChild, getActionBar, getApplication, getCallingActivity, getCallingPackage, getChangingConfigurations, getComponentName, getContentScene, getContentTransitionManager, getCurrentFocus, getFragmentManager, getIntent, getLastNonConfigurationInstance, getLayoutInflater, getLoaderManager, getLocalClassName, getMaxNumPictureInPictureActions, getMediaController, getOnBackInvokedDispatcher, getParent, getParentActivityIntent, getPreferences, getReferrer, getRequestedOrientation, getSearchEvent, getSplashScreen, getSystemService, getTaskId, getTitle, getTitleColor, getVoiceInteractor, getVolumeControlStream, getWindow, getWindowManager, hasWindowFocus, isActivityTransitionRunning, isChangingConfigurations, isChild, isDestroyed, isFinishing, isImmersive, isInMultiWindowMode, isInPictureInPictureMode, isLaunchedFromBubble, isLocalVoiceInteractionSupported, isTaskRoot, isVoiceInteraction, isVoiceInteractionRoot, managedQuery, moveTaskToBack, navigateUpTo, navigateUpToFromChild, onActionModeFinished, onActionModeStarted, onActivityReenter, onApplyThemeResource, onAttachedToWindow, onAttachFragment, onChildTitleChanged, onContextItemSelected, onContextMenuClosed, onCreate, onCreateContextMenu, onCreateDescription, onCreateDialog, onCreateDialog, onCreateNavigateUpTaskStack, onCreatePanelView, onCreateThumbnail, onDetachedFromWindow, onEnterAnimationComplete, onGenericMotionEvent, onGetDirectActions, onKeyLongPress, onKeyMultiple, onKeyShortcut, onKeyUp, onLocalVoiceInteractionStarted, onLocalVoiceInteractionStopped, onNavigateUp, onNavigateUpFromChild, onOptionsMenuClosed, onPerformDirectAction, onPictureInPictureRequested, onPictureInPictureUiStateChanged, onPostCreate, onPrepareDialog, onPrepareDialog, onPrepareNavigateUpTaskStack, onPrepareOptionsMenu, onProvideAssistContent, onProvideAssistData, onProvideKeyboardShortcuts, onProvideReferrer, onRestart, onRestoreInstanceState, onRestoreInstanceState, onSaveInstanceState, onSearchRequested, onSearchRequested, onTopResumedActivityChanged, onTouchEvent, onTrackballEvent, onUserInteraction, onUserLeaveHint, onVisibleBehindCanceled, onWindowAttributesChanged, onWindowFocusChanged, onWindowStartingActionMode, onWindowStartingActionMode, openContextMenu, overridePendingTransition, overridePendingTransition, postponeEnterTransition, recreate, registerActivityLifecycleCallbacks, registerComponentCallbacks, registerForContextMenu, releaseInstance, removeDialog, requestDragAndDropPermissions, requestPermissions, requestShowKeyboardShortcuts, requestVisibleBehind, requestWindowFeature, requireViewById, runOnUiThread, setActionBar, setContentTransitionManager, setDefaultKeyMode, setEnterSharedElementCallback, setExitSharedElementCallback, setFeatureDrawable, setFeatureDrawableAlpha, setFeatureDrawableResource, setFeatureDrawableUri, setFinishOnTouchOutside, setImmersive, setInheritShowWhenLocked, setIntent, setLocusContext, setMediaController, setPictureInPictureParams, setProgress, setProgressBarIndeterminate, setProgressBarIndeterminateVisibility, setProgressBarVisibility, setRecentsScreenshotEnabled, setRequestedOrientation, setResult, setResult, setSecondaryProgress, setShouldDockBigOverlays, setShowWhenLocked, setTaskDescription, setTitle, setTitle, setTitleColor, setTranslucent, setTurnScreenOn, setVisible, setVolumeControlStream, setVrModeEnabled, shouldDockBigOverlays, shouldShowRequestPermissionRationale, shouldUpRecreateTask, showAssist, showDialog, showDialog, showLockTaskEscapeMessage, startActionMode, startActionMode, startActivities, startActivities, startActivity, startActivity, startActivityFromChild, startActivityFromChild, startActivityFromFragment, startActivityFromFragment, startActivityIfNeeded, startActivityIfNeeded, startIntentSender, startIntentSender, startIntentSenderFromChild, startIntentSenderFromChild, startLocalVoiceInteraction, startLockTask, startManagingCursor, startNextMatchingActivity, startNextMatchingActivity, startPostponedEnterTransition, startSearch, stopLocalVoiceInteraction, stopLockTask, stopManagingCursor, takeKeyEvents, triggerSearch, unregisterActivityLifecycleCallbacks, unregisterComponentCallbacks, unregisterForContextMenu</code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-android.view.ContextThemeWrapper">Methods inherited from class&nbsp;android.view.ContextThemeWrapper</h3>
 <code>applyOverrideConfiguration, getAssets, getTheme, setTheme</code></div>
@@ -208,6 +268,44 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="binding">
 <h3>binding</h3>
 <div class="member-signature"><span class="return-type"><a href="databinding/ActivityCurrencyBinding.html" title="class in algonquin.cst2355.finalprojectandroid.databinding">ActivityCurrencyBinding</a></span>&nbsp;<span class="element-name">binding</span></div>
+<div class="block">Represents the binding object for the CurrencyActivity layout.
+ It provides access to the views defined in the layout XML file.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="conversions">
+<h3>conversions</h3>
+<div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="Conversion.html" title="class in algonquin.cst2355.finalprojectandroid">Conversion</a>&gt;</span>&nbsp;<span class="element-name">conversions</span></div>
+<div class="block">A list to store the Conversion objects representing the saved conversions.
+ It is initialized as an empty ArrayList.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="conversionModel">
+<h3>conversionModel</h3>
+<div class="member-signature"><span class="return-type"><a href="data/CurrencyActivityViewModel.html" title="class in algonquin.cst2355.finalprojectandroid.data">CurrencyActivityViewModel</a></span>&nbsp;<span class="element-name">conversionModel</span></div>
+<div class="block">An instance of the CurrencyActivityViewModel used to handle data related to currency conversions.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="myDB">
+<h3>myDB</h3>
+<div class="member-signature"><span class="return-type"><a href="ConversionDatabase.html" title="class in algonquin.cst2355.finalprojectandroid">ConversionDatabase</a></span>&nbsp;<span class="element-name">myDB</span></div>
+<div class="block">The database instance for handling conversions database.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="myDAO">
+<h3>myDAO</h3>
+<div class="member-signature"><span class="return-type"><a href="ConversionDAO.html" title="interface in algonquin.cst2355.finalprojectandroid">ConversionDAO</a></span>&nbsp;<span class="element-name">myDAO</span></div>
+<div class="block">The Data Access Object (DAO) for accessing the ConversionDatabase and performing database operations.</div>
+</section>
+</li>
+<li>
+<section class="detail" id="displayedFragment">
+<h3>displayedFragment</h3>
+<div class="member-signature"><span class="return-type"><a href="ConversionDetailsFragment.html" title="class in algonquin.cst2355.finalprojectandroid">ConversionDetailsFragment</a></span>&nbsp;<span class="element-name">displayedFragment</span></div>
+<div class="block">Represents the currently displayed ConversionDetailsFragment in the activity.</div>
 </section>
 </li>
 </ul>
@@ -233,12 +331,92 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
+<section class="detail" id="onCreateOptionsMenu(android.view.Menu)">
+<h3>onCreateOptionsMenu</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">onCreateOptionsMenu</span><wbr><span class="parameters">(android.view.Menu&nbsp;menu)</span></div>
+<div class="block">Initialize the options menu for the activity.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code>onCreateOptionsMenu</code>&nbsp;in class&nbsp;<code>android.app.Activity</code></dd>
+<dt>Parameters:</dt>
+<dd><code>menu</code> - The options menu in which the menu items are placed.</dd>
+<dt>Returns:</dt>
+<dd>true to display the menu, false otherwise.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="onOptionsItemSelected(android.view.MenuItem)">
+<h3>onOptionsItemSelected</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">onOptionsItemSelected</span><wbr><span class="parameters">(@NonNull
+ android.view.MenuItem&nbsp;item)</span></div>
+<div class="block">Called when a menu item is selected from the options menu.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code>onOptionsItemSelected</code>&nbsp;in class&nbsp;<code>android.app.Activity</code></dd>
+<dt>Parameters:</dt>
+<dd><code>item</code> - The selected menu item.</dd>
+<dt>Returns:</dt>
+<dd>true to indicate that the event has been consumed and no further processing is needed, false otherwise.</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="onCreate(android.os.Bundle)">
 <h3>onCreate</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onCreate</span><wbr><span class="parameters">(android.os.Bundle&nbsp;savedInstanceState)</span></div>
+<div class="block">Called when the activity is created. This method initializes the user interface and sets up various components
+ for the currency conversion application.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code>onCreate</code>&nbsp;in class&nbsp;<code>androidx.fragment.app.FragmentActivity</code></dd>
+<dt>Parameters:</dt>
+<dd><code>savedInstanceState</code> - A Bundle containing the saved state of the activity, or null if there is no saved state.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="onConversionDeleted(algonquin.cst2355.finalprojectandroid.Conversion)">
+<h3>onConversionDeleted</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onConversionDeleted</span><wbr><span class="parameters">(<a href="Conversion.html" title="class in algonquin.cst2355.finalprojectandroid">Conversion</a>&nbsp;deletedConversion)</span></div>
+<div class="block">Callback method invoked when a Conversion is deleted.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code><a href="ConversionDetailsFragment.OnConversionDeletedListener.html#onConversionDeleted(algonquin.cst2355.finalprojectandroid.Conversion)">onConversionDeleted</a></code>&nbsp;in interface&nbsp;<code><a href="ConversionDetailsFragment.OnConversionDeletedListener.html" title="interface in algonquin.cst2355.finalprojectandroid">ConversionDetailsFragment.OnConversionDeletedListener</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>deletedConversion</code> - The Conversion object that was deleted.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="onItemSelected(android.widget.AdapterView,android.view.View,int,long)">
+<h3>onItemSelected</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onItemSelected</span><wbr><span class="parameters">(android.widget.AdapterView&lt;?&gt;&nbsp;parent,
+ android.view.View&nbsp;view,
+ int&nbsp;position,
+ long&nbsp;id)</span></div>
+<div class="block">Callback method triggered when an item in the AdapterView is selected.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code>onItemSelected</code>&nbsp;in interface&nbsp;<code>android.widget.AdapterView.OnItemSelectedListener</code></dd>
+<dt>Parameters:</dt>
+<dd><code>parent</code> - The AdapterView where the selection happened (e.g., Spinner).</dd>
+<dd><code>view</code> - The View within the AdapterView that was clicked (the selected item View).</dd>
+<dd><code>position</code> - The position of the selected item in the AdapterView.</dd>
+<dd><code>id</code> - The row id of the selected item.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="onNothingSelected(android.widget.AdapterView)">
+<h3>onNothingSelected</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onNothingSelected</span><wbr><span class="parameters">(android.widget.AdapterView&lt;?&gt;&nbsp;parent)</span></div>
+<div class="block">Callback method triggered when nothing is selected in the AdapterView.</div>
+<dl class="notes">
+<dt>Specified by:</dt>
+<dd><code>onNothingSelected</code>&nbsp;in interface&nbsp;<code>android.widget.AdapterView.OnItemSelectedListener</code></dd>
+<dt>Parameters:</dt>
+<dd><code>parent</code> - The AdapterView where the selection is empty (e.g., Spinner).</dd>
 </dl>
 </section>
 </li>

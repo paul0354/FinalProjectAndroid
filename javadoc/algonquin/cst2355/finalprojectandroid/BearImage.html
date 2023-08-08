@@ -77,6 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">BearImage</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">Represents a bear image. Contains functionality to retrieve the bear image's
+ file name, width and height (in pixels), and size in bytes.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -90,20 +92,30 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>protected int</code></div>
-<div class="col-second even-row-color"><code><a href="#height" class="member-name-link">height</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-second even-row-color"><code><a href="#byteSize" class="member-name-link">byteSize</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">The size of the bear image in bytes.</div>
+</div>
 <div class="col-first odd-row-color"><code>protected int</code></div>
-<div class="col-second odd-row-color"><code><a href="#id" class="member-name-link">id</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color"><code><a href="#imageName" class="member-name-link">imageName</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>protected boolean</code></div>
-<div class="col-second odd-row-color"><code><a href="#wasCropped" class="member-name-link">wasCropped</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-second odd-row-color"><code><a href="#height" class="member-name-link">height</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">The height of the bear image in pixels.</div>
+</div>
+<div class="col-first even-row-color"><code>protected int</code></div>
+<div class="col-second even-row-color"><code><a href="#id" class="member-name-link">id</a></code></div>
+<div class="col-last even-row-color">
+<div class="block">The id of the bear image.</div>
+</div>
+<div class="col-first odd-row-color"><code>protected <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#imageName" class="member-name-link">imageName</a></code></div>
+<div class="col-last odd-row-color">
+<div class="block">The file name of the bear image.</div>
+</div>
 <div class="col-first even-row-color"><code>protected int</code></div>
 <div class="col-second even-row-color"><code><a href="#width" class="member-name-link">width</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">The width of the bear image in pixels.</div>
+</div>
 </div>
 </section>
 </li>
@@ -115,11 +127,13 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,int,int,boolean)" class="member-name-link">BearImage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;imageName,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.lang.String,int,int)" class="member-name-link">BearImage</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;imageName,
  int&nbsp;width,
- int&nbsp;height,
- boolean&nbsp;wasCropped)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+ int&nbsp;height)</code></div>
+<div class="col-last even-row-color">
+<div class="block">Creates a new bear image using a provided file name, width, and
+ height.</div>
+</div>
 </div>
 </section>
 </li>
@@ -135,14 +149,25 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHeight()" class="member-name-link">getHeight</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getImageName()" class="member-name-link">getImageName</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWidth()" class="member-name-link">getWidth</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getByteSize()" class="member-name-link">getByteSize</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Retrieves the bear image's size.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getHeight()" class="member-name-link">getHeight</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Retrieves the bear image's height.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getImageName()" class="member-name-link">getImageName</a>()</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Retrieves the bear image's file name.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWidth()" class="member-name-link">getWidth</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Retrieves the bear image's width.</div>
+</div>
 </div>
 </div>
 </div>
@@ -164,30 +189,35 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="id">
 <h3>id</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">id</span></div>
+<div class="block">The id of the bear image.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="imageName">
 <h3>imageName</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">imageName</span></div>
+<div class="block">The file name of the bear image.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="width">
 <h3>width</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">width</span></div>
+<div class="block">The width of the bear image in pixels.</div>
 </section>
 </li>
 <li>
 <section class="detail" id="height">
 <h3>height</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">height</span></div>
+<div class="block">The height of the bear image in pixels.</div>
 </section>
 </li>
 <li>
-<section class="detail" id="wasCropped">
-<h3>wasCropped</h3>
-<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">wasCropped</span></div>
+<section class="detail" id="byteSize">
+<h3>byteSize</h3>
+<div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">byteSize</span></div>
+<div class="block">The size of the bear image in bytes.</div>
 </section>
 </li>
 </ul>
@@ -199,12 +229,20 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(java.lang.String,int,int,boolean)">
+<section class="detail" id="&lt;init&gt;(java.lang.String,int,int)">
 <h3>BearImage</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">BearImage</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;imageName,
  int&nbsp;width,
- int&nbsp;height,
- boolean&nbsp;wasCropped)</span></div>
+ int&nbsp;height)</span></div>
+<div class="block">Creates a new bear image using a provided file name, width, and
+ height. Establishes byteSize using a calculation involving
+ width and height.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>imageName</code> - The file name for the bear image.</dd>
+<dd><code>width</code> - The width of the bear image in pixels.</dd>
+<dd><code>height</code> - The height of the bear image in pixels.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -219,18 +257,44 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getImageName()">
 <h3>getImageName</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getImageName</span>()</div>
+<div class="block">Retrieves the bear image's file name.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>imageName The bear image's file name.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getWidth()">
 <h3>getWidth</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getWidth</span>()</div>
+<div class="block">Retrieves the bear image's width.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>width The bear image's width in pixels.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getHeight()">
 <h3>getHeight</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getHeight</span>()</div>
+<div class="block">Retrieves the bear image's height.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>height The bear image's height in pixels.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getByteSize()">
+<h3>getByteSize</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getByteSize</span>()</div>
+<div class="block">Retrieves the bear image's size.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>byteSize The bear image's size in bytes.</dd>
+</dl>
 </section>
 </li>
 </ul>
