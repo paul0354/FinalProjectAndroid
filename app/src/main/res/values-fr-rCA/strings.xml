@@ -30,4 +30,61 @@
     <string name="flight_saved_button">Voir Les Vols Enregistrés</string>
     <string name="flight_help_button">Aide</string>
     <string name="flight_help">Pour utiliser cette application, tapez un code d\'aéroport dans la barre de recherche. Lorsque vous cliquez sur le bouton de recherche, une liste des vols au départ de cet aéroport apparaîtra, ainsi que leur aéroport de destination. \n\nPour enregistrer un vol, cliquez sur l\'un des vols de la liste, puis cliquez sur le bouton Ajouter aux vols enregistrés.\n\nPour afficher vos vols enregistrés, cliquez sur les trois points, puis cliquez sur le bouton Afficher les vols enregistrés.\n\nPour supprimer un vol enregistré, cliquez sur l\'un de vos vols enregistrés, puis cliquez sur le bouton Supprimer des vols enregistrés.</string>
+    <string name="bear_h">H (px)</string>
+    <string name="bear_h_hint">Hauter</string>
+    <string name="bear_w">I (px)</string>
+    <string name="bear_w_hint">Largeur</string>
+    <string name="make_img">G\u00E9n\u00E9rer L\'Image</string>
+    <string name="view_imgs">Voir Toutes</string>
+    <string name="save_img">Enregistrer L\'Image</string>
+    <string name="curr_img_text">Image Actuelle</string>
+    <string name="save_to_db">ENREGISTRER</string>
+    <string name="delete">SUPPRIMER?</string>
+    <string name="del_bear_sb">Vous avez supprim\u00E9 l\'image en place # </string>
+    <string name="no_gen_bear_toast">D\u00E9sol\u00E9! Vous n\'avez pas g\u00E9n\u00E9r\u00E9 d\'image.</string>
+    <string name="save_success_toast">Image enregistr\u00E9e</string>
+    <string name="size_in_bytes">La taille de l\'image en octets</string>
+    <string name="del_bear_alert">"Voulez-vous supprimer cette image: "</string>
+    <string name="no">Non</string>
+    <string name="yes">Oui</string>
+    <string name="size_too_big_toast">D\u00E9sol\u00E9! Hauteur et largeur ne peut pas d\u00E9passer 5000.</string>
+    <string name="provide_size_toast">La hauteur ou la largeur sont manquantes ou n\u00E9gatives</string>
+    <string name="help_blurb">
+        H: hauteur en px, I: largeur en px&lt;br&gt;&lt;/br&gt;
+        Entrez la taille de l\'image et appuyer sur &lt;i&gt;G\u00E9n\u00E9rateur d\'Ours.&lt;/i&gt;&lt;br&gt;&lt;/br&gt;
+        &lt;b&gt;La hauteur ou la largeur ne peux pas d\u00E9passer 5000.&lt;/b&gt;&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+        Appuyer &lt;i&gt;Enregistrer L\'image&lt;/i&gt; pour enregistrer l\'image g\u00E9n\u00E9r\u00E9.&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+        Appoyer &lt;i&gt;Voir Toutes&lt;/i&gt; pour voir toutes des images.&lt;br&gt;&lt;/br&gt;&lt;br&gt;&lt;/br&gt;
+        &lt;u&gt;Apr\u00E9s appuyer Voir Toutes&lt;/u&gt;&lt;br&gt;&lt;/br&gt;
+        Appuyer une image pour voir d\u00E9tails suppl\u00E9mentaires, et pour supprimer l\'image.
+    </string>
+    <string name="about_bear">\u00C0 propos de l\'application</string>
+    <string name="bear_menu_help">Aide</string>
+    <string name="Display_All">Afficher tout</string>
+    <string name="Clear_All">Effacer tout</string>
+    <string name="Convert">Convertir</string>
+    <string name="Delete">Supprimer</string>
+    <string name="Save">Sauvegarder</string>
+    <string name="about_converter">A propo du convertisseur de maonnaie</string>
+    <string name="help_currency">&lt;b&gt;Comment Utiliser l\'Application de Convertisseur de Devises :&lt;/b&gt;&lt;br&gt;&lt;br&gt;
+&lt;b&gt;1. Sélectionner la Devise :&lt;/b&gt;&lt;br&gt;
+Choisissez les devises pour la conversion.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;2. Effectuer la Conversion :&lt;/b&gt;&lt;br&gt;
+Cliquez sur "Convertir" pour obtenir le résultat.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;3. Sauvegarder la Conversion :&lt;/b&gt;&lt;br&gt;
+Enregistrez la conversion pour plus tard.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;4. Voir les Conversions Sauvegardées :&lt;/b&gt;&lt;br&gt;
+Consultez toutes les conversions enregistrées.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;5. Supprimer les Conversions Sauvegardées :&lt;/b&gt;&lt;br&gt;
+Retirez les conversions de la liste.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;6. Mettre à Jour les Conversions :&lt;/b&gt;&lt;br&gt;
+Les conversions enregistrées se mettent automatiquement à jour.&lt;br&gt;&lt;br&gt;
+
+Profitez de votre Convertisseur de Devises !&lt;/string&gt;
+    </string>
 </resources>
