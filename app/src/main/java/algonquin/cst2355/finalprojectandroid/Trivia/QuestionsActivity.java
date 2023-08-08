@@ -34,6 +34,10 @@ import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScoreDao;
 import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScoreDatabase;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityTriviaBinding;
 
+
+/**
+ * An activity that displays trivia questions and handles user interactions for answering and submitting the quiz.
+ */
 public class QuestionsActivity extends AppCompatActivity {
 
     private ActivityTriviaBinding binding;
@@ -47,12 +51,15 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTriviaBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_questions);
+
+        // Retrieve the category from the previous intent.
         String category = getIntent().getStringExtra("category");
 
         SharedPreferences sharedPreferences = getSharedPreferences("myPrefs", MODE_PRIVATE);
 
 
         EditText numOfQuestions = binding.editTextNumber;
+        // Set the number of questions based on user preference.
         numOfQuestions.setText(sharedPreferences.getString("numOfQuestions", "2"));
 
         int numberOfQuestions = Integer.parseInt(numOfQuestions.getText().toString());
@@ -61,6 +68,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         Button submitButton = findViewById(R.id.submit_result);
 
+        // On click listener to evaluate the quiz once the user submits.
         submitButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -72,7 +80,12 @@ public class QuestionsActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Fetches trivia questions from the specified category.
+     *
+     * @param category          The category of trivia questions to fetch.
+     * @param numberOfQuestions The number of trivia questions to fetch.
+     */
     private void fetchQuestions(String category, int numberOfQuestions) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://the-trivia-api.com/api/questions?categories=" + category + "&limit=" + numberOfQuestions;
@@ -80,6 +93,8 @@ public class QuestionsActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
+
+                // Parse the JSON response to get the list of questions.
                 questionList =
                         gson.fromJson(response, new TypeToken<List<QuestionDetails>>() {
                         }.getType());
@@ -92,7 +107,12 @@ public class QuestionsActivity extends AppCompatActivity {
         }, error -> System.out.println("Unable to find questions"));
         queue.add(stringRequest);
     }
-
+    /**
+     * Calculates the score based on user's responses.
+     *
+     * @param questions List of trivia questions.
+     * @return Score based on correct answers.
+     */
     private int calculateScore(List<QuestionDetails> questions) {
         AtomicInteger score = new AtomicInteger();
         questions.forEach(question -> {
@@ -102,7 +122,11 @@ public class QuestionsActivity extends AppCompatActivity {
         });
         return score.get();
     }
-
+    /**
+     * Displays a dialog showing the user's score and prompts for the user's name.
+     *
+     * @param score The score to display.
+     */
     private void createDialog(int score) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(QuestionsActivity.this);
 
