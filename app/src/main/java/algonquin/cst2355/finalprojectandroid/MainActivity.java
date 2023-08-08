@@ -1,7 +1,6 @@
 package algonquin.cst2355.finalprojectandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;

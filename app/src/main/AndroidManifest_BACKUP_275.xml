@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -10,13 +14,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FinalProjectAndroid"
+        android:theme="@style/Base.Theme.FinalProjectAndroid"
         tools:targetApi="31">
+        <activity
+<<<<<<< HEAD
+            android:name=".BearImage"
+=======
+            android:name=".flight.SavedFlightsActivity"
+>>>>>>> AustinBranch
+            android:exported="false" />
         <activity
             android:name=".TriviaActivity"
             android:exported="false" />
         <activity
-            android:name=".FlightActivity"
+            android:name=".flight.FlightActivity"
             android:exported="false" />
         <activity
             android:name=".CurrencyActivity"

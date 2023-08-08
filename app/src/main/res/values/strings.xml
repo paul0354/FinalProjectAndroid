@@ -5,6 +5,30 @@
     <string name="currency_app_name">Currency Converter</string>
     <string name="trivia_app_name">Trivia Tester</string>
     <string name="welcome_msg">Welcome to our Android Suite</string>
+    <string name="saved_flights_name">Saved Flights</string>
+    <string name="flight_hint">Enter an airport code...</string>
+    <string name="search_flight">Search</string>
+    <string name="flight_joiner"> from </string>
+    <string name="flight_flight">Flight </string>
+    <string name="flight_des">Destination airport = </string>
+    <string name="flight_gate">Gate = </string>
+    <string name="flight_delay">Delay = </string>
+    <string name="flight_ter">Terminal = </string>
+    <string name="flight_add">Flight added to your saved flights.</string>
+    <string name="flight_prompt">Would you like to remove this from your saved flights?</string>
+    <string name="flight_question">Question:</string>
+    <string name="flight_yes">Yes</string>
+    <string name="flight_remove">Flight removed from your saved flights.</string>
+    <string name="flight_no">No</string>
+    <string name="flight_searching">Searching Airport </string>
+    <string name="flight_invalid">Invalid airport code.</string>
+    <string name="flight_help">To use this app, type an airport code into the searchbar. When you click the search button, a list of flights from that airport will appear, along with their destination airport. \n\nTo save a flight, click on one of the flights in the list, then click on the Add To Saved Flights button.\n\nTo view your saved flights, click on the three dots, then click on the View Saved Flights button.\n\nTo delete a saved flight, click on one of your saved flights, then click on the Remove From Saved Flights button.</string>
+    <string name="flight_help_title">"How To Use The Flight Tracker"</string>
+    <string name="flight_confirm">OK</string>
+    <string name="flight_add_button">Add To Saved Flights</string>
+    <string name="flight_remove_button">Remove From Saved Flights</string>
+    <string name="flight_saved_button">View Saved Flights</string>
+    <string name="flight_help_button">Help</string>
     <string name="Display_All"> Display All</string>
     <string name="Clear_All">Clear All</string>
     <string name="Convert">Convert</string>

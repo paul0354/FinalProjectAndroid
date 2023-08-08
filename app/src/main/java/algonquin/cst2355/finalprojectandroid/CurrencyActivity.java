@@ -38,6 +38,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import algonquin.cst2355.finalprojectandroid.data.CurrencyActivityViewModel;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityCurrencyBinding;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
