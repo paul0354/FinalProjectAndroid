@@ -87,4 +87,7 @@ Les conversions enregistrées se mettent automatiquement à jour.&lt;br&gt;&lt;b
 
 Profitez de votre Convertisseur de Devises !&lt;/string&gt;
     </string>
+
+    <string name="select_category">Sélectionner une catégorie</string>
+    <string name="action_help">aide</string>
 </resources>

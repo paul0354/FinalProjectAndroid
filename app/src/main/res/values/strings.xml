@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Converter</string>
+    <string name="app_name">Android Final Project</string>
     <string name="bear_app_name">Bear Image Generator</string>
     <string name="flight_app_name">Flight Tracker</string>
     <string name="currency_app_name">Currency Converter</string>
@@ -90,4 +90,7 @@ Remove conversions from the list.&lt;br&gt;&lt;br&gt;
 Saved conversions will update automatically.&lt;br&gt;&lt;br&gt;
 
 Enjoy using the Currency Converter!&lt;/string&gt;</string>
+    <string name="select_category">Select a category</string>
+    <string name="action_help">Help</string>
+
 </resources>

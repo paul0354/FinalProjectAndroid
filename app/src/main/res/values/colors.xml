@@ -6,4 +6,6 @@
     <color name="task_primary">#4B1D3F</color>
     <color name="task_secondary">#D62246</color>
     <color name="background">#D4F4DD</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 </resources>
