@@ -8,13 +8,19 @@
     tools:context=".Trivia.QuestionsActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/questiontool"
+        android:id="@+id/question_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:titleTextColor="@color/secondary"
-        android:background="@color/primary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="@style/ToolbarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Group 2 - 022"
+        app:titleTextColor="@color/background"
+        app:popupTheme="@style/toolBarPopUpTheme"
+        />
 
 
     <androidx.core.widget.NestedScrollView
@@ -46,7 +52,7 @@
                 android:contentDescription="Submit quiz result"
                 android:focusable="true"
                 android:importantForAccessibility="yes"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:textSize="14dp"
                 android:textStyle="bold"
                 app:cornerRadius="20dp" />
