@@ -144,7 +144,7 @@ public class FlightActivity extends AppCompatActivity {
             else {
                 //lets the user know that flights are being searched for
                 Toast.makeText(this,
-                        getString(R.string.flight_searching) + binding.inputCode.getText().toString(),
+                        getString(R.string.flight_searching) + " " + binding.inputCode.getText().toString(),
                         Toast.LENGTH_SHORT).show();
 
                 String api = "70ecb37f100c89920ba0342196798895";
@@ -165,11 +165,18 @@ public class FlightActivity extends AppCompatActivity {
                             JSONObject dep = data.getJSONObject(i).getJSONObject("departure");
                             JSONObject arr = data.getJSONObject(i).getJSONObject("arrival");
 
-                            String fN = data.getJSONObject(i).getJSONObject("flight").getString("number") + " " + getString(R.string.flight_joiner) + " " + airportCode.toUpperCase();
+                            //String fN = data.getJSONObject(i).getJSONObject("flight").getString("number") + " " + getString(R.string.flight_joiner) + " " + airportCode.toUpperCase();
+                            String fN = data.getJSONObject(i).getJSONObject("flight").getString("number");
+                            if(fN.equals("null")) { fN = "N/A"; }
+                            fN = fN + " " + getString(R.string.flight_joiner) + " " + airportCode.toUpperCase();
                             String des = arr.getString("iata");
+                            if(des.equals("null")) { des = "N/A";}
                             String ter = dep.getString("terminal");
+                            if(ter.equals("null")) { ter = "N/A"; }
                             String gat = dep.getString("gate");
+                            if(gat.equals("null")) { gat = "N/A"; }
                             String del = dep.getString("delay");
+                            if(del.equals("null")) { del = "N/A"; }
 
                             FlightInfo f = new FlightInfo(fN, des, ter, gat, del);
                             flights.add(f);
