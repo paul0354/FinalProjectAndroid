@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Final Project</string>
+    <string name="bear_app_name">générateur d’image d’ours</string>
+    <string name="flight_app_name">traqueur de vol</string>
+    <string name="currency_app_name">Convertisseur de devises</string>
+    <string name="trivia_app_name">Testeur de trivia</string>
+    <string name="welcome_msg">bienvenue dans notre suite Android</string>
+    <string name="select_category">Sélectionner une catégorie</string>
+    <string name="action_help">aide</string>
+</resources>

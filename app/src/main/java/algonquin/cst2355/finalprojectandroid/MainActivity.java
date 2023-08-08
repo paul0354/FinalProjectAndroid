@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import algonquin.cst2355.finalprojectandroid.Trivia.TriviaActivity;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
