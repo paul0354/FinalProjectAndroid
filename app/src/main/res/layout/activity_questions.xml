@@ -52,7 +52,7 @@
                 android:contentDescription="Submit quiz result"
                 android:focusable="true"
                 android:importantForAccessibility="yes"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:textSize="14dp"
                 android:textStyle="bold"
                 app:cornerRadius="20dp" />

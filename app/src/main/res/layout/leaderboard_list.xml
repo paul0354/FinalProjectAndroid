@@ -14,7 +14,7 @@
         android:layout_marginTop="17dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="17dp"
-        android:text="Player Name"
+        android:text="@string/Player_name"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/scoreTextView"

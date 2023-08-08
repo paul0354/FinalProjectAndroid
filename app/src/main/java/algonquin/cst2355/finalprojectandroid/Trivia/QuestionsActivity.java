@@ -33,13 +33,26 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import algonquin.cst2355.finalprojectandroid.BearActivity;
+import algonquin.cst2355.finalprojectandroid.CurrencyActivity;
+import algonquin.cst2355.finalprojectandroid.FlightActivity;
 import algonquin.cst2355.finalprojectandroid.MainActivity;
 import algonquin.cst2355.finalprojectandroid.R;
 import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScore;
 import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScoreDao;
 import algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScoreDatabase;
+import algonquin.cst2355.finalprojectandroid.TriviaActivity;
 import algonquin.cst2355.finalprojectandroid.databinding.ActivityTriviaBinding;
 
+
+/**
+ * Represents the Questions activity screen that displays trivia questions based on
+ * user's category selection and collects their answers. Users can also view their scores
+ * and submit them to the leaderboard.
+ *
+ * @author Your Name
+ * @version 1.0
+ */
 public class QuestionsActivity extends AppCompatActivity {
 
     private ActivityTriviaBinding binding;
@@ -48,6 +61,12 @@ public class QuestionsActivity extends AppCompatActivity {
 
     UserScoreDao userScoreDao;
 
+    /**
+     * Initializes the Questions activity. This method sets up UI components, fetches trivia
+     * questions based on user preferences, and handles events for submitting scores.
+     *
+     * @param savedInstanceState Represents the state of the activity in case of restarts.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +107,13 @@ public class QuestionsActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * Fetches trivia questions using the provided category and number of questions. The
+     * fetched questions are then displayed in a RecyclerView.
+     *
+     * @param category The trivia category chosen by the user.
+     * @param numberOfQuestions The number of questions specified by the user.
+     */
     private void fetchQuestions(String category, int numberOfQuestions) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://the-trivia-api.com/api/questions?categories=" + category + "&limit=" + numberOfQuestions;
@@ -108,7 +133,12 @@ public class QuestionsActivity extends AppCompatActivity {
         }, error -> System.out.println("Unable to find questions"));
         queue.add(stringRequest);
     }
-
+    /**
+     * Calculates the user's score based on their answers to the trivia questions.
+     *
+     * @param questions List of questions along with the user's answers.
+     * @return int The user's score.
+     */
     private int calculateScore(List<QuestionDetails> questions) {
         AtomicInteger score = new AtomicInteger();
         questions.forEach(question -> {
@@ -118,7 +148,12 @@ public class QuestionsActivity extends AppCompatActivity {
         });
         return score.get();
     }
-
+    /**
+     * Creates and displays a dialog showing the user's score and prompting them to
+     * submit their score with a name. Upon submission, the score is saved in the database.
+     *
+     * @param score The user's score.
+     */
     private void createDialog(int score) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(QuestionsActivity.this);
 
@@ -155,23 +190,51 @@ public class QuestionsActivity extends AppCompatActivity {
         });
         dialogBuilder.show();
     }
+
+    /**
+     * Creates and displays a help dialog for the user, providing information about
+     * how to answer the trivia questions and submit scores.
+     */
     private void createHelpDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(QuestionsActivity.this);
         builder.setTitle("Help");
         builder.setMessage("Enter Number of Question in text Field and select the Category");
         builder.create().show();
     }
-
+    /**
+     * Handles toolbar menu item selections. This includes launching other activities
+     * or displaying the help dialog based on the selected menu item.
+     *
+     * @param item The menu item that was selected.
+     * @return boolean Returns true if the event was handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.toolbar_help) {
             createHelpDialog();
             return true;
+        }else if (id == R.id.toolbar_bear)  {
+            Intent intent = new Intent(QuestionsActivity.this, BearActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.toolbar_currency)  {
+            Intent intent = new Intent(QuestionsActivity.this, CurrencyActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.toolbar_flight)  {
+            Intent intent = new Intent(QuestionsActivity.this, FlightActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
-    }
 
+    }
+    /**
+     * Inflates the toolbar menu.
+     *
+     * @param menu The options menu in which items are placed.
+     * @return boolean Returns true if the menu should be displayed.
+     */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
