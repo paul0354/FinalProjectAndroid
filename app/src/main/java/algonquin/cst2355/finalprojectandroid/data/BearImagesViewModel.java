@@ -9,6 +9,8 @@ import algonquin.cst2355.finalprojectandroid.BearImage;
 
 /**
  * A class representing the live and mutable viewModel of the bear images list.
+ * @author Julia Paulson
+ * @version 1.0
  */
 public class BearImagesViewModel extends ViewModel {
     /**

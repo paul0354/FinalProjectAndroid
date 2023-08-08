@@ -79,6 +79,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">UserScoreDatabase</span>
 <span class="extends-implements">extends androidx.room.RoomDatabase</span></div>
+<div class="block">The Room Database class for storing user scores.
+ It serves as an access point to the underlying SQLite database.
+ The database is only created once and then reused to avoid the overhead of opening a connection every time.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -126,10 +129,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="UserScoreDatabase.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDatabase</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getDatabase(android.content.Context)" class="member-name-link">getDatabase</a><wbr>(android.content.Context&nbsp;context)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Gets the singleton instance of the UserScoreDatabase.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>abstract <a href="UserScoreDao.html" title="interface in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDao</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserScoreDao()" class="member-name-link">getUserScoreDao</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Returns an instance of the UserScoreDao to perform CRUD operations.</div>
+</div>
 </div>
 </div>
 </div>
@@ -168,12 +175,25 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getUserScoreDao()">
 <h3>getUserScoreDao</h3>
 <div class="member-signature"><span class="modifiers">public abstract</span>&nbsp;<span class="return-type"><a href="UserScoreDao.html" title="interface in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDao</a></span>&nbsp;<span class="element-name">getUserScoreDao</span>()</div>
+<div class="block">Returns an instance of the UserScoreDao to perform CRUD operations.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>UserScoreDao object</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getDatabase(android.content.Context)">
 <h3>getDatabase</h3>
 <div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type"><a href="UserScoreDatabase.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDatabase</a></span>&nbsp;<span class="element-name">getDatabase</span><wbr><span class="parameters">(android.content.Context&nbsp;context)</span></div>
+<div class="block">Gets the singleton instance of the UserScoreDatabase.
+ If no instance exists, a new one is created. Otherwise, the existing instance is returned.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>context</code> - the application context</dd>
+<dt>Returns:</dt>
+<dd>UserScoreDatabase singleton instance</dd>
+</dl>
 </section>
 </li>
 </ul>

@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * An interface for accessing and manipulating the bear image database.
+ * @author Julia Paulson
+ * @version 1.0
  */
 @Dao
 public interface BearImageDAO {

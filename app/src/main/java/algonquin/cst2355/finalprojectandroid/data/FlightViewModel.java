@@ -1,9 +1,11 @@
-package algonquin.cst2355.finalprojectandroid;
+package algonquin.cst2355.finalprojectandroid.data;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
+
+import algonquin.cst2355.finalprojectandroid.FlightInfo;
 
 /**
  * View model for the flight activity

@@ -82,6 +82,7 @@ loadScripts(document, 'script');</script>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">QuestionDetails</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></span></div>
+<div class="block">Represents the details of a trivia question, including its content, options, and other related data.</div>
 <dl class="notes">
 <dt>See Also:</dt>
 <dd>
@@ -337,132 +338,220 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="getCategory()">
 <h3>getCategory</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getCategory</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the category of the trivia question.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setCategory(java.lang.String)">
 <h3>setCategory</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCategory</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;category)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>category</code> - the category to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getId()">
 <h3>getId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getId</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the unique ID of the trivia question.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setId(java.lang.String)">
 <h3>setId</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setId</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;id)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>id</code> - the ID to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getCorrectAnswer()">
 <h3>getCorrectAnswer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getCorrectAnswer</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the correct answer for the trivia question.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setCorrectAnswer(java.lang.String)">
 <h3>setCorrectAnswer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCorrectAnswer</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;correctAnswer)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>correctAnswer</code> - the correct answer to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getIncorrectAnswers()">
 <h3>getIncorrectAnswers</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getIncorrectAnswers</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the list of incorrect answers for the trivia question.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setIncorrectAnswers(java.util.List)">
 <h3>setIncorrectAnswers</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setIncorrectAnswers</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;incorrectAnswers)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>incorrectAnswers</code> - the list of incorrect answers to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getQuestion()">
 <h3>getQuestion</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getQuestion</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the actual question text.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setQuestion(java.lang.String)">
 <h3>setQuestion</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setQuestion</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;question)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>question</code> - the question text to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getTags()">
 <h3>getTags</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getTags</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the tags associated with the trivia question.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setTags(java.util.ArrayList)">
 <h3>setTags</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setTags</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;tags)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>tags</code> - the tags to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getType()">
 <h3>getType</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getType</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the type of the trivia question (e.g., multiple choice).</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setType(java.lang.String)">
 <h3>setType</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setType</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;type)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>type</code> - the type to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getDifficulty()">
 <h3>getDifficulty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getDifficulty</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the difficulty level of the trivia question.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setDifficulty(java.lang.String)">
 <h3>setDifficulty</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setDifficulty</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;difficulty)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>difficulty</code> - the difficulty level to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getRegions()">
 <h3>getRegions</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;</span>&nbsp;<span class="element-name">getRegions</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>the regions associated with the trivia question.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setRegions(java.util.ArrayList)">
 <h3>setRegions</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRegions</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&nbsp;regions)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>regions</code> - the regions to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isNiche()">
 <h3>isNiche</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isNiche</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a boolean indicating if the question is niche.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setNiche(boolean)">
 <h3>setNiche</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setNiche</span><wbr><span class="parameters">(boolean&nbsp;niche)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>niche</code> - the niche status to set.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="isCorrectAnswer()">
 <h3>isCorrectAnswer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isCorrectAnswer</span>()</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>a boolean indicating if the user's answer is correct.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="setCorrectAnswer(boolean)">
 <h3>setCorrectAnswer</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setCorrectAnswer</span><wbr><span class="parameters">(boolean&nbsp;correctAnswer)</span></div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>correctAnswer</code> - a boolean to set if the user's answer is correct.</dd>
+</dl>
 </section>
 </li>
 </ul>

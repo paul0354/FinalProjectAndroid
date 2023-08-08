@@ -7,6 +7,8 @@ import androidx.room.PrimaryKey;
 /**
  * Represents a bear image. Contains functionality to retrieve the bear image's
  * file name, width and height (in pixels), and size in bytes.
+ * @author Julia Paulson
+ * @version 1.0
  */
 @Entity
 public class BearImage {

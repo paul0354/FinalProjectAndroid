@@ -5,6 +5,8 @@ import java.io.File;
 /**
  * An interface which mandates the implementation of functionality to save an image
  * from a provided file.
+ * @author Julia Paulson
+ * @version 1.0
  */
 public interface ImgSaver {
     /**

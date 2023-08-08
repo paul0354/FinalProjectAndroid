@@ -73,6 +73,8 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public interface </span><span class="element-name type-name-label">UserScoreDao</span></div>
+<div class="block">Data Access Object (DAO) for the UserScore entity.
+ It provides methods to perform database operations on the UserScore table.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -89,16 +91,24 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#delete(algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScore)" class="member-name-link">delete</a><wbr>(<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&nbsp;userScore)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Deletes a specific UserScore record from the database.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getAllUsers()" class="member-name-link">getAllUsers</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Retrieves all users' scores from the database.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>androidx.lifecycle.LiveData&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&gt;&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getLeaderboardUsers()" class="member-name-link">getLeaderboardUsers</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Retrieves all users' scores from the database, sorted by their names in ascending order.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#save(algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScore)" class="member-name-link">save</a><wbr>(<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&nbsp;userScore)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">Inserts a new UserScore record into the database.</div>
+</div>
 </div>
 </div>
 </div>
@@ -117,24 +127,44 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getAllUsers()">
 <h3>getAllUsers</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&gt;</span>&nbsp;<span class="element-name">getAllUsers</span>()</div>
+<div class="block">Retrieves all users' scores from the database.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>A list of all UserScore objects in the database.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getLeaderboardUsers()">
 <h3>getLeaderboardUsers</h3>
 <div class="member-signature"><span class="return-type">androidx.lifecycle.LiveData&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&gt;&gt;</span>&nbsp;<span class="element-name">getLeaderboardUsers</span>()</div>
+<div class="block">Retrieves all users' scores from the database, sorted by their names in ascending order.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>LiveData containing a list of UserScore objects sorted by name.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="save(algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScore)">
 <h3>save</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">save</span><wbr><span class="parameters">(<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&nbsp;userScore)</span></div>
+<div class="block">Inserts a new UserScore record into the database.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>userScore</code> - The UserScore object to be saved.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="delete(algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScore)">
 <h3>delete</h3>
 <div class="member-signature"><span class="return-type">void</span>&nbsp;<span class="element-name">delete</span><wbr><span class="parameters">(<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&nbsp;userScore)</span></div>
+<div class="block">Deletes a specific UserScore record from the database.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>userScore</code> - The UserScore object to be deleted.</dd>
+</dl>
 </section>
 </li>
 </ul>

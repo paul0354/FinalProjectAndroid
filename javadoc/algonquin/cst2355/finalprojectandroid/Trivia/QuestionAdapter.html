@@ -79,6 +79,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">QuestionAdapter</span>
 <span class="extends-implements">extends androidx.recyclerview.widget.RecyclerView.Adapter&lt;<a href="QuestionAdapter.ViewHolder.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionAdapter.ViewHolder</a>&gt;</span></div>
+<div class="block">QuestionAdapter is an adapter class for RecyclerView to display trivia questions.
+ Each question is presented with multiple choice answers.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -93,7 +95,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color"><code>static class&nbsp;</code></div>
 <div class="col-second even-row-color"><code><a href="QuestionAdapter.ViewHolder.html" class="type-name-link" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionAdapter.ViewHolder</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">ViewHolder class for the RecyclerView items.</div>
+</div>
 </div>
 <div class="inherited-list">
 <h2 id="nested-classes-inherited-from-class-androidx.recyclerview.widget.RecyclerView.Adapter">Nested classes/interfaces inherited from class&nbsp;androidx.recyclerview.widget.RecyclerView.Adapter</h2>
@@ -109,7 +113,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.List)" class="member-name-link">QuestionAdapter</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="QuestionDetails.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionDetails</a>&gt;&nbsp;questionList)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructor for the QuestionAdapter.</div>
+</div>
 </div>
 </section>
 </li>
@@ -126,15 +132,21 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>int</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getItemCount()" class="member-name-link">getItemCount</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the total number of items in the dataset.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onBindViewHolder(algonquin.cst2355.finalprojectandroid.Trivia.QuestionAdapter.ViewHolder,int)" class="member-name-link">onBindViewHolder</a><wbr>(<a href="QuestionAdapter.ViewHolder.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionAdapter.ViewHolder</a>&nbsp;holder,
  int&nbsp;position)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Binds the data of a particular trivia question to a ViewHolder.</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="QuestionAdapter.ViewHolder.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionAdapter.ViewHolder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreateViewHolder(android.view.ViewGroup,int)" class="member-name-link">onCreateViewHolder</a><wbr>(android.view.ViewGroup&nbsp;parent,
  int&nbsp;viewType)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Called when the RecyclerView needs a new ViewHolder to represent an item.</div>
+</div>
 </div>
 </div>
 </div>
@@ -159,6 +171,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.util.List)">
 <h3>QuestionAdapter</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">QuestionAdapter</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="QuestionDetails.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionDetails</a>&gt;&nbsp;questionList)</span></div>
+<div class="block">Constructor for the QuestionAdapter.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>questionList</code> - List of trivia questions to display.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -176,9 +193,15 @@ loadScripts(document, 'script');</script>
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="QuestionAdapter.ViewHolder.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionAdapter.ViewHolder</a></span>&nbsp;<span class="element-name">onCreateViewHolder</span><wbr><span class="parameters">(@NonNull
  android.view.ViewGroup&nbsp;parent,
  int&nbsp;viewType)</span></div>
+<div class="block">Called when the RecyclerView needs a new ViewHolder to represent an item.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code>onCreateViewHolder</code>&nbsp;in class&nbsp;<code>androidx.recyclerview.widget.RecyclerView.Adapter&lt;<a href="QuestionAdapter.ViewHolder.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionAdapter.ViewHolder</a>&gt;</code></dd>
+<dt>Parameters:</dt>
+<dd><code>parent</code> - The ViewGroup into which the new view will be added after it is bound to an adapter position.</dd>
+<dd><code>viewType</code> - The view type of the new View.</dd>
+<dt>Returns:</dt>
+<dd>A new ViewHolder that holds a View for this adapter.</dd>
 </dl>
 </section>
 </li>
@@ -188,9 +211,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onBindViewHolder</span><wbr><span class="parameters">(@NonNull
  <a href="QuestionAdapter.ViewHolder.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionAdapter.ViewHolder</a>&nbsp;holder,
  int&nbsp;position)</span></div>
+<div class="block">Binds the data of a particular trivia question to a ViewHolder.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code>onBindViewHolder</code>&nbsp;in class&nbsp;<code>androidx.recyclerview.widget.RecyclerView.Adapter&lt;<a href="QuestionAdapter.ViewHolder.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionAdapter.ViewHolder</a>&gt;</code></dd>
+<dt>Parameters:</dt>
+<dd><code>holder</code> - The ViewHolder to be bound.</dd>
+<dd><code>position</code> - The position of the item within the adapter's data set.</dd>
 </dl>
 </section>
 </li>
@@ -198,9 +225,12 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getItemCount()">
 <h3>getItemCount</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">getItemCount</span>()</div>
+<div class="block">Returns the total number of items in the dataset.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code>getItemCount</code>&nbsp;in class&nbsp;<code>androidx.recyclerview.widget.RecyclerView.Adapter&lt;<a href="QuestionAdapter.ViewHolder.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">QuestionAdapter.ViewHolder</a>&gt;</code></dd>
+<dt>Returns:</dt>
+<dd>The number of items in the dataset.</dd>
 </dl>
 </section>
 </li>

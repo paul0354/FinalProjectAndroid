@@ -47,6 +47,9 @@ import algonquin.cst2355.finalprojectandroid.databinding.ActivityBearBinding;
  * other app activities, as well as used to display information about how to use this GUI. Contains
  * functionality to store data entered by the user for use future application sessions. Provides
  * users with feedback if they enter inappropriate data.
+ *
+ * @author Julia Paulson
+ * @version 1.0
  */
 public class BearActivity extends AppCompatActivity implements ImgSaver {
     /**

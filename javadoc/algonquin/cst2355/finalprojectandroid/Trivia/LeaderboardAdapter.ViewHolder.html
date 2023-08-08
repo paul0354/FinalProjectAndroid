@@ -77,8 +77,9 @@ loadScripts(document, 'script');</script>
 <dd><a href="LeaderboardAdapter.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia">LeaderboardAdapter</a></dd>
 </dl>
 <hr>
-<div class="type-signature"><span class="modifiers">public static class </span><span class="element-name type-name-label">LeaderboardAdapter.ViewHolder</span>
+<div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">LeaderboardAdapter.ViewHolder</span>
 <span class="extends-implements">extends androidx.recyclerview.widget.RecyclerView.ViewHolder</span></div>
+<div class="block">ViewHolder class to hold and recycle views for efficient scrolling.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,8 +92,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>(package private) android.widget.TextView</code></div>
-<div class="col-second even-row-color"><code><a href="#rankTextView" class="member-name-link">rankTextView</a></code></div>
+<div class="col-first even-row-color"><code>(package private) com.google.android.material.floatingactionbutton.FloatingActionButton</code></div>
+<div class="col-second even-row-color"><code><a href="#deleteButton" class="member-name-link">deleteButton</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>(package private) android.widget.TextView</code></div>
 <div class="col-second odd-row-color"><code><a href="#scoreTextView" class="member-name-link">scoreTextView</a></code></div>
@@ -100,6 +101,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code>(package private) android.widget.TextView</code></div>
 <div class="col-second even-row-color"><code><a href="#usernameTextView" class="member-name-link">usernameTextView</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
+<div class="col-first odd-row-color"><code>(package private) <a href="DB/UserScoreDatabase.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDatabase</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#userScoreDatabase" class="member-name-link">userScoreDatabase</a></code></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 </div>
 <div class="inherited-list">
 <h3 id="fields-inherited-from-class-androidx.recyclerview.widget.RecyclerView.ViewHolder">Fields inherited from class&nbsp;androidx.recyclerview.widget.RecyclerView.ViewHolder</h3>
@@ -114,7 +118,8 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(android.view.View)" class="member-name-link">ViewHolder</a><wbr>(android.view.View&nbsp;itemView)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(android.view.View,java.util.List)" class="member-name-link">ViewHolder</a><wbr>(android.view.View&nbsp;itemView,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="DB/UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&gt;&nbsp;userScores)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -141,12 +146,6 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="rankTextView">
-<h3>rankTextView</h3>
-<div class="member-signature"><span class="return-type">android.widget.TextView</span>&nbsp;<span class="element-name">rankTextView</span></div>
-</section>
-</li>
-<li>
 <section class="detail" id="scoreTextView">
 <h3>scoreTextView</h3>
 <div class="member-signature"><span class="return-type">android.widget.TextView</span>&nbsp;<span class="element-name">scoreTextView</span></div>
@@ -158,6 +157,18 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="return-type">android.widget.TextView</span>&nbsp;<span class="element-name">usernameTextView</span></div>
 </section>
 </li>
+<li>
+<section class="detail" id="deleteButton">
+<h3>deleteButton</h3>
+<div class="member-signature"><span class="return-type">com.google.android.material.floatingactionbutton.FloatingActionButton</span>&nbsp;<span class="element-name">deleteButton</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="userScoreDatabase">
+<h3>userScoreDatabase</h3>
+<div class="member-signature"><span class="return-type"><a href="DB/UserScoreDatabase.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDatabase</a></span>&nbsp;<span class="element-name">userScoreDatabase</span></div>
+</section>
+</li>
 </ul>
 </section>
 </li>
@@ -167,9 +178,10 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(android.view.View)">
+<section class="detail" id="&lt;init&gt;(android.view.View,java.util.List)">
 <h3>ViewHolder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ViewHolder</span><wbr><span class="parameters">(android.view.View&nbsp;itemView)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ViewHolder</span><wbr><span class="parameters">(android.view.View&nbsp;itemView,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="DB/UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&gt;&nbsp;userScores)</span></div>
 </section>
 </li>
 </ul>

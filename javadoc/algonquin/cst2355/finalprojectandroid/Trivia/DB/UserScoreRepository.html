@@ -44,13 +44,13 @@ loadScripts(document, 'script');</script>
 <ul class="sub-nav-list">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field-summary">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-summary">Method</a></li>
 </ul>
 <ul class="sub-nav-list">
 <li>Detail:&nbsp;</li>
-<li><a href="#field-detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor-detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method-detail">Method</a></li>
 </ul>
@@ -77,27 +77,11 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">UserScoreRepository</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<div class="block">A repository class abstracting access to multiple data sources, providing a clean API for data access to the rest of the application.
+ It fetches data from the Room database using the DAO.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
-<!-- =========== FIELD SUMMARY =========== -->
-<li>
-<section class="field-summary" id="field-summary">
-<h2>Field Summary</h2>
-<div class="caption"><span>Fields</span></div>
-<div class="summary-table three-column-summary">
-<div class="table-header col-first">Modifier and Type</div>
-<div class="table-header col-second">Field</div>
-<div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>(package private) <a href="UserScoreDao.html" title="interface in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDao</a></code></div>
-<div class="col-second even-row-color"><code><a href="#userDao" class="member-name-link">userDao</a></code></div>
-<div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code>(package private) <a href="UserScoreDatabase.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDatabase</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#userScoreDatabase" class="member-name-link">userScoreDatabase</a></code></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-</div>
-</section>
-</li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
 <li>
 <section class="constructor-summary" id="constructor-summary">
@@ -107,7 +91,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(android.app.Application)" class="member-name-link">UserScoreRepository</a><wbr>(android.app.Application&nbsp;application)</code></div>
-<div class="col-last even-row-color">&nbsp;</div>
+<div class="col-last even-row-color">
+<div class="block">Constructor initializes the database and DAO.</div>
+</div>
 </div>
 </section>
 </li>
@@ -124,10 +110,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>androidx.lifecycle.LiveData&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&gt;&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUserScores()" class="member-name-link">getUserScores</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Fetches the list of user scores from the database.</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#insert(algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScore)" class="member-name-link">insert</a><wbr>(<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&nbsp;userScore)</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Inserts a UserScore object into the database.</div>
+</div>
 </div>
 </div>
 </div>
@@ -140,26 +130,6 @@ loadScripts(document, 'script');</script>
 </section>
 <section class="details">
 <ul class="details-list">
-<!-- ============ FIELD DETAIL =========== -->
-<li>
-<section class="field-details" id="field-detail">
-<h2>Field Details</h2>
-<ul class="member-list">
-<li>
-<section class="detail" id="userScoreDatabase">
-<h3>userScoreDatabase</h3>
-<div class="member-signature"><span class="return-type"><a href="UserScoreDatabase.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDatabase</a></span>&nbsp;<span class="element-name">userScoreDatabase</span></div>
-</section>
-</li>
-<li>
-<section class="detail" id="userDao">
-<h3>userDao</h3>
-<div class="member-signature"><span class="return-type"><a href="UserScoreDao.html" title="interface in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScoreDao</a></span>&nbsp;<span class="element-name">userDao</span></div>
-</section>
-</li>
-</ul>
-</section>
-</li>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <li>
 <section class="constructor-details" id="constructor-detail">
@@ -169,6 +139,11 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(android.app.Application)">
 <h3>UserScoreRepository</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">UserScoreRepository</span><wbr><span class="parameters">(android.app.Application&nbsp;application)</span></div>
+<div class="block">Constructor initializes the database and DAO.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>application</code> - the context of the caller, usually an Android component.</dd>
+</dl>
 </section>
 </li>
 </ul>
@@ -183,12 +158,22 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="insert(algonquin.cst2355.finalprojectandroid.Trivia.DB.UserScore)">
 <h3>insert</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">insert</span><wbr><span class="parameters">(<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&nbsp;userScore)</span></div>
+<div class="block">Inserts a UserScore object into the database.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>userScore</code> - the user score to be inserted.</dd>
+</dl>
 </section>
 </li>
 <li>
 <section class="detail" id="getUserScores()">
 <h3>getUserScores</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">androidx.lifecycle.LiveData&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="UserScore.html" title="class in algonquin.cst2355.finalprojectandroid.Trivia.DB">UserScore</a>&gt;&gt;</span>&nbsp;<span class="element-name">getUserScores</span>()</div>
+<div class="block">Fetches the list of user scores from the database.</div>
+<dl class="notes">
+<dt>Returns:</dt>
+<dd>LiveData containing a list of user scores.</dd>
+</dl>
 </section>
 </li>
 </ul>

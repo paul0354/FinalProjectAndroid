@@ -97,6 +97,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">QuestionsActivity</span>
 <span class="extends-implements">extends androidx.appcompat.app.AppCompatActivity</span></div>
+<div class="block">Represents the Questions activity screen that displays trivia questions based on
+ user's category selection and collects their answers. Users can also view their scores
+ and submit them to the leaderboard.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -159,7 +162,19 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreate(android.os.Bundle)" class="member-name-link">onCreate</a><wbr>(android.os.Bundle&nbsp;savedInstanceState)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Initializes the Questions activity.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onCreateOptionsMenu(android.view.Menu)" class="member-name-link">onCreateOptionsMenu</a><wbr>(android.view.Menu&nbsp;menu)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Inflates the toolbar menu.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#onOptionsItemSelected(android.view.MenuItem)" class="member-name-link">onOptionsItemSelected</a><wbr>(android.view.MenuItem&nbsp;item)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Handles toolbar menu item selections.</div>
+</div>
 </div>
 </div>
 </div>
@@ -177,7 +192,7 @@ loadScripts(document, 'script');</script>
 <code>dispatchKeyShortcutEvent, getExtraData, putExtraData, shouldDumpInternalState, superDispatchKeyEvent</code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-android.app.Activity">Methods inherited from class&nbsp;android.app.Activity</h3>
-<code>closeContextMenu, createPendingResult, dismissDialog, dismissKeyboardShortcutsHelper, dispatchGenericMotionEvent, dispatchPopulateAccessibilityEvent, dispatchTouchEvent, dispatchTrackballEvent, enterPictureInPictureMode, enterPictureInPictureMode, finish, finishActivity, finishActivityFromChild, finishAffinity, finishAfterTransition, finishAndRemoveTask, finishFromChild, getActionBar, getApplication, getCallingActivity, getCallingPackage, getChangingConfigurations, getComponentName, getContentScene, getContentTransitionManager, getCurrentFocus, getFragmentManager, getIntent, getLastNonConfigurationInstance, getLayoutInflater, getLoaderManager, getLocalClassName, getMaxNumPictureInPictureActions, getMediaController, getOnBackInvokedDispatcher, getParent, getParentActivityIntent, getPreferences, getReferrer, getRequestedOrientation, getSearchEvent, getSplashScreen, getSystemService, getTaskId, getTitle, getTitleColor, getVoiceInteractor, getVolumeControlStream, getWindow, getWindowManager, hasWindowFocus, isActivityTransitionRunning, isChangingConfigurations, isChild, isDestroyed, isFinishing, isImmersive, isInMultiWindowMode, isInPictureInPictureMode, isLaunchedFromBubble, isLocalVoiceInteractionSupported, isTaskRoot, isVoiceInteraction, isVoiceInteractionRoot, managedQuery, moveTaskToBack, navigateUpTo, navigateUpToFromChild, onActionModeFinished, onActionModeStarted, onActivityReenter, onApplyThemeResource, onAttachedToWindow, onAttachFragment, onChildTitleChanged, onContextItemSelected, onContextMenuClosed, onCreate, onCreateContextMenu, onCreateDescription, onCreateDialog, onCreateDialog, onCreateNavigateUpTaskStack, onCreateOptionsMenu, onCreatePanelView, onCreateThumbnail, onDetachedFromWindow, onEnterAnimationComplete, onGenericMotionEvent, onGetDirectActions, onKeyLongPress, onKeyMultiple, onKeyShortcut, onKeyUp, onLocalVoiceInteractionStarted, onLocalVoiceInteractionStopped, onNavigateUp, onNavigateUpFromChild, onOptionsItemSelected, onOptionsMenuClosed, onPerformDirectAction, onPictureInPictureRequested, onPictureInPictureUiStateChanged, onPostCreate, onPrepareDialog, onPrepareDialog, onPrepareNavigateUpTaskStack, onPrepareOptionsMenu, onProvideAssistContent, onProvideAssistData, onProvideKeyboardShortcuts, onProvideReferrer, onRestart, onRestoreInstanceState, onRestoreInstanceState, onSaveInstanceState, onSearchRequested, onSearchRequested, onTopResumedActivityChanged, onTouchEvent, onTrackballEvent, onUserInteraction, onUserLeaveHint, onVisibleBehindCanceled, onWindowAttributesChanged, onWindowFocusChanged, onWindowStartingActionMode, onWindowStartingActionMode, openContextMenu, overridePendingTransition, overridePendingTransition, postponeEnterTransition, recreate, registerActivityLifecycleCallbacks, registerComponentCallbacks, registerForContextMenu, releaseInstance, removeDialog, requestDragAndDropPermissions, requestPermissions, requestShowKeyboardShortcuts, requestVisibleBehind, requestWindowFeature, requireViewById, runOnUiThread, setActionBar, setContentTransitionManager, setDefaultKeyMode, setEnterSharedElementCallback, setExitSharedElementCallback, setFeatureDrawable, setFeatureDrawableAlpha, setFeatureDrawableResource, setFeatureDrawableUri, setFinishOnTouchOutside, setImmersive, setInheritShowWhenLocked, setIntent, setLocusContext, setMediaController, setPictureInPictureParams, setProgress, setProgressBarIndeterminate, setProgressBarIndeterminateVisibility, setProgressBarVisibility, setRecentsScreenshotEnabled, setRequestedOrientation, setResult, setResult, setSecondaryProgress, setShouldDockBigOverlays, setShowWhenLocked, setTaskDescription, setTitle, setTitle, setTitleColor, setTranslucent, setTurnScreenOn, setVisible, setVolumeControlStream, setVrModeEnabled, shouldDockBigOverlays, shouldShowRequestPermissionRationale, shouldUpRecreateTask, showAssist, showDialog, showDialog, showLockTaskEscapeMessage, startActionMode, startActionMode, startActivities, startActivities, startActivity, startActivity, startActivityFromChild, startActivityFromChild, startActivityFromFragment, startActivityFromFragment, startActivityIfNeeded, startActivityIfNeeded, startIntentSender, startIntentSender, startIntentSenderFromChild, startIntentSenderFromChild, startLocalVoiceInteraction, startLockTask, startManagingCursor, startNextMatchingActivity, startNextMatchingActivity, startPostponedEnterTransition, startSearch, stopLocalVoiceInteraction, stopLockTask, stopManagingCursor, takeKeyEvents, triggerSearch, unregisterActivityLifecycleCallbacks, unregisterComponentCallbacks, unregisterForContextMenu</code></div>
+<code>closeContextMenu, createPendingResult, dismissDialog, dismissKeyboardShortcutsHelper, dispatchGenericMotionEvent, dispatchPopulateAccessibilityEvent, dispatchTouchEvent, dispatchTrackballEvent, enterPictureInPictureMode, enterPictureInPictureMode, finish, finishActivity, finishActivityFromChild, finishAffinity, finishAfterTransition, finishAndRemoveTask, finishFromChild, getActionBar, getApplication, getCallingActivity, getCallingPackage, getChangingConfigurations, getComponentName, getContentScene, getContentTransitionManager, getCurrentFocus, getFragmentManager, getIntent, getLastNonConfigurationInstance, getLayoutInflater, getLoaderManager, getLocalClassName, getMaxNumPictureInPictureActions, getMediaController, getOnBackInvokedDispatcher, getParent, getParentActivityIntent, getPreferences, getReferrer, getRequestedOrientation, getSearchEvent, getSplashScreen, getSystemService, getTaskId, getTitle, getTitleColor, getVoiceInteractor, getVolumeControlStream, getWindow, getWindowManager, hasWindowFocus, isActivityTransitionRunning, isChangingConfigurations, isChild, isDestroyed, isFinishing, isImmersive, isInMultiWindowMode, isInPictureInPictureMode, isLaunchedFromBubble, isLocalVoiceInteractionSupported, isTaskRoot, isVoiceInteraction, isVoiceInteractionRoot, managedQuery, moveTaskToBack, navigateUpTo, navigateUpToFromChild, onActionModeFinished, onActionModeStarted, onActivityReenter, onApplyThemeResource, onAttachedToWindow, onAttachFragment, onChildTitleChanged, onContextItemSelected, onContextMenuClosed, onCreate, onCreateContextMenu, onCreateDescription, onCreateDialog, onCreateDialog, onCreateNavigateUpTaskStack, onCreatePanelView, onCreateThumbnail, onDetachedFromWindow, onEnterAnimationComplete, onGenericMotionEvent, onGetDirectActions, onKeyLongPress, onKeyMultiple, onKeyShortcut, onKeyUp, onLocalVoiceInteractionStarted, onLocalVoiceInteractionStopped, onNavigateUp, onNavigateUpFromChild, onOptionsMenuClosed, onPerformDirectAction, onPictureInPictureRequested, onPictureInPictureUiStateChanged, onPostCreate, onPrepareDialog, onPrepareDialog, onPrepareNavigateUpTaskStack, onPrepareOptionsMenu, onProvideAssistContent, onProvideAssistData, onProvideKeyboardShortcuts, onProvideReferrer, onRestart, onRestoreInstanceState, onRestoreInstanceState, onSaveInstanceState, onSearchRequested, onSearchRequested, onTopResumedActivityChanged, onTouchEvent, onTrackballEvent, onUserInteraction, onUserLeaveHint, onVisibleBehindCanceled, onWindowAttributesChanged, onWindowFocusChanged, onWindowStartingActionMode, onWindowStartingActionMode, openContextMenu, overridePendingTransition, overridePendingTransition, postponeEnterTransition, recreate, registerActivityLifecycleCallbacks, registerComponentCallbacks, registerForContextMenu, releaseInstance, removeDialog, requestDragAndDropPermissions, requestPermissions, requestShowKeyboardShortcuts, requestVisibleBehind, requestWindowFeature, requireViewById, runOnUiThread, setActionBar, setContentTransitionManager, setDefaultKeyMode, setEnterSharedElementCallback, setExitSharedElementCallback, setFeatureDrawable, setFeatureDrawableAlpha, setFeatureDrawableResource, setFeatureDrawableUri, setFinishOnTouchOutside, setImmersive, setInheritShowWhenLocked, setIntent, setLocusContext, setMediaController, setPictureInPictureParams, setProgress, setProgressBarIndeterminate, setProgressBarIndeterminateVisibility, setProgressBarVisibility, setRecentsScreenshotEnabled, setRequestedOrientation, setResult, setResult, setSecondaryProgress, setShouldDockBigOverlays, setShowWhenLocked, setTaskDescription, setTitle, setTitle, setTitleColor, setTranslucent, setTurnScreenOn, setVisible, setVolumeControlStream, setVrModeEnabled, shouldDockBigOverlays, shouldShowRequestPermissionRationale, shouldUpRecreateTask, showAssist, showDialog, showDialog, showLockTaskEscapeMessage, startActionMode, startActionMode, startActivities, startActivities, startActivity, startActivity, startActivityFromChild, startActivityFromChild, startActivityFromFragment, startActivityFromFragment, startActivityIfNeeded, startActivityIfNeeded, startIntentSender, startIntentSender, startIntentSenderFromChild, startIntentSenderFromChild, startLocalVoiceInteraction, startLockTask, startManagingCursor, startNextMatchingActivity, startNextMatchingActivity, startPostponedEnterTransition, startSearch, stopLocalVoiceInteraction, stopLockTask, stopManagingCursor, takeKeyEvents, triggerSearch, unregisterActivityLifecycleCallbacks, unregisterComponentCallbacks, unregisterForContextMenu</code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-android.view.ContextThemeWrapper">Methods inherited from class&nbsp;android.view.ContextThemeWrapper</h3>
 <code>applyOverrideConfiguration, getAssets, getTheme, setTheme</code></div>
@@ -236,9 +251,44 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="onCreate(android.os.Bundle)">
 <h3>onCreate</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">onCreate</span><wbr><span class="parameters">(android.os.Bundle&nbsp;savedInstanceState)</span></div>
+<div class="block">Initializes the Questions activity. This method sets up UI components, fetches trivia
+ questions based on user preferences, and handles events for submitting scores.</div>
 <dl class="notes">
 <dt>Overrides:</dt>
 <dd><code>onCreate</code>&nbsp;in class&nbsp;<code>androidx.fragment.app.FragmentActivity</code></dd>
+<dt>Parameters:</dt>
+<dd><code>savedInstanceState</code> - Represents the state of the activity in case of restarts.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="onOptionsItemSelected(android.view.MenuItem)">
+<h3>onOptionsItemSelected</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">onOptionsItemSelected</span><wbr><span class="parameters">(android.view.MenuItem&nbsp;item)</span></div>
+<div class="block">Handles toolbar menu item selections. This includes launching other activities
+ or displaying the help dialog based on the selected menu item.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code>onOptionsItemSelected</code>&nbsp;in class&nbsp;<code>android.app.Activity</code></dd>
+<dt>Parameters:</dt>
+<dd><code>item</code> - The menu item that was selected.</dd>
+<dt>Returns:</dt>
+<dd>boolean Returns true if the event was handled, false otherwise.</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="onCreateOptionsMenu(android.view.Menu)">
+<h3>onCreateOptionsMenu</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">onCreateOptionsMenu</span><wbr><span class="parameters">(android.view.Menu&nbsp;menu)</span></div>
+<div class="block">Inflates the toolbar menu.</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code>onCreateOptionsMenu</code>&nbsp;in class&nbsp;<code>android.app.Activity</code></dd>
+<dt>Parameters:</dt>
+<dd><code>menu</code> - The options menu in which items are placed.</dd>
+<dt>Returns:</dt>
+<dd>boolean Returns true if the menu should be displayed.</dd>
 </dl>
 </section>
 </li>

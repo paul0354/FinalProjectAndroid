@@ -36,6 +36,8 @@ import algonquin.cst2355.finalprojectandroid.databinding.BearImagesLayoutBinding
 /**
  * Represents a list of all bear images in a database, with a GUI for saving the currently generated
  * image to the database. Updates the list upon user actions (adding/removing items from list).
+ * @author Julia Paulson
+ * @version 1.0
  */
 public class BearImagesFragment extends Fragment {
     /**

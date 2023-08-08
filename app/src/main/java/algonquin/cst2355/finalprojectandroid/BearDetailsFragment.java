@@ -19,6 +19,8 @@ import algonquin.cst2355.finalprojectandroid.databinding.BearDetailsLayoutBindin
  * A fragment containing additional details about a bear image object, as well
  * as the GUI functionality to delete the bear image from the images list and the
  * database. Alerts the user and prompts for confirmation before any such deletion occurs.
+ * @author Julia Paulson
+ * @version 1.0
  */
 public class BearDetailsFragment extends Fragment {
     /**
