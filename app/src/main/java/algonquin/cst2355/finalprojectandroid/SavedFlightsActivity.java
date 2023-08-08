@@ -124,6 +124,8 @@ public class SavedFlightsActivity extends AppCompatActivity {
         if(FlightActivity.savedFlights.size() != temp) {
             FlightActivity.savedFlights.remove(pos);
             adapt.notifyItemRemoved(pos);
+            Executor t = Executors.newSingleThreadExecutor();
+            t.execute(() -> temp = FlightActivity.savedFlights.size());
         }
 
     }
