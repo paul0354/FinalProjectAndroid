@@ -11,4 +11,26 @@
     <string name="Convert">Convertir</string>
     <string name="Delete">Supprimer</string>
     <string name="Save">Sauvegarder</string>
+    <string name="about_converter">A propo du convertisseur de maonnaie</string>
+    <string name="help_currency">&lt;b&gt;Comment Utiliser l\'Application de Convertisseur de Devises :&lt;/b&gt;&lt;br&gt;&lt;br&gt;
+&lt;b&gt;1. Sélectionner la Devise :&lt;/b&gt;&lt;br&gt;
+Choisissez les devises pour la conversion.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;2. Effectuer la Conversion :&lt;/b&gt;&lt;br&gt;
+Cliquez sur "Convertir" pour obtenir le résultat.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;3. Sauvegarder la Conversion :&lt;/b&gt;&lt;br&gt;
+Enregistrez la conversion pour plus tard.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;4. Voir les Conversions Sauvegardées :&lt;/b&gt;&lt;br&gt;
+Consultez toutes les conversions enregistrées.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;5. Supprimer les Conversions Sauvegardées :&lt;/b&gt;&lt;br&gt;
+Retirez les conversions de la liste.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;6. Mettre à Jour les Conversions :&lt;/b&gt;&lt;br&gt;
+Les conversions enregistrées se mettent automatiquement à jour.&lt;br&gt;&lt;br&gt;
+
+Profitez de votre Convertisseur de Devises !&lt;/string&gt;
+    </string>
 </resources>
