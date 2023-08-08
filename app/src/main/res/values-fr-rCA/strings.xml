@@ -90,4 +90,12 @@ Profitez de votre Convertisseur de Devises !&lt;/string&gt;
 
     <string name="select_category">Sélectionner une catégorie</string>
     <string name="action_help">aide</string>
+    <string name="submit">soumettre</string>
+    <string name="enter_the_number_of_questions">entrez le nombre de questions</string>
+    <string name="category_1">catégorie1</string>
+    <string name="category_2">catégorie2</string>
+    <string name="Player_name">Nom du Joueur</string>
+    <string name="Score">Le Score</string>
+    <string name="Submit">Soumettre</string>
+
 </resources>

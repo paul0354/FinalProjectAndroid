@@ -92,5 +92,13 @@ Saved conversions will update automatically.&lt;br&gt;&lt;br&gt;
 Enjoy using the Currency Converter!&lt;/string&gt;</string>
     <string name="select_category">Select a category</string>
     <string name="action_help">Help</string>
+    <string name="submit">submit</string>
+    <string name="enter_the_number_of_questions">enter the number of questions</string>
+    <string name="category_1">catégorie1</string>
+    <string name="category_2">catégorie2</string>
+    <string name="Player_name">Player Name</string>
+    <string name="Score">Score</string>
+    <string name="Submit">Submit</string>
+
 
 </resources>
