@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -146,9 +147,12 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
             Intent bearPage = new Intent(CurrencyActivity.this, BearActivity.class);
             startActivity(bearPage);
         } else if (item.getItemId() == R.id.item_2) {
-            View parentView = findViewById(android.R.id.content); // Get the root view of the activity
-            Snackbar snackbar = Snackbar.make(parentView, "This function is provided by Chawki.", Snackbar.LENGTH_LONG);
-            snackbar.show();
+            androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(this);
+            builder.setMessage(Html.fromHtml(getString(R.string.help_currency),
+                            Html.FROM_HTML_MODE_LEGACY))
+                    .setTitle(getString(R.string.about_converter))
+                    .create().show();
+            return true;
         } else if (item.getItemId() == R.id.item_3) {
             Intent flight = new Intent(CurrencyActivity.this, FlightActivity.class);
             startActivity(flight);
@@ -235,6 +239,9 @@ public class CurrencyActivity extends AppCompatActivity implements AdapterView.O
                                     // Add the new Conversion object to the list of conversions.
                                     conversions.add(newConversion);
                                     myAdapter.notifyItemInserted(conversions.size() - 1);
+                                    String snackbarMessage = "Conversion successful!";
+                                    Snackbar snackbar = Snackbar.make(binding.getRoot(), snackbarMessage, Snackbar.LENGTH_SHORT);
+                                    snackbar.show();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

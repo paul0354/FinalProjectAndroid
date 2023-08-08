@@ -44,5 +44,26 @@
         given the option to delete it from the list.
     </string>
     <string name="about_bear">About the Bear Image Generator</string>
+    <string name="about_converter">about the Currency Converter</string>
     <string name="bear_menu_help">Help</string>
+    <string name="help_currency">&lt;b&gt;How to Use the Currency Converter App:&lt;/b&gt;&lt;br&gt;&lt;br&gt;
+&lt;b&gt;1. Select Currency:&lt;/b&gt;&lt;br&gt;
+Choose the currencies for conversion.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;2. Perform Conversion:&lt;/b&gt;&lt;br&gt;
+Click "Convert" to get the result.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;3. Save Conversion:&lt;/b&gt;&lt;br&gt;
+Save the conversion for later.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;4. View Saved Conversions:&lt;/b&gt;&lt;br&gt;
+See all saved conversions.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;5. Delete Saved Conversions:&lt;/b&gt;&lt;br&gt;
+Remove conversions from the list.&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;6. Update Conversion:&lt;/b&gt;&lt;br&gt;
+Saved conversions will update automatically.&lt;br&gt;&lt;br&gt;
+
+Enjoy using the Currency Converter!&lt;/string&gt;</string>
 </resources>
